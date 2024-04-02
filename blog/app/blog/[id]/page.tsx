@@ -24,6 +24,7 @@ interface PageProps {
 interface TocItem {
   text: string;
   id: string;
+  level: number; // Include hierarchy level
 }
 
 export default function Page({ params }: PageProps) {

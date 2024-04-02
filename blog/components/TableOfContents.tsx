@@ -10,6 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 type TocProps = {
   text: string;
   id: string;
+  level: number;
 };
 
 type TableOfContentsProps = {
@@ -101,10 +102,10 @@ export const TableOfContents = ({
             sx={{ display: "block" }}>
             <ListItemButton
               sx={{
-                pl: data.tag === "h2" ? 2 : data.tag === "h3" ? 4 : 1,
+                pl: `${data.level * 8}px`, // 階層レベルに応じて左パディングを増やす
               }}>
               <ListItemText
-                primary={data.tag === "h1" ? data.text : "-" + data.text}
+                primary={data.tag === "h1" ? data.text : data.text}
                 primaryTypographyProps={{
                   sx: {
                     "&:hover": { bgcolor: "gray.500", borderRadius: "4px" },
