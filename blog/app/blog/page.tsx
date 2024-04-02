@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-// import styles from "./page.module.css";
 import { client } from "@/libs/client";
 import Link from "next/link";
 import { Blog } from "@/types/blog";
