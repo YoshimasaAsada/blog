@@ -18,6 +18,10 @@ import Link from "next/link";
 const pages = ["About", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
+/**
+ * ヘッダー
+ * @returns 
+ */
 export function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
