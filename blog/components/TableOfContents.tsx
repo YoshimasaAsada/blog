@@ -46,6 +46,7 @@ const useScrollPosition = (ref: React.RefObject<HTMLDivElement>) => {
   return isSticky;
 };
 
+// TOCをクリックした時にその位置まで動かすやつ
 export const TableOfContents = ({
   toc,
   containerRef,
@@ -65,9 +66,11 @@ export const TableOfContents = ({
     id: string
   ) => {
     event.preventDefault();
-    const headerOffset = 70; // ヘッダーの高さを考慮
+    setActiveId(id); // クリックされたセクションIDをアクティブに設定
+
+    const headerOffset = 70;
     const elementPosition = document.getElementById(id)?.offsetTop || 0;
-    const offsetPosition = elementPosition - headerOffset - 20; // 追加のオフセット
+    const offsetPosition = elementPosition - headerOffset;
 
     window.scrollTo({
       top: offsetPosition,
@@ -75,9 +78,35 @@ export const TableOfContents = ({
     });
   };
 
-  const handleDrawerToggle = () => {
-    setExpanded(!isExpanded);
-  };
+  // 目次に対してどこを見ているか追従させ、ハイライトを当てる
+  const [activeId, setActiveId] = useState("");
+  useEffect(() => {
+    const handleScroll = () => {
+      let foundSectionId = "";
+      for (const section of toc) {
+        const element = document.getElementById(section.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          const headerOffset = 70;
+          // セクションがビューポートの上端より上にある場合
+          if (rect.top - headerOffset < 0) {
+            foundSectionId = section.id;
+          } else {
+            // ビューポートの上端に最も近いセクションが見つかったらループを抜ける
+            break;
+          }
+        }
+      }
+
+      // 見つかったセクションが現在のアクティブなセクションと異なる場合、アクティブなセクションを更新
+      if (foundSectionId !== activeId) {
+        setActiveId(foundSectionId);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [toc, activeId]); // 依存配列にtocとactiveIdを追加
 
   return (
     <Box
@@ -94,7 +123,7 @@ export const TableOfContents = ({
         目次
       </Typography>
       <List>
-        {toc.map((data: any) => (
+        {toc.map((data) => (
           <ListItem
             key={data.id}
             component="div"
@@ -102,16 +131,11 @@ export const TableOfContents = ({
             sx={{ display: "block" }}>
             <ListItemButton
               sx={{
-                pl: `${data.level * 8}px`, // 階層レベルに応じて左パディングを増やす
+                pl: `${data.level * 8}px`,
+                color: activeId === data.id ? "primary.main" : "inherit", // アクティブなセクションに基づいて背景色を変更
+                "&:hover": { color: "primary.light" },
               }}>
-              <ListItemText
-                primary={data.tag === "h1" ? data.text : data.text}
-                primaryTypographyProps={{
-                  sx: {
-                    "&:hover": { bgcolor: "gray.500", borderRadius: "4px" },
-                  },
-                }}
-              />
+              <ListItemText primary={data.text} />
             </ListItemButton>
           </ListItem>
         ))}
