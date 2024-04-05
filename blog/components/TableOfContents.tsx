@@ -19,20 +19,20 @@ type TableOfContentsProps = {
 };
 
 /**
- * スクロール位置を監視し、ヘッダー位置までTOCが上がったらtrue,そうでなければfalse
- * @param ref reactのrefオブジェクト
+ * スクロール位置を監視して、上まで行けばTOCをヘッダー手前で固定するためのisStickyのフラグを返す
+ * @param ref
  * @returns
  */
 const useScrollPosition = (ref: React.RefObject<HTMLDivElement>) => {
-  const [isSticky, setSticky] = useState(false); // TOCを固定するかしないかを判定する
+  // TOCを固定するかどうかフラグ
+  const [isSticky, setSticky] = useState(false);
 
   useEffect(() => {
     const boxTop = ref.current ? ref.current.getBoundingClientRect().top : 0;
-    const headerHeight = 70; // ヘッダーの高さを定義
-    const initialTopPosition = boxTop - headerHeight; // コンポーネントが固定されるべき初期位置を計算
+    const headerHeight = 70;
+    const initialTopPosition = boxTop - headerHeight;
 
     const handleScroll = () => {
-      // スクロール位置がコンポーネントの初期位置を超えたかどうかを判定
       const isOverInitialPosition = window.scrollY >= initialTopPosition;
       setSticky(isOverInitialPosition);
     };
@@ -46,28 +46,20 @@ const useScrollPosition = (ref: React.RefObject<HTMLDivElement>) => {
   return isSticky;
 };
 
-// TOCをクリックした時にその位置まで動かすやつ
 export const TableOfContents = ({
   toc,
   containerRef,
 }: TableOfContentsProps) => {
   const [isExpanded, setExpanded] = useState<boolean>(true);
-  const boxRef = useRef<HTMLDivElement | null>(null); // Boxコンポーネントへの参照
+  const boxRef = useRef<HTMLDivElement | null>(null);
   const isSticky = useScrollPosition(boxRef);
+  const [activeId, setActiveId] = useState("");
 
-  // 親コンテナの幅を動的に取得し、固定表示時に適用
-  // fixが適用された時にレイアウトが崩れるため
   const containerWidth = containerRef.current
     ? containerRef.current.offsetWidth
     : "100%";
 
-  const handleLinkClick = (
-    event: React.MouseEvent<HTMLDivElement>,
-    id: string
-  ) => {
-    event.preventDefault();
-    setActiveId(id); // クリックされたセクションIDをアクティブに設定
-
+  const smoothScrollTo = (id: string) => {
     const headerOffset = 70;
     const elementPosition = document.getElementById(id)?.offsetTop || 0;
     const offsetPosition = elementPosition - headerOffset;
@@ -76,10 +68,33 @@ export const TableOfContents = ({
       top: offsetPosition,
       behavior: "smooth",
     });
+
+    let isScrolling: number; // `number`型として宣言
+
+    const handleScroll = () => {
+      window.clearTimeout(isScrolling);
+
+      isScrolling = window.setTimeout(() => {
+        // タイプスクリプト環境での`setTimeout`はグローバルではなく`window`オブジェクト経由でアクセスするのが一般的
+        // スクロールが一定時間停止したとみなされたら実行
+        setActiveId(id); // スクロール終了時にハイライトを更新
+
+        // このスクロールハンドラを削除
+        window.removeEventListener("scroll", handleScroll);
+      }, 66); // 66ミリ秒間隔でスクロールイベントの発生がなければ、スクロールが終了したとみなす
+    };
+
+    window.addEventListener("scroll", handleScroll);
   };
 
-  // 目次に対してどこを見ているか追従させ、ハイライトを当てる
-  const [activeId, setActiveId] = useState("");
+  const handleLinkClick = (
+    event: React.MouseEvent<HTMLDivElement>,
+    id: string
+  ) => {
+    event.preventDefault();
+    smoothScrollTo(id);
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       let foundSectionId = "";
@@ -88,17 +103,14 @@ export const TableOfContents = ({
         if (element) {
           const rect = element.getBoundingClientRect();
           const headerOffset = 70;
-          // セクションがビューポートの上端より上にある場合
           if (rect.top - headerOffset < 0) {
             foundSectionId = section.id;
           } else {
-            // ビューポートの上端に最も近いセクションが見つかったらループを抜ける
             break;
           }
         }
       }
 
-      // 見つかったセクションが現在のアクティブなセクションと異なる場合、アクティブなセクションを更新
       if (foundSectionId !== activeId) {
         setActiveId(foundSectionId);
       }
@@ -106,7 +118,7 @@ export const TableOfContents = ({
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [toc, activeId]); // 依存配列にtocとactiveIdを追加
+  }, [toc, activeId]);
 
   return (
     <Box
@@ -114,12 +126,14 @@ export const TableOfContents = ({
       sx={{
         position: isSticky ? "fixed" : "static",
         top: isSticky ? "70px" : "0px",
-        width: containerWidth, // 親コンテナの幅を適用
+        width: containerWidth,
         zIndex: 2,
         overflow: "auto",
-        height: isSticky ? `calc(100vh - 70px)` : "auto",
+        height: "auto",
+        borderRadius: "4px",
+        border: "1px solid #888",
       }}>
-      <Typography variant="h6" sx={{ m: 2 }}>
+      <Typography variant="h6" sx={{ m: 2, borderBottom: "1px solid #ccc" }}>
         目次
       </Typography>
       <List>
@@ -128,14 +142,28 @@ export const TableOfContents = ({
             key={data.id}
             component="div"
             onClick={(e) => handleLinkClick(e, data.id)}
-            sx={{ display: "block" }}>
+            sx={{
+              display: "block",
+              paddingTop: "0px", // 上のパディングを減らす
+              paddingBottom: "0px", // 下のパディングを減らす
+            }}>
             <ListItemButton
               sx={{
-                pl: `${data.level * 8}px`,
-                color: activeId === data.id ? "primary.main" : "inherit", // アクティブなセクションに基づいて背景色を変更
-                "&:hover": { color: "primary.light" },
+                pl: `${data.level * 15}px`, // 階層に基づく左側のパディング
+                pr: "8px", // 右側のパディングを設定
+                minHeight: "36px", // ボタンの最小高さを設定して縦のスペースを減らす
+                color: activeId === data.id ? "primary.main" : "inherit",
+                borderLeft: activeId === data.id ? "4px solid" : "", // アクティブ時の左側ボーダー
+                borderColor: activeId === data.id ? "primary.main" : "",
+                backgroundColor: activeId === data.id ? "action.hover" : "",
+                "&:hover": {
+                  color: "primary.light",
+                  borderLeft: "4px solid", // ホバー時の左側ボーダー
+                  borderColor: "primary.main", // ホバー時のボーダー色
+                  backgroundColor: "action.hover", // ホバー時の背景色変更
+                },
               }}>
-              <ListItemText primary={data.text} />
+              <ListItemText primary={data.text} sx={{ m: 0 }} />
             </ListItemButton>
           </ListItem>
         ))}
