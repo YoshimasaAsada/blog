@@ -125,48 +125,202 @@ a {
   }
 }
 
-.progressBarContainer {
-  text-align: center;
-  width: 50%;
+// .progressBarContainer {
+//   text-align: center;
+//   width: 50%;
+// }
+
+// .main {
+//   width: 960px;
+//   margin: 0 auto;
+// }
+
+// .title {
+//   margin-bottom: 20px;
+// }
+
+// .publishedAt {
+//   margin-bottom: 40px;
+// }
+
+// .blog > h1 {
+//   font-size: 30px;
+//   font-weight: bold;
+//   // margin: 40px 0 20px;
+//   // background-color: #eee;
+//   // padding: 10px 20px;
+//   // border-radius: 5px solid #ddd;
+//   margin-bottom: 10px;
+//   border-bottom: 1px solid #ddd;
+// }
+
+// .blog > h2 {
+//   font-size: 24px;
+//   font-weight: bold;
+//   margin: 40px 0 16px;
+//   border-bottom: 1px solid #ddd;
+// }
+
+// .blog > p {
+//   line-height: 1.8;
+//   letter-spacing: 0.2px;
+// }
+
+// .blog > ol {
+//   list-style-type: decimal;
+//   list-style-position: inside;
+// }
+
+.blog {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.7;
+  color: rgb(var(--foreground-rgb));
 }
 
-.main {
-  width: 960px;
-  margin: 0 auto;
-}
-
-.title {
-  margin-bottom: 20px;
-}
-
-.publishedAt {
-  margin-bottom: 40px;
-}
-
-.blog > h1 {
-  font-size: 30px;
+.blog h1 {
+  font-size: 1.5rem;
   font-weight: bold;
-  // margin: 40px 0 20px;
-  // background-color: #eee;
-  // padding: 10px 20px;
-  // border-radius: 5px solid #ddd;
-  margin-bottom: 10px;
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+  padding-left: 0.5rem;
+  padding-top: 0.2rem;
   border-bottom: 1px solid #ddd;
 }
 
-.blog > h2 {
-  font-size: 24px;
+.blog h2 {
   font-weight: bold;
-  margin: 40px 0 16px;
+  margin-top: 20px;
+  font-size: 1.3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-left: 10px;
+  border-bottom: none !important;
   border-bottom: 1px solid #ddd;
 }
 
-.blog > p {
-  line-height: 1.8;
-  letter-spacing: 0.2px;
+.blog h3 {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.3rem;
+  padding-left: 10px;
 }
 
-.blog > ol {
+.blog ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+  padding-left: 10px;
+}
+
+.blog ol > li {
+  font-weight: bold;
+  padding: 3px;
+}
+.blog ol > li::marker {
+  color: rgb(var(--foreground-rgb));
+}
+
+.blog ul > li::marker {
+  color: rgb(var(--foreground-rgb));
+}
+
+.blog ol {
   list-style-type: decimal;
-  list-style-position: inside;
+  margin-left: 2rem;
+  padding-left: 10px;
+}
+.blog li {
+  font-size: 1rem;
+}
+.blog ul > li {
+  padding: 3px;
+}
+
+.blog a {
+  color: #3498db; /* Blue link color */
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.blog a:hover {
+  color: #2980b9; /* Slightly darker blue on hover */
+  text-decoration: underline;
+}
+
+.blog div {
+  position: relative;
+}
+
+.blog code {
+  background-color: #1a1a1a;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: "Fira Code", monospace; /* Monospace font for code */
+}
+
+.blog blockquote {
+  border-left: 5px solid #b6c9d6; /* Matching blue border */
+  padding-left: 1rem;
+  margin: 10px;
+  margin-left: 2rem;
+  font-style: italic;
+  color: rgb(var(--foreground-rgb)) !important;
+}
+
+.blog hr {
+  border: none;
+  border-top: 2px solid #ecf0f1; /* Light grey border */
+  margin: 1.5rem 0;
+}
+
+.blog img {
+  max-width: 70%;
+  height: auto;
+  display: block;
+  margin: 3rem 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.blog p {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  line-height: 2;
+}
+
+.blog p + p {
+  margin-top: 0.5rem;
+}
+
+.index_img {
+  width: 700px;
+  height: 260px;
+  object-fit: fill;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* コードブロック */
+pre {
+  overflow-x: auto;
+  margin-top: 16px;
+  margin-bottom: 0px;
+  border-radius: 5px;
+}
+
+/* コードブロック(ファイル名が入力ありの場合) */
+div[data-filename] {
+  margin-top: 16px;
+}
+
+div[data-filename] > span {
+  display: inline-block;
+  background-color: #333333;
+  text-align: center;
+  padding: 3px 15px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+div[data-filename] > pre {
+  margin-top: 0px;
+  border-top-left-radius: 0px;
 }
