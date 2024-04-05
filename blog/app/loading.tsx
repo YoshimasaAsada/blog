@@ -1,5 +1,5 @@
 /**
- * ロード中のグルグルするやつ
+ * ロード中のに出すやつ
  */
 import { LinearProgress } from "@mui/material";
 
