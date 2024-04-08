@@ -9,6 +9,7 @@ import { CardTest } from "@/components/CardTest";
 import "highlight.js/styles/atom-one-dark.css";
 import hljs, { HighlightResult } from "highlight.js";
 import { load } from "cheerio";
+import parse from "html-react-parser";
 
 interface PageProps {
   params: {
@@ -95,6 +96,7 @@ export default function Page({ params }: PageProps) {
           </Grid>
           {/* TOCサイドバー */}
           <Grid item xs={12} md={3}>
+            <CardTest tocContainerRef={tocContainerRef} />
             <CardTest tocContainerRef={tocContainerRef} />
             <TableOfContents toc={toc} containerRef={tocContainerRef} />
           </Grid>

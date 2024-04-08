@@ -152,15 +152,13 @@ export const TableOfContents = ({
                 pl: `${data.level * 15}px`, // 階層に基づく左側のパディング
                 pr: "8px", // 右側のパディングを設定
                 minHeight: "36px", // ボタンの最小高さを設定して縦のスペースを減らす
-                color: activeId === data.id ? "primary.main" : "inherit",
+                // color: activeId === data.id ? "#6c6873" : "inherit",
                 borderLeft: activeId === data.id ? "4px solid" : "", // アクティブ時の左側ボーダー
-                borderColor: activeId === data.id ? "primary.main" : "",
-                backgroundColor: activeId === data.id ? "action.hover" : "",
+                borderColor: activeId === data.id ? "#6c6873" : "",
                 "&:hover": {
-                  color: "primary.light",
+                  // color: "#6c6873",
                   borderLeft: "4px solid", // ホバー時の左側ボーダー
-                  borderColor: "primary.main", // ホバー時のボーダー色
-                  backgroundColor: "action.hover", // ホバー時の背景色変更
+                  borderColor: "#6c6873", // ホバー時のボーダー色
                 },
               }}>
               <ListItemText primary={data.text} sx={{ m: 0 }} />

@@ -20,7 +20,7 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 /**
  * ヘッダー
- * @returns 
+ * @returns
  */
 export function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -46,7 +46,9 @@ export function Header() {
   };
 
   return (
-    <AppBar position="fixed" sx={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
+    // <AppBar position="fixed" sx={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
+    // <AppBar position="fixed" sx={{ backgroundColor: "#424242" }}>
+    <AppBar position="fixed" sx={{ backgroundColor: "rgba(66, 66, 66, 0.8)" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
