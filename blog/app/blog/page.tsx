@@ -48,9 +48,10 @@ export default function Page() {
       <h1 style={{ paddingBottom: "20px", paddingTop: "20px" }}>ブログ一覧</h1>
       <Grid container spacing={2}>
         {currentItems.map((content) => (
-          <Grid item xs={4} sm={4} md={4} lg={4} key={content.id}>
-            <Link href={`/blog/${content.id}`}>
+          <Grid key={content.id} item xs={4} sm={4} md={4} lg={4}>
+            <Link key={content.id} href={`/blog/${content.id}`}>
               <Card
+                key={content.id}
                 sx={{
                   maxWidth: 345,
                   height: 300,
@@ -96,7 +97,7 @@ export default function Page() {
           </Grid>
         ))}
       </Grid>
-      <Stack spacing={2}>
+      <Stack spacing={2} justifyContent="center" direction="row">
         <Pagination
           count={Math.ceil(blogs?.length / itemsPerPage)} // 全ページ数
           page={currentPage}
