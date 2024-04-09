@@ -15,7 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Link from "next/link";
 
-const pages = ["About", "Blog"];
+const pages = ["About", "Blog", "Profile"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 /**
@@ -123,9 +123,9 @@ export function Header() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Link href={`/${page.toLocaleLowerCase()}`}>
+              <Link href={`/${page.toLocaleLowerCase()}`} key={page}>
                 <Button
-                  key={page}
+                  // key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}>
                   {page}
