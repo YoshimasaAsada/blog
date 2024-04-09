@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <main>
       {blogs.map((content) => (
-        <div>
+        <div key={content.id}>
           <Link href={`/blog/${content.id}`} key={content.id}>
             {content.title}
           </Link>
