@@ -73,7 +73,7 @@ export default function Page({ params }: PageProps) {
     if (params && params.id) {
       fetchData();
     }
-  }, [params.id]);
+  }, [params]);
 
   useEffect(() => {
     // コンテンツがDOMに挿入された後にハイライトを適用
