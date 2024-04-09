@@ -49,9 +49,8 @@ export default function Page() {
       <Grid container spacing={2}>
         {currentItems.map((content) => (
           <Grid key={content.id} item xs={4} sm={4} md={4} lg={4}>
-            <Link key={content.id} href={`/blog/${content.id}`}>
+            <Link href={`/blog/${content.id}`}>
               <Card
-                key={content.id}
                 sx={{
                   maxWidth: 345,
                   height: 300,
