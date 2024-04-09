@@ -123,9 +123,9 @@ export function Header() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Link href={`/${page.toLocaleLowerCase()}`} key={page}>
+              <Link key={page} href={`/${page.toLocaleLowerCase()}`}>
                 <Button
-                  // key={page}
+                  key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "white", display: "block" }}>
                   {page}
