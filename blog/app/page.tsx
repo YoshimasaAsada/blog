@@ -3,32 +3,27 @@ import { useEffect, useState } from "react";
 // import styles from "./page.module.css";
 import { client } from "@/libs/client";
 import Link from "next/link";
+import { Blog } from "@/types/blog";
 
 export default function Home() {
-  const [blogs, setBlogs] = useState([]);
+  // const [blogs, setBlogs] = useState<Blog[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await client.get({
-        endpoint: "blogs",
-      });
-      setBlogs(data.contents);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const data = await client.get({
+  //       endpoint: "blogs",
+  //     });
+  //     setBlogs(data.contents);
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
-  console.log(blogs);
+  // console.log(blogs);
 
   return (
-    <main>
-      {blogs.map((content) => (
-        <div key={content.id}>
-          <Link href={`/blog/${content.id}`} key={content.id}>
-            {content.title}
-          </Link>
-        </div>
-      ))}
-    </main>
+    <>
+      <h1>test</h1>
+    </>
   );
 }

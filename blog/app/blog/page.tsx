@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 
 export default function Page() {
-  const [blogs, setBlogs] = useState<Blog[] | null>([]); // 初期値を空のオブジェクトに
+  const [blogs, setBlogs] = useState<Blog[]>([]); // 初期値を空のオブジェクトに
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +47,7 @@ export default function Page() {
     <Container>
       <h1 style={{ paddingBottom: "20px", paddingTop: "20px" }}>ブログ一覧</h1>
       <Grid container spacing={2}>
-        {currentItems.map((content) => (
+        {currentItems?.map((content) => (
           <Grid key={content.id} item xs={4} sm={4} md={4} lg={4}>
             <Link href={`/blog/${content.id}`}>
               <Card
