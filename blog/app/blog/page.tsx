@@ -37,7 +37,7 @@ export default function Page() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = blogs?.slice(indexOfFirstItem, indexOfLastItem);
   // 3. ページネーションコントロール
-  const paginate = (_, value) => {
+  const paginate = (_: any, value: number) => {
     setCurrentPage(value);
   };
 
