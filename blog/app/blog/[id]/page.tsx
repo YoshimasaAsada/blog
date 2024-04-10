@@ -87,16 +87,12 @@ export default function Page({ params }: PageProps) {
           {/* メインコンテンツ */}
           <Grid item xs={12} md={9}>
             <h1 className="title">{blog?.title}</h1>
-            {/* <div className="blog">
-              {blog?.content ? parse(blog?.content) : null}
-            </div> */}
             <div
               className="blog"
               dangerouslySetInnerHTML={{ __html: blog?.content }}></div>
           </Grid>
           {/* TOCサイドバー */}
           <Grid item xs={12} md={3}>
-            <CardTest tocContainerRef={tocContainerRef} />
             <CardTest tocContainerRef={tocContainerRef} />
             <TableOfContents toc={toc} containerRef={tocContainerRef} />
           </Grid>
