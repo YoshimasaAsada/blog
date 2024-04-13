@@ -9,7 +9,6 @@ import { CardTest } from "@/components/CardTest";
 import "highlight.js/styles/atom-one-dark.css";
 import hljs, { HighlightResult } from "highlight.js";
 import { load } from "cheerio";
-import parse from "html-react-parser";
 
 interface PageProps {
   params: {
