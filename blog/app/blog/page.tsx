@@ -40,7 +40,7 @@ export default function Page(props: PageProps) {
         const data = await client.get({
           endpoint: "blogs",
         });
-        console.log("query");
+        console.log("all");
         setBlogs(data.contents);
         console.log(data.contents);
       }
