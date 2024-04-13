@@ -26,7 +26,7 @@ export default function Page(props: any) {
   useEffect(() => {
     const fetchData = async () => {
       // クエリパラメータ `category` が存在するかどうかに基づいて条件分岐
-      console.log(props);
+      console.log(props.searchParams);
       if (props.searchParams.category) {
         const data = await client.get({
           endpoint: "blogs",
