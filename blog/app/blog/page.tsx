@@ -48,7 +48,7 @@ export default function Page(props: PageProps) {
     };
 
     fetchData();
-  }, []);
+  }, [props]);
 
   // ページネーションの実装
   // 1. 状態の設定
