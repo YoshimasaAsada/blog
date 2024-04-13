@@ -33,12 +33,16 @@ export default function Page(props: PageProps) {
             filters: `category[contains]${props.searchParams.category}`,
           },
         });
+        console.log("query");
         setBlogs(data.contents);
+        console.log(data.contents);
       } else {
         const data = await client.get({
           endpoint: "blogs",
         });
+        console.log("query");
         setBlogs(data.contents);
+        console.log(data.contents);
       }
     };
 
