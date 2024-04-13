@@ -3,18 +3,8 @@ import { useEffect, useState } from "react";
 import { client } from "@/libs/client";
 import Link from "next/link";
 import { Blog } from "@/types/blog";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Container,
-  Grid,
-  // Pagination,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import Image from "next/image";
-
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 // オプションをインポートする
@@ -23,6 +13,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { CardTest } from "@/components/CardTest";
+import { CategoryList } from "@/components/CategoryList";
 
 export default function Page() {
   const [blogs, setBlogs] = useState<Blog[]>([]); // 初期値を空のオブジェクトに
@@ -53,6 +45,22 @@ export default function Page() {
 
   return (
     <Container>
+      <Grid container spacing={2}>
+        <Image
+          style={{
+            paddingBottom: "20px",
+            paddingTop: "20px",
+            width: "100%",
+            height: "100%",
+          }}
+          src="/images/942831A9-9E6A-46F0-B9C0-5992CC219822_1_102_o.jpeg"
+          width={100}
+          height={200}
+          alt="Slider Image"
+          sizes="(min-width: 1024px) 100vw, 60vw"
+          className="slideImage"
+        />
+      </Grid>
       <Grid container spacing={2}>
         <h1 style={{ paddingBottom: "20px", paddingTop: "20px" }}>
           おすすめ記事
@@ -110,7 +118,7 @@ export default function Page() {
         <Grid
           container
           justifyContent="flex-end"
-          style={{ paddingTop: "20px" }}>
+          style={{ paddingTop: "20px", paddingBottom: "20px" }}>
           <Link href="/blog" passHref>
             <div
               style={{
@@ -122,6 +130,13 @@ export default function Page() {
               <ArrowForwardIosIcon />
             </div>
           </Link>
+        </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={9}></Grid>
+          <Grid item xs={12} md={3}>
+            <CardTest />
+            <CategoryList />
+          </Grid>
         </Grid>
       </Grid>
     </Container>
