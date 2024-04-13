@@ -20,7 +20,7 @@ interface PageProps {
   };
 }
 
-export default function Page(props: PageProps) {
+export default function Page(props: any) {
   const [blogs, setBlogs] = useState<Blog[]>([]);
 
   useEffect(() => {
