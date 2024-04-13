@@ -24,19 +24,16 @@ interface PageProps {
 export default function Page(props: any) {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const searchParams = useSearchParams();
-  const tmp = searchParams.get("category");
-  console.log(tmp);
+  const searchCategory = searchParams.get("category");
 
   useEffect(() => {
     const fetchData = async () => {
       // クエリパラメータ `category` が存在するかどうかに基づいて条件分岐
-
-      // console.log(props.searchParams.category);
-      if (tmp) {
+      if (searchCategory) {
         const data = await client.get({
           endpoint: "blogs",
           queries: {
-            filters: `category[contains]${tmp}`,
+            filters: `category[contains]${searchCategory}`,
           },
         });
         console.log("query");
