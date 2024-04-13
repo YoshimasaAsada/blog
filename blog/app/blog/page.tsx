@@ -13,6 +13,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useSearchParams } from "next/navigation";
 
 interface PageProps {
   searchParams: {
@@ -22,10 +23,13 @@ interface PageProps {
 
 export default function Page(props: any) {
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const searchParams = useSearchParams();
+  console.log(searchParams);
 
   useEffect(() => {
     const fetchData = async () => {
       // クエリパラメータ `category` が存在するかどうかに基づいて条件分岐
+
       console.log(props.searchParams);
       if (props.searchParams.category) {
         const data = await client.get({
