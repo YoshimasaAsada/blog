@@ -14,15 +14,32 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function Page() {
-  const [blogs, setBlogs] = useState<Blog[]>([]); // 初期値を空のオブジェクトに
+interface PageProps {
+  searchParams: {
+    category: string;
+  };
+}
+
+export default function Page(props: PageProps) {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await client.get({
-        endpoint: "blogs",
-      });
-      setBlogs(data.contents);
+      // クエリパラメータ `category` が存在するかどうかに基づいて条件分岐
+      if (props.searchParams.category) {
+        const data = await client.get({
+          endpoint: "blogs",
+          queries: {
+            filters: `category[contains]${props.searchParams.category}`,
+          },
+        });
+        setBlogs(data.contents);
+      } else {
+        const data = await client.get({
+          endpoint: "blogs",
+        });
+        setBlogs(data.contents);
+      }
     };
 
     fetchData();
