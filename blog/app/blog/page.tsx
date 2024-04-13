@@ -26,24 +26,24 @@ export default function Page(props: PageProps) {
   useEffect(() => {
     const fetchData = async () => {
       // クエリパラメータ `category` が存在するかどうかに基づいて条件分岐
-      if (props.searchParams.category) {
-        const data = await client.get({
-          endpoint: "blogs",
-          queries: {
-            filters: `category[contains]${props.searchParams.category}`,
-          },
-        });
-        console.log("query");
-        setBlogs(data.contents);
-        console.log(data.contents);
-      } else {
-        const data = await client.get({
-          endpoint: "blogs",
-        });
-        console.log("all");
-        setBlogs(data.contents);
-        console.log(data.contents);
-      }
+      // if (props.searchParams.category) {
+      const data = await client.get({
+        endpoint: "blogs",
+        queries: {
+          filters: `category[contains]${props.searchParams.category}`,
+        },
+      });
+      console.log("query");
+      setBlogs(data.contents);
+      console.log(data.contents);
+      // } else {
+      //   const data = await client.get({
+      //     endpoint: "blogs",
+      //   });
+      //   console.log("all");
+      //   setBlogs(data.contents);
+      //   console.log(data.contents);
+      // }
     };
 
     fetchData();
