@@ -32,11 +32,11 @@ export default function Page(props: any) {
       // クエリパラメータ `category` が存在するかどうかに基づいて条件分岐
 
       // console.log(props.searchParams.category);
-      if (props.searchParams.category) {
+      if (tmp) {
         const data = await client.get({
           endpoint: "blogs",
           queries: {
-            filters: `category[contains]${props.searchParams.category}`,
+            filters: `category[contains]${tmp}`,
           },
         });
         console.log("query");
