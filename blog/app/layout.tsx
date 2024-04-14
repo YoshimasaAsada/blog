@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.scss";
 import { Header } from "@/components/Header";
 import { Box } from "@mui/material";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         <Box sx={{ marginTop: "70px" }}>{children}</Box>
+        <Footer />
       </body>
     </html>
   );
