@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        <Box sx={{ marginTop: "70px" }}>{children}</Box>
+        <Box sx={{ marginTop: "70px", marginBottom: "70px" }}>{children}</Box>
         <Footer />
       </body>
     </html>

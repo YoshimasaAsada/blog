@@ -15,6 +15,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { CardTest } from "@/components/CardTest";
 import { CategoryList } from "@/components/CategoryList";
+import { Profile } from "@/components/Profile";
 
 export default function Page() {
   const [blogs, setBlogs] = useState<Blog[]>([]); // 初期値を空のオブジェクトに
@@ -132,9 +133,10 @@ export default function Page() {
           </Link>
         </Grid>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={9}></Grid>
+          <Grid item xs={12} md={9}>
+            <Profile />
+          </Grid>
           <Grid item xs={12} md={3}>
-            <CardTest />
             <CategoryList />
           </Grid>
         </Grid>
