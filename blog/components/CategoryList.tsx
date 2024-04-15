@@ -1,7 +1,7 @@
 "use client";
 import { client } from "@/libs/client";
 import { Category } from "@/types/category";
-import { Chip, Container } from "@mui/material";
+import { Box, Chip, Container, Typography } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -23,10 +23,18 @@ export const CategoryList = () => {
 
   return (
     <>
-      <div>
-        <h2>Category</h2>
-      </div>
-      <div>
+      <Typography
+        variant="h2"
+        component="h2"
+        style={{
+          textDecoration: "underline",
+          textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
+          textDecorationThickness: "2px", // 下線の太さを調整
+        }}>
+        Category
+      </Typography>
+
+      <Box>
         {categories?.map((category: any) => {
           return (
             <>
@@ -41,7 +49,7 @@ export const CategoryList = () => {
             </>
           );
         })}
-      </div>
+      </Box>
     </>
   );
 };
