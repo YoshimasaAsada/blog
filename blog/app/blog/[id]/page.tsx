@@ -6,7 +6,7 @@ import { Container, Grid } from "@mui/material";
 import { renderToc } from "../../../libs/render-toc";
 import TableOfContents from "@/components/TableOfContents";
 import { CardTest } from "@/components/CardTest";
-import "highlight.js/styles/atom-one-dark.css";
+import "highlight.js/styles/github-dark.css";
 import hljs, { HighlightResult } from "highlight.js";
 import { load } from "cheerio";
 
