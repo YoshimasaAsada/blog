@@ -115,7 +115,7 @@ a {
 }
 
 .blog code {
-  background-color: #1a1a1a;
+  background-color: #141313;
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-family: "Fira Code", monospace; /* Monospace font for code */
@@ -193,4 +193,61 @@ div[data-filename] > pre {
   .slideImage {
     aspect-ratio: initial;
   }
+}
+
+// more blogsボタンのアクション
+.to-blog-animation {
+  position: relative;
+  width: 150px; /*サイズは自由に変更してください。*/
+  height: 50px; /*サイズは自由に変更してください。*/
+  color: white;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  overflow: hidden;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  text-indent: 0;
+}
+
+.to-blog-animation:hover {
+  color: #fff;
+  text-indent: -40%;
+}
+
+.to-blog-animation:before {
+  z-index: -1;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #7d92ee;
+  -webkit-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+
+.to-blog-animation:hover:before {
+  left: 0;
+}
+
+.to-blog-animation:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  margin-top: -7px;
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-left: 10px solid rgba(255, 255, 255, 1);
+  -webkit-transition: all 0.1s ease 0.25s;
+  transition: all 0.1s ease 0.25s;
+  right: -20px;
+}
+
+.to-blog-animation:hover:after {
+  right: 0px;
 }

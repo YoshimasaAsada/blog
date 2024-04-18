@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { client } from "@/libs/client";
 import Link from "next/link";
 import { Blog } from "@/types/blog";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -13,7 +13,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { CardTest } from "@/components/CardTest";
 import { CategoryList } from "@/components/CategoryList";
 import { Profile } from "@/components/Profile";
 
@@ -63,9 +62,17 @@ export default function Page() {
         />
       </Grid>
       <Grid container spacing={2}>
-        <h1 style={{ paddingBottom: "20px", paddingTop: "20px" }}>
-          おすすめ記事
-        </h1>
+        <Typography
+          component="h3"
+          variant="h3"
+          sx={{ paddingTop: "20px", paddingBottom: "20px" }}
+          style={{
+            textDecoration: "underline",
+            textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
+            textDecorationThickness: "2px", // 下線の太さを調整
+          }}>
+          Recommend
+        </Typography>
       </Grid>
       <Grid container spacing={2}>
         <Swiper
@@ -122,13 +129,11 @@ export default function Page() {
           style={{ paddingTop: "20px", paddingBottom: "20px" }}>
           <Link href="/blog" passHref>
             <div
+              className="to-blog-animation"
               style={{
-                display: "flex",
-                alignItems: "center",
                 cursor: "pointer",
               }}>
               More Blogs
-              <ArrowForwardIosIcon />
             </div>
           </Link>
         </Grid>
