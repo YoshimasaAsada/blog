@@ -1,16 +1,11 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-
 import GitHubIcon from "@mui/icons-material/GitHub";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/X";
 import { AppBar } from "@mui/material";
 
 const logoStyle = {
@@ -80,10 +75,10 @@ export default function Footer() {
             <Link color="#ffffff" href="#">
               人気記事
             </Link>
-            <Link color="#ffffff" href="#">
+            <Link color="#ffffff" href="/">
               ホーム
             </Link>
-            <Link color="#ffffff" href="#">
+            <Link color="#ffffff" href="/profile">
               プロフィール
             </Link>
           </Box>
@@ -93,7 +88,7 @@ export default function Footer() {
               flexDirection: "column",
               gap: 1,
             }}>
-            <Link color="#ffffff" href="#">
+            <Link color="#ffffff" href="/privacy_poricy">
               プライバシーポリシー
             </Link>
             <Link color="#ffffff" href="#">
