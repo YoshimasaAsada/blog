@@ -1,7 +1,7 @@
 "use client";
 import { client } from "@/libs/client";
 import { Category } from "@/types/category";
-import { Box, Chip, Container, Typography } from "@mui/material";
+import { Box, Chip, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -20,6 +20,21 @@ export const CategoryList = () => {
   }, []);
 
   console.log(categories);
+  const [hoveredCategory, setHoveredCategory] = useState(null);
+
+  // 通常時のスタイルとホバー時のスタイル
+  const normalStyle = {
+    color: "white",
+    borderColor: "white",
+    margin: "2px",
+  };
+
+  const hoverStyle = {
+    color: "white", // ホバー時の文字色を変更
+    borderColor: "gray", // ホバー時の境界線の色を変更
+    backgroundColor: "gray", // ホバー時の背景色を変更
+    margin: "2px",
+  };
 
   return (
     <>
@@ -38,12 +53,16 @@ export const CategoryList = () => {
         {categories?.map((category: any) => {
           return (
             <>
-              <Link href={`/blog?category=${category.id}`}>
+              <Link key={category.id} href={`/blog?category=${category.id}`}>
                 <Chip
-                  key={category.id}
                   label={category.name}
+                  clickable
                   variant="outlined"
-                  style={{ color: "white", borderColor: "white" }}
+                  onMouseEnter={() => setHoveredCategory(category.id)}
+                  onMouseLeave={() => setHoveredCategory(null)}
+                  style={
+                    hoveredCategory === category.id ? hoverStyle : normalStyle
+                  }
                 />
               </Link>
             </>
