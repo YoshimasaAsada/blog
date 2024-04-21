@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { client } from "@/libs/client";
 import { Blog } from "@/types/blog";
-import { Container, Grid } from "@mui/material";
+import { Chip, Container, Grid, Typography } from "@mui/material";
 import { renderToc } from "../../../libs/render-toc";
 import TableOfContents from "@/components/TableOfContents";
 import { CardTest } from "@/components/CardTest";
@@ -86,6 +86,17 @@ export default function Page({ params }: PageProps) {
           {/* メインコンテンツ */}
           <Grid item xs={12} md={9}>
             <h1 className="title">{blog?.title}</h1>
+            <h2>category</h2>
+            {blog?.category.map((category, index) => (
+              <Chip
+                key={index}
+                label={category.name}
+                variant="outlined"
+                sx={{
+                  color: "white", // テキスト色を黒に設定
+                }}
+              />
+            ))}
             <div
               className="blog"
               dangerouslySetInnerHTML={{ __html: blog?.content }}></div>

@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   CardMedia,
+  Chip,
   Container,
   Grid,
   Pagination,
@@ -97,7 +98,6 @@ export default function Page(props: any) {
                 />
                 <CardContent
                   sx={{
-                    display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
                     height: "60%", // カードの残りの高さを埋める
@@ -105,15 +105,20 @@ export default function Page(props: any) {
                   <Typography gutterBottom variant="h6" component="div">
                     {content.title}
                   </Typography>
-                  <div style={{ marginTop: "auto" }}>
-                    {/* 投稿日を下に押し下げる */}
-                    <Typography variant="body2" color="text.secondary">
-                      投稿日：
-                      {new Date(content.publishedAt).toLocaleDateString(
-                        "ja-JP"
-                      )}
-                    </Typography>
-                  </div>
+                  <Typography variant="body2" color="text.secondary">
+                    投稿日：
+                    {new Date(content.publishedAt).toLocaleDateString("ja-JP")}
+                  </Typography>
+                  <Typography color="text.secondary" display="inline">
+                    タグ：
+                  </Typography>
+                  {content.category.map((category, index) => (
+                    <Chip
+                      key={index}
+                      label={category.name}
+                      variant="outlined"
+                    />
+                  ))}
                 </CardContent>
               </Card>
             </Link>
