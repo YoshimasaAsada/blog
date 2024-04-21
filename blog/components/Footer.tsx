@@ -91,7 +91,7 @@ export default function Footer() {
             <Link color="#ffffff" href="/privacy_poricy">
               プライバシーポリシー
             </Link>
-            <Link color="#ffffff" href="#">
+            <Link color="#ffffff" href="/contact">
               お問い合わせ
             </Link>
           </Box>
