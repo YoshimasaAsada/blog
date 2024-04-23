@@ -15,6 +15,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { CategoryList } from "@/components/CategoryList";
 import { Profile } from "@/components/Profile";
+import PeriodicTable from "@/components/PeriodicTable";
 
 export default function Page() {
   const [blogs, setBlogs] = useState<Blog[]>([]); // 初期値を空のオブジェクトに
@@ -45,7 +46,7 @@ export default function Page() {
 
   return (
     <Container>
-      <Grid container spacing={2}>
+      {/* <Grid container spacing={2}>
         <Image
           style={{
             paddingBottom: "20px",
@@ -60,7 +61,7 @@ export default function Page() {
           sizes="(min-width: 1024px) 100vw, 60vw"
           className="slideImage"
         />
-      </Grid>
+      </Grid> */}
       <Grid container spacing={2}>
         <Typography
           component="h3"
@@ -146,6 +147,7 @@ export default function Page() {
           </Grid>
         </Grid>
       </Grid>
+      {/* <PeriodicTable /> */}
     </Container>
   );
 }
