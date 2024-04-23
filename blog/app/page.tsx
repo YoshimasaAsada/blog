@@ -1,153 +1,81 @@
 "use client";
-import { useEffect, useState } from "react";
-import { client } from "@/libs/client";
 import Link from "next/link";
-import { Blog } from "@/types/blog";
-import { Container, Grid, Typography } from "@mui/material";
-import Image from "next/image";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
-// オプションをインポートする
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { CategoryList } from "@/components/CategoryList";
-import { Profile } from "@/components/Profile";
-import PeriodicTable from "@/components/PeriodicTable";
+import { useEffect, useRef } from "react";
+import * as THREE from "three";
+import styles from "./LinkStyles.module.css"; // CSSモジュールをインポート
 
 export default function Page() {
-  const [blogs, setBlogs] = useState<Blog[]>([]); // 初期値を空のオブジェクトに
+  const mountRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await client.get({
-        endpoint: "blogs",
-      });
-      setBlogs(data.contents);
-    };
+    if (!mountRef.current) return;
 
-    fetchData();
+    const currentRef = mountRef.current;
+    const width = currentRef.clientWidth;
+    const height = currentRef.clientHeight;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(width, height);
+    currentRef.appendChild(renderer.domElement);
+
+    const starsGeometry = new THREE.BufferGeometry();
+    const starVertices = [];
+
+    for (let i = 0; i < 10000; i++) {
+      starVertices.push(THREE.MathUtils.randFloatSpread(2000)); // x
+      starVertices.push(THREE.MathUtils.randFloatSpread(2000)); // y
+      starVertices.push(THREE.MathUtils.randFloatSpread(2000)); // z
+    }
+
+    starsGeometry.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(starVertices, 3)
+    );
+    const starsMaterial = new THREE.PointsMaterial({ color: 0x888888 });
+    const starField = new THREE.Points(starsGeometry, starsMaterial);
+
+    scene.add(starField);
+    camera.position.z = 1000;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      starField.rotation.x += 0.001;
+      starField.rotation.y += 0.001;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    return () => {
+      if (currentRef) {
+        currentRef.removeChild(renderer.domElement);
+      }
+    };
   }, []);
 
-  const slideSettings = {
-    0: {
-      slidesPerView: 1.4,
-      spaceBetween: 10,
-    },
-    1024: {
-      slidesPerView: 2,
-      spaceBetween: 10,
-    },
-  };
-
-  console.log(blogs);
-
   return (
-    <Container>
-      {/* <Grid container spacing={2}>
-        <Image
-          style={{
-            paddingBottom: "20px",
-            paddingTop: "20px",
-            width: "100%",
-            height: "100%",
-          }}
-          src="/images/942831A9-9E6A-46F0-B9C0-5992CC219822_1_102_o.jpeg"
-          width={100}
-          height={200}
-          alt="Slider Image"
-          sizes="(min-width: 1024px) 100vw, 60vw"
-          className="slideImage"
-        />
-      </Grid> */}
-      <Grid container spacing={2}>
-        <Typography
-          component="h3"
-          variant="h3"
-          sx={{ paddingTop: "20px", paddingBottom: "20px" }}
-          style={{
-            textDecoration: "underline",
-            textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
-            textDecorationThickness: "2px", // 下線の太さを調整
-          }}>
-          Recommend
-        </Typography>
-      </Grid>
-      <Grid container spacing={2}>
-        <Swiper
-          key={blogs.length}
-          modules={[Navigation, Pagination, Autoplay]}
-          breakpoints={slideSettings} // slidesPerViewを指定
-          slidesPerView={"auto"} // ハイドレーションエラー対策
-          centeredSlides={true} // スライドを中央に配置
-          loop={true} // スライドをループさせる
-          speed={1000} // スライドが切り替わる時の速度
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: false,
-          }} // スライド表示時間
-          navigation // ナビゲーション（左右の矢印）
-          pagination={{
-            clickable: true,
-          }} // ページネーション, クリックで対象のスライドに切り替わる
-          className="slideWrapper">
-          {blogs?.map((content, index) => (
-            <SwiperSlide key={index}>
-              {content.eyecatch ? (
-                <Link href={`/blog/${content.id}`}>
-                  <Image
-                    src={content.eyecatch.url}
-                    width={500}
-                    height={300}
-                    alt="Slider Image"
-                    sizes="(min-width: 1024px) 100vw, 60vw"
-                    className="slideImage"
-                  />
-                </Link>
-              ) : (
-                <Link href={`/blog/${content.id}`}>
-                  <div
-                    style={{
-                      width: "500px",
-                      height: "300px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      backgroundColor: "#ccc",
-                    }}>
-                    <p>No Image Available</p>
-                  </div>
-                </Link>
-              )}
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <Grid
-          container
-          justifyContent="flex-end"
-          style={{ paddingTop: "20px", paddingBottom: "20px" }}>
-          <Link href="/blog" passHref>
-            <div
-              className="to-blog-animation"
-              style={{
-                cursor: "pointer",
-              }}>
-              More Blogs
-            </div>
-          </Link>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={9}>
-            <Profile />
-          </Grid>
-          <Grid item xs={12} md={3}>
-            <CategoryList />
-          </Grid>
-        </Grid>
-      </Grid>
-      {/* <PeriodicTable /> */}
-    </Container>
+    <div
+      ref={mountRef}
+      style={{
+        width: "100vw",
+        height: "100vh",
+        position: "fixed",
+        zIndex: -1,
+      }}>
+      <div className={styles.welcome}>Welcome to YASD TECH</div>
+      <div className={styles.slider}>
+        <Link href="/blog" className={`${styles.link} ${styles.blog}`}>
+          Blog
+        </Link>
+        <Link href="/profile" className={`${styles.link} ${styles.profile}`}>
+          Profile
+        </Link>
+        <Link href="/contact" className={`${styles.link} ${styles.contact}`}>
+          Contact
+        </Link>
+      </div>
+    </div>
   );
 }
