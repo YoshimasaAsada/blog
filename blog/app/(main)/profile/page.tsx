@@ -1,9 +1,5 @@
 "use client";
-import { useEffect } from "react";
-import * as THREE from "three";
-import PeriodicTable from "@/components/PeriodicTable";
 import { Container } from "@mui/material";
-import { Profile } from "@/components/Profile";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
