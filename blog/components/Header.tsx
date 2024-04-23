@@ -10,12 +10,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import Link from "next/link";
 
-const pages = ["Blog", "Profile", "Works", 'Contact', 'Skils'];
+const pages = ["Blog", "Profile", "Contact"];
 
 /**
  * ヘッダー
@@ -97,6 +96,9 @@ export function Header() {
               sx={{
                 display: { xs: "block", md: "none" },
               }}>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center">Home</Typography>
+              </MenuItem>
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
@@ -123,6 +125,13 @@ export function Header() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            <Link href="/">
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}>
+                Home
+              </Button>
+            </Link>
             {pages.map((page) => (
               <Link key={page} href={`/${page.toLocaleLowerCase()}`}>
                 <Button
