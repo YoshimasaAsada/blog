@@ -1,5 +1,5 @@
 "use client";
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
@@ -7,13 +7,23 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import LaptopChromebookIcon from "@mui/icons-material/LaptopChromebook";
+import SchoolIcon from "@mui/icons-material/School";
 
-const Earth = () => {
-  // return <PeriodicTable />;
+export default function Page() {
   return (
     <>
       <Container>
-        麻田祥正 1999年生まれ
+        <Typography
+          component="h3"
+          variant="h3"
+          sx={{ paddingTop: "20px" }}
+          style={{
+            textDecoration: "underline",
+            textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
+            textDecorationThickness: "2px", // 下線の太さを調整
+          }}>
+          Career
+        </Typography>
         {/* <Profile /> */}
         <Timeline
           sx={{
@@ -26,15 +36,13 @@ const Earth = () => {
           <TimelineItem>
             <TimelineSeparator>
               <TimelineDot>
-                <LaptopChromebookIcon />
+                <SchoolIcon />
               </TimelineDot>
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent>
-              <h2>インフラトップトップ（2021/4~現在）</h2>
-              DMM WEB
-              Cammpというプログラミングスクールでメンターを行なっています。 Ruby
-              on Rails, AWSをメインに教えています。
+              <h2>大学卒業（2019/4〜2023/4）</h2>
+              経営学部卒
             </TimelineContent>
           </TimelineItem>
           <TimelineItem>
@@ -45,8 +53,23 @@ const Earth = () => {
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent>
-              <h2>テモナ株式会社（2023/4~現在）</h2>
+              <h2>某大手プログラミングスクール（2021/4~現在）</h2>
+              学生時代からプログラミングスクールのメンターを行なっています(現在も副業で継続中)。
+              <br />
+              Ruby on Rails, AWSをメインに教えています。
+            </TimelineContent>
+          </TimelineItem>
+          <TimelineItem>
+            <TimelineSeparator>
+              <TimelineDot>
+                <LaptopChromebookIcon />
+              </TimelineDot>
+              <TimelineConnector />
+            </TimelineSeparator>
+            <TimelineContent>
+              <h2>EC系SaaSミドルベンチャー（2023/4~現在）</h2>
               新卒で入りました。
+              <br />
               情シス、インフラ構築,保守,運用(AlmaLinux)、バックエンド開発(Nestjs×Typescript)、フロントエンド開発(React×Typescript)をやってます。
               <h3>情シス</h3>
               主にアクセス権の付与。AWSのIAM、Githubのリポジトリ権限管理など
@@ -59,13 +82,31 @@ const Earth = () => {
             </TimelineContent>
           </TimelineItem>
         </Timeline>
-        <h2>Skils</h2>
-        Rails,React,NestJS,Next.JS,Ruby,Typescript,Python,sh
-        <h2>qualification</h2>
-        AWS Certified Solutions Architect - Associate
+        <Typography
+          component="h3"
+          variant="h3"
+          sx={{ paddingTop: "20px" }}
+          style={{
+            textDecoration: "underline",
+            textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
+            textDecorationThickness: "2px", // 下線の太さを調整
+          }}>
+          Skils
+        </Typography>
+        <h2>Rails,React,NestJS,Next.JS,Ruby,Typescript,Python,sh</h2>
+        <Typography
+          component="h3"
+          variant="h3"
+          sx={{ paddingTop: "20px" }}
+          style={{
+            textDecoration: "underline",
+            textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
+            textDecorationThickness: "2px", // 下線の太さを調整
+          }}>
+          qualification
+        </Typography>
+        <h2>AWS Certified Solutions Architect - Associate</h2>
       </Container>
     </>
   );
-};
-
-export default Earth;
+}
