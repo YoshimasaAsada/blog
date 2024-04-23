@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { client } from "@/libs/client";
 import { Blog } from "@/types/blog";
 import { Chip, Container, Grid, Stack, Typography } from "@mui/material";
-import { renderToc } from "../../../libs/render-toc";
+import { renderToc } from "../../../../libs/render-toc";
 import TableOfContents from "@/components/TableOfContents";
 import { CardTest } from "@/components/CardTest";
 import "highlight.js/styles/github-dark.css";
