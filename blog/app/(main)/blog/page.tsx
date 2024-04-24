@@ -73,7 +73,7 @@ export default function Page(props: any) {
         container
         alignItems="center"
         style={{ paddingTop: "20px", paddingBottom: "20px" }}>
-        <BlogSwiper blogs={blogs} />
+        {/* <BlogSwiper blogs={blogs} /> */}
         <Grid item xs={6}>
           <Typography
             variant="h3"
