@@ -67,9 +67,7 @@ export default function Page() {
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent>
-              <h2>EC系SaaSミドルベンチャー（2023/4~現在）</h2>
-              新卒で入りました。
-              <br />
+              <h2>EC系SaaSミドルベンチャー[新卒入社]（2023/4~現在）</h2>
               情シス、インフラ構築,保守,運用(AlmaLinux)、バックエンド開発(Nestjs×Typescript)、フロントエンド開発(React×Typescript)をやってます。
               <h3>情シス</h3>
               主にアクセス権の付与。AWSのIAM、Githubのリポジトリ権限管理など
@@ -93,7 +91,7 @@ export default function Page() {
           }}>
           Skils
         </Typography>
-        <h2>Rails,React,NestJS,Next.JS,Ruby,Typescript,Python,sh</h2>
+        <h2>Rails,React,NestJS,Next.JS,Ruby,Typescript,Python</h2>
         <Typography
           component="h3"
           variant="h3"
