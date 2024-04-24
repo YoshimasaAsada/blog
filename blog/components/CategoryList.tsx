@@ -38,34 +38,31 @@ export const CategoryList = () => {
 
   return (
     <>
-      <Typography
-        variant="h2"
-        component="h2"
-        style={{
-          textDecoration: "underline",
-          textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
-          textDecorationThickness: "2px", // 下線の太さを調整
-        }}>
-        Category
-      </Typography>
-
       <Box>
+        <Typography
+          variant="h3"
+          component="h3"
+          style={{
+            textDecoration: "underline",
+            textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
+            textDecorationThickness: "2px", // 下線の太さを調整
+          }}>
+          Categories
+        </Typography>
         {categories?.map((category: any) => {
           return (
-            <>
-              <Link key={category.id} href={`/blog?category=${category.id}`}>
-                <Chip
-                  label={category.name}
-                  clickable
-                  variant="outlined"
-                  onMouseEnter={() => setHoveredCategory(category.id)}
-                  onMouseLeave={() => setHoveredCategory(null)}
-                  style={
-                    hoveredCategory === category.id ? hoverStyle : normalStyle
-                  }
-                />
-              </Link>
-            </>
+            <Link key={category.id} href={`/blog?category=${category.id}`}>
+              <Chip
+                label={category.name}
+                clickable
+                variant="outlined"
+                onMouseEnter={() => setHoveredCategory(category.id)}
+                onMouseLeave={() => setHoveredCategory(null)}
+                style={
+                  hoveredCategory === category.id ? hoverStyle : normalStyle
+                }
+              />
+            </Link>
           );
         })}
       </Box>
