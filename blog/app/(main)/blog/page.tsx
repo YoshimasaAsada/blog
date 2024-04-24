@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Blog } from "@/types/blog";
 import {
   Card,
+  CardActionArea,
   CardContent,
   CardMedia,
   Chip,
@@ -67,7 +68,7 @@ export default function Page(props: any) {
   // ページネーションの実装
   // 1. 状態の設定
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // 1ページあたりのアイテム数
+  const itemsPerPage = 4; // 1ページあたりのアイテム数
   // 2. データの分割
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -90,9 +91,135 @@ export default function Page(props: any) {
     },
   };
 
+  // TODO:あとでリファクタ
+  const BlogCard = ({ content }: any) => {
+    const [isHovered, setIsHovered] = useState(false);
+
+    return (
+      // <Grid item xs={4} sm={4} md={4} lg={4}>
+      <Link href={`/blog/${content.id}`}>
+        <Card
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          sx={{
+            // maxWidth: 345,
+            height: 300, // 高さを固定
+            backgroundColor: isHovered ? "#000" : "#fff",
+            color: isHovered ? "#fff" : "inherit",
+            overflow: "hidden", // オーバーフローを隠す
+            "&:hover .MuiCardMedia-root": {
+              transform: "scale(1.05)",
+              transition: "transform 0.2s ease-in-out",
+            },
+          }}>
+          {isHovered ? (
+            <>
+              <Card
+                sx={{
+                  position: "relative",
+                  filter: "grayscale(100%)",
+                  height: "100%",
+                }}>
+                <CardActionArea
+                  sx={{
+                    position: "absolute",
+                    top: 0,
+                    bottom: 0,
+                    right: 0,
+                    left: 0,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "rgba(0,0,0,0.5)",
+                    zIndex: 2,
+                  }}>
+                  <Typography
+                    variant="h5"
+                    component="div"
+                    sx={{ color: "white", textAlign: "center" }}>
+                    View More
+                  </Typography>
+                </CardActionArea>
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={content.eyecatch?.url}
+                  alt={content.title}
+                  sx={{
+                    transition: "transform 0.5s ease-in-out",
+                  }}
+                />
+                <CardContent
+                  sx={{
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    height: "60%",
+                  }}>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    color="text.secondary">
+                    {content.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    投稿日：
+                    {new Date(content.publishedAt).toLocaleDateString("ja-JP")}
+                  </Typography>
+                  <Typography color="text.secondary" display="inline">
+                    タグ：
+                  </Typography>
+                  {content.category.map((category: any, index: number) => (
+                    <Chip
+                      key={index}
+                      label={category?.name}
+                      variant="outlined"
+                    />
+                  ))}
+                </CardContent>
+              </Card>
+            </>
+          ) : (
+            <>
+              <CardMedia
+                component="img"
+                height="140"
+                image={content.eyecatch?.url}
+                alt={content.title}
+                sx={{
+                  transition: "transform 0.5s ease-in-out",
+                }}
+              />
+              <CardContent
+                sx={{
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  height: "60%", // カードの残りの高さを埋める
+                }}>
+                <Typography variant="h6" component="div" color="text.secondary">
+                  {content.title}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  投稿日：
+                  {new Date(content.publishedAt).toLocaleDateString("ja-JP")}
+                </Typography>
+                <Typography color="text.secondary" display="inline">
+                  タグ：
+                </Typography>
+                {content.category.map((category: any, index: number) => (
+                  <Chip key={index} label={category?.name} variant="outlined" />
+                ))}
+              </CardContent>
+            </>
+          )}
+        </Card>
+      </Link>
+      // </Grid>
+    );
+  };
+
   return (
     <Container>
-      <Typography
+      {/* <Typography
         component="h3"
         variant="h3"
         sx={{ paddingTop: "20px", paddingBottom: "20px" }}
@@ -124,14 +251,46 @@ export default function Page(props: any) {
           <SwiperSlide key={index}>
             {content.eyecatch ? (
               <Link href={`/blog/${content.id}`}>
-                <Image
-                  src={content.eyecatch.url}
-                  width={500}
-                  height={300}
-                  alt="Slider Image"
-                  sizes="(min-width: 1024px) 100vw, 60vw"
-                  className="slideImage"
-                />
+                <>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={content.eyecatch?.url}
+                    alt={content.title}
+                    sx={{
+                      transition: "transform 0.5s ease-in-out",
+                    }}
+                  />
+                  <CardContent
+                    sx={{
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      height: "60%", // カードの残りの高さを埋める
+                    }}>
+                    <Typography
+                      variant="h6"
+                      component="div"
+                      color="text.secondary">
+                      {content.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      投稿日：
+                      {new Date(content.publishedAt).toLocaleDateString(
+                        "ja-JP"
+                      )}
+                    </Typography>
+                    <Typography color="text.secondary" display="inline">
+                      タグ：
+                    </Typography>
+                    {content.category.map((category: any, index: any) => (
+                      <Chip
+                        key={index}
+                        label={category?.name}
+                        variant="outlined"
+                      />
+                    ))}
+                  </CardContent>
+                </>
               </Link>
             ) : (
               <Link href={`/blog/${content.id}`}>
@@ -150,98 +309,70 @@ export default function Page(props: any) {
             )}
           </SwiperSlide>
         ))}
-      </Swiper>
-      <h1 style={{ paddingBottom: "20px", paddingTop: "20px" }}>ブログ一覧</h1>
+      </Swiper> */}
       <Grid
         container
-        justifyContent="flex-end"
+        alignItems="center"
         style={{ paddingTop: "20px", paddingBottom: "20px" }}>
-        <Link href="/blog" passHref>
-          <div
-            className="to-blog-animation"
+        <Grid item xs={6}>
+          <Typography
+            variant="h3"
+            component="h3"
             style={{
-              cursor: "pointer",
+              textDecoration: "underline",
+              textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
+              textDecorationThickness: "2px", // 下線の太さを調整
             }}>
-            More Blogs
-          </div>
-        </Link>
+            Blogs
+          </Typography>
+        </Grid>
+        <Grid item xs={6} style={{ textAlign: "right" }}>
+          <Link href="/blog" passHref>
+            <div
+              className="to-blog-animation"
+              style={{
+                cursor: "pointer",
+              }}>
+              All Blogs
+            </div>
+          </Link>
+        </Grid>
       </Grid>
       <Grid container spacing={2}>
-        {currentItems?.map((content) => (
-          <Grid key={content.id} item xs={4} sm={4} md={4} lg={4}>
-            <Link href={`/blog/${content.id}`}>
-              <Card
-                sx={{
-                  maxWidth: 345,
-                  height: 300,
-                  "&:hover": {
-                    backgroundColor: "#f5f5f5", // ホバー時の背景色を変更
-                    "& .MuiCardMedia-root": {
-                      transform: "scale(1.05)",
-                      transition: "transform 0.2s ease-in-out",
-                    },
-                  },
-                }}>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={content.eyecatch?.url}
-                  alt={content.title}
-                  sx={{
-                    transition: "transform 0.5s ease-in-out",
-                  }}
-                />
-                <CardContent
-                  sx={{
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    height: "60%", // カードの残りの高さを埋める
-                  }}>
-                  <Typography gutterBottom variant="h6" component="div">
-                    {content.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    投稿日：
-                    {new Date(content.publishedAt).toLocaleDateString("ja-JP")}
-                  </Typography>
-                  <Typography color="text.secondary" display="inline">
-                    タグ：
-                  </Typography>
-                  {content.category.map((category, index) => (
-                    <Chip
-                      key={index}
-                      label={category.name}
-                      variant="outlined"
-                    />
-                  ))}
-                </CardContent>
-              </Card>
-            </Link>
+        <Grid item xs={9}>
+          <Grid container spacing={2}>
+            {currentItems?.map((content) => (
+              <Grid item xs={12} sm={6} key={content.id}>
+                <BlogCard content={content} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
+          <Stack spacing={2} justifyContent="center" direction="row">
+            <Pagination
+              count={Math.ceil(blogs?.length / itemsPerPage)} // 全ページ数
+              page={currentPage}
+              onChange={paginate}
+              sx={{
+                paddingTop: "8px",
+                "& .MuiPaginationItem-root": {
+                  color: "white",
+                  backgroundColor: "transparent",
+                  "&:hover": {
+                    backgroundColor: "gray",
+                  },
+                },
+                "& .MuiPaginationItem-root.Mui-selected": {
+                  color: "white",
+                  backgroundColor: "gray",
+                },
+              }}
+            />
+          </Stack>
+        </Grid>
+        <Grid item xs={3}>
+          <CategoryList />
+        </Grid>
       </Grid>
-      <Stack spacing={2} justifyContent="center" direction="row">
-        <Pagination
-          count={Math.ceil(blogs?.length / itemsPerPage)} // 全ページ数
-          page={currentPage}
-          onChange={paginate}
-          sx={{
-            paddingTop: "8px",
-            "& .MuiPaginationItem-root": {
-              color: "white", // 非アクティブなアイテムのテキスト色
-              backgroundColor: "transparent", // 非アクティブなアイテムの背景色
-              "&:hover": {
-                backgroundColor: "gray", // ホバー時の背景色
-              },
-            },
-            "& .MuiPaginationItem-root.Mui-selected": {
-              color: "white", // 選択されたアイテムのテキスト色
-              backgroundColor: "gray", // 選択されたアイテムの背景色
-            },
-          }}
-        />
-      </Stack>
-      <CategoryList />
     </Container>
   );
 }
