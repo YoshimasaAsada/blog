@@ -9,8 +9,26 @@ import {
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useEffect, useState } from "react";
+import { client } from "@/libs/client";
+import { Blog } from "@/types/blog";
 
-export const BlogSwiper = ({ blogs }: any) => {
+export const BlogSwiper = () => {
+  const [blogs, setBlogs] = useState<Blog[]>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await client.get({
+        endpoint: "blogs",
+      });
+      console.log("all");
+      setBlogs(data.contents);
+      console.log(data.contents);
+    };
+
+    fetchData();
+  }, []);
+
   const slideSettings = {
     0: {
       slidesPerView: 1.4,
@@ -36,7 +54,7 @@ export const BlogSwiper = ({ blogs }: any) => {
         Recommend
       </Typography>
       <Swiper
-        key={blogs.length}
+        key={blogs?.length}
         modules={[Navigation, SwiperPagenation, Autoplay]}
         breakpoints={slideSettings} // slidesPerViewを指定
         slidesPerView={"auto"} // ハイドレーションエラー対策
