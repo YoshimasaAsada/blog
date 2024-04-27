@@ -1,24 +1,32 @@
 "use client";
-
+import { useEffect, useState, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
-import { useEffect } from "react";
 import { IS_GATAG, GA_TAG_ID, pageview } from "../libs/gtag";
+import Loading from "@/app/loading";
+
+const LoadSearchParams = () => {
+  const searchParams = useSearchParams();
+  return searchParams.toString();
+};
 
 const GoogleAnalytics = () => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+  const [searchParams, setSearchParams] = useState("");
 
   useEffect(() => {
     if (!IS_GATAG) {
       return;
     }
-    const url = pathname + searchParams.toString();
+    const url = pathname + searchParams;
     pageview(url);
   }, [pathname, searchParams]);
 
   return (
     <>
+      <Suspense fallback={<Loading />}>
+        <LoadSearchParamsWrapper setSearchParams={setSearchParams} />
+      </Suspense>
       <Script
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_TAG_ID}`}
@@ -35,6 +43,15 @@ const GoogleAnalytics = () => {
       </Script>
     </>
   );
+};
+
+const LoadSearchParamsWrapper = ({ setSearchParams }: any) => {
+  const searchParamsString = LoadSearchParams(); // This calls useSearchParams internally
+  useEffect(() => {
+    setSearchParams(searchParamsString);
+  }, [searchParamsString]);
+
+  return null;
 };
 
 export default GoogleAnalytics;
