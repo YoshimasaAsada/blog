@@ -3,13 +3,7 @@ import { useEffect, useState } from "react";
 import { client } from "@/libs/client";
 import Link from "next/link";
 import { Blog } from "@/types/blog";
-import {
-  Container,
-  Grid,
-  Pagination,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Container, Grid, Pagination, Stack, Typography } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import { CategoryList } from "@/components/CategoryList";
 import { BlogCard } from "@/components/BlogCard";
@@ -65,7 +59,6 @@ export default function Page(props: any) {
     setCurrentPage(value);
   };
 
-  console.log(blogs);
 
   return (
     <Container>

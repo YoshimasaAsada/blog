@@ -47,11 +47,6 @@ export function Header() {
     <AppBar position="fixed" sx={{ backgroundColor: "rgba(66, 66, 66, 0.8)" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Avatar
-            alt="Remy Sharp"
-            src="/images/942831A9-9E6A-46F0-B9C0-5992CC219822_1_102_o.jpeg"
-            sx={{ width: 70, height: 50, marginRight: "10px" }}
-          />
           <Typography
             variant="h6"
             noWrap
@@ -106,7 +101,6 @@ export function Header() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -122,7 +116,7 @@ export function Header() {
               color: "inherit",
               textDecoration: "none",
             }}>
-            LOGO
+            YASD TECH
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Link href="/">
