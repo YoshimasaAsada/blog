@@ -18,41 +18,12 @@ type TableOfContentsProps = {
   containerRef: React.RefObject<HTMLDivElement>;
 };
 
-/**
- * スクロール位置を監視して、上まで行けばTOCをヘッダー手前で固定するためのisStickyのフラグを返す
- * @param ref
- * @returns
- */
-const useScrollPosition = (ref: React.RefObject<HTMLDivElement>) => {
-  // TOCを固定するかどうかフラグ
-  const [isSticky, setSticky] = useState(false);
-
-  useEffect(() => {
-    const boxTop = ref.current ? ref.current.getBoundingClientRect().top : 0;
-    const headerHeight = 70;
-    const initialTopPosition = boxTop - headerHeight;
-
-    const handleScroll = () => {
-      const isOverInitialPosition = window.scrollY >= initialTopPosition;
-      setSticky(isOverInitialPosition);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [ref]);
-
-  return isSticky;
-};
-
 export const TableOfContents = ({
   toc,
   containerRef,
 }: TableOfContentsProps) => {
   const [isExpanded, setExpanded] = useState<boolean>(true);
   const boxRef = useRef<HTMLDivElement | null>(null);
-  const isSticky = useScrollPosition(boxRef);
   const [activeId, setActiveId] = useState("");
 
   const containerWidth = containerRef.current
@@ -122,16 +93,11 @@ export const TableOfContents = ({
 
   return (
     <Box
-      ref={boxRef}
       sx={{
-        position: isSticky ? "fixed" : "static",
-        top: isSticky ? "70px" : "0px",
-        width: containerWidth,
-        zIndex: 2,
-        overflow: "auto",
-        height: "auto",
-        borderRadius: "4px",
-        border: "1px solid #888",
+        position: "sticky",
+        top: "80px", // ヘッダーの高さが70pxなので、10px下に固定する
+        maxHeight: "calc(100vh - 80px)", // ビューポート高さからtopの値を引いた高さを最大高さとする
+        overflowY: "auto", // コンテンツが多い場合にスクロールバーを表示
       }}>
       <Typography variant="h6" sx={{ m: 2, borderBottom: "1px solid #ccc" }}>
         目次
