@@ -42,6 +42,13 @@ a {
 }
 
 /* blogのスタイル */
+.title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #666666;
+}
+
 .blog > h1 {
   font-size: 30px;
   font-weight: bold;
@@ -53,14 +60,12 @@ a {
   font-size: 24px;
   font-weight: bold;
   margin: 40px 0 16px;
-  border-bottom: 1px solid #ddd;
 }
 
 .blog > h3 {
   font-size: 18px;
   font-weight: bold;
   margin: 40px 0 16px;
-  border-bottom: 1px solid #ddd;
 }
 
 .blog {
@@ -157,13 +162,14 @@ a {
 pre {
   overflow-x: auto;
   margin-top: 16px;
-  margin-bottom: 0px;
+  margin-bottom: 16px;
   border-radius: 5px;
 }
 
 /* コードブロック(ファイル名が入力ありの場合) */
 div[data-filename] {
   margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 div[data-filename] > span {
