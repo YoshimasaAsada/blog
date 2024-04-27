@@ -72,9 +72,6 @@ export default function Footer() {
               flexDirection: "column",
               gap: 1,
             }}>
-            <Link color="#ffffff" href="#">
-              人気記事
-            </Link>
             <Link color="#ffffff" href="/">
               ホーム
             </Link>
