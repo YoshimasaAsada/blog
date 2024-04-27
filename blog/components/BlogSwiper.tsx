@@ -51,7 +51,7 @@ export const BlogSwiper = () => {
           textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
           textDecorationThickness: "2px", // 下線の太さを調整
         }}>
-        Recommend
+        Read Next
       </Typography>
       <Swiper
         key={blogs?.length}

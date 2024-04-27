@@ -18,11 +18,14 @@ export const BlogCard = ({ content }: any) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         sx={{
-          // maxWidth: 345,
-          height: 300, // 高さを固定
+          height: 300,
           backgroundColor: isHovered ? "#000" : "#fff",
           color: isHovered ? "#fff" : "inherit",
-          overflow: "hidden", // オーバーフローを隠す
+          overflow: "hidden",
+          boxShadow: isHovered
+            ? "0 0 20px 0 rgba(255, 255, 255, 0.5)" // マウスホバー時の影
+            : "none",
+          transition: "box-shadow ease-in-out", // 影の変化にトランジションを追加
           "&:hover .MuiCardMedia-root": {
             transform: "scale(1.05)",
             transition: "transform 0.2s ease-in-out",
@@ -53,7 +56,7 @@ export const BlogCard = ({ content }: any) => {
                   variant="h5"
                   component="div"
                   sx={{ color: "white", textAlign: "center" }}>
-                  View More
+                  View
                 </Typography>
               </CardActionArea>
               <CardMedia
