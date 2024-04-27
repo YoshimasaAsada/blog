@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { client } from "@/libs/client";
 import { Blog } from "@/types/blog";
-import { Chip, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 import { renderToc } from "../../../../libs/render-toc";
 import TableOfContents from "@/components/TableOfContents";
 import { CardTest } from "@/components/CardTest";
@@ -12,6 +12,7 @@ import { load } from "cheerio";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import Image from "next/image";
+import { BlogSwiper } from "@/components/BlogSwiper";
 
 interface PageProps {
   params: {
@@ -89,49 +90,52 @@ export default function Page({ params }: PageProps) {
           {/* メインコンテンツ */}
           <Grid item xs={12} md={9}>
             <h1 className="title">{blog?.title}</h1>
-            <Grid container>
-              <Image
-                style={{
-                  paddingBottom: "10px",
-                  paddingTop: "10px",
-                  width: "100%",
-                  height: "100%",
-                }}
-                src={blog?.eyecatch.url}
-                width={100}
-                height={200}
-                alt="Slider Image"
-                sizes="(min-width: 1024px) 100vw, 60vw"
-                className="slideImage"
-              />
-            </Grid>
-            <Stack
-              direction="row"
-              spacing={1}
-              alignItems="center"
-              sx={{ paddingTop: "5px" }}>
-              <CalendarMonthIcon />
-              <Typography>投稿日：</Typography>
-              {new Date(blog?.publishedAt).toLocaleDateString("ja-JP")}
-            </Stack>
-            <Stack
-              direction="row"
-              spacing={1}
-              alignItems="center"
-              sx={{ paddingTop: "5px" }}>
-              <LocalOfferIcon />
-              <Typography display="inline">関連：</Typography>
-              {blog?.category.map((category, index) => (
-                <Chip
-                  key={index}
-                  label={category.name}
-                  variant="outlined"
-                  sx={{
-                    color: "white", // テキスト色を黒に設定
+            <Box paddingBottom="15px">
+              <Grid container>
+                <Image
+                  style={{
+                    marginBottom: "10px",
+                    marginTop: "10px",
+                    width: "100%",
+                    height: "100%",
+                    backgroundColor: "#fff", // Set the background color to white
                   }}
+                  src={blog?.eyecatch.url}
+                  width={100}
+                  height={200}
+                  alt="Slider Image"
+                  sizes="(min-width: 1024px) 100vw, 60vw"
+                  className="slideImage"
                 />
-              ))}
-            </Stack>
+              </Grid>
+              <Stack
+                direction="row"
+                spacing={1}
+                alignItems="center"
+                sx={{ paddingTop: "5px" }}>
+                <CalendarMonthIcon />
+                <Typography>投稿日：</Typography>
+                {new Date(blog?.publishedAt).toLocaleDateString("ja-JP")}
+              </Stack>
+              <Stack
+                direction="row"
+                spacing={1}
+                alignItems="center"
+                sx={{ paddingTop: "5px" }}>
+                <LocalOfferIcon />
+                <Typography display="inline">関連：</Typography>
+                {blog?.category.map((category, index) => (
+                  <Chip
+                    key={index}
+                    label={category.name}
+                    variant="outlined"
+                    sx={{
+                      color: "white", // テキスト色を黒に設定
+                    }}
+                  />
+                ))}
+              </Stack>
+            </Box>
             <div
               className="blog"
               dangerouslySetInnerHTML={{ __html: blog?.content }}
@@ -143,6 +147,7 @@ export default function Page({ params }: PageProps) {
             <TableOfContents toc={toc} containerRef={tocContainerRef} />
           </Grid>
         </Grid>
+        {/* <BlogSwiper /> */}
       </Container>
     </>
   );
