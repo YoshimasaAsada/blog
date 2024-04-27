@@ -83,7 +83,7 @@ export default function Page({ params }: PageProps) {
   }, [blog]); // blogの状態が更新された後に実行
 
   return (
-    <main>
+    <>
       <Container>
         <Grid container spacing={2}>
           {/* メインコンテンツ */}
@@ -144,6 +144,6 @@ export default function Page({ params }: PageProps) {
           </Grid>
         </Grid>
       </Container>
-    </main>
+    </>
   );
 }
