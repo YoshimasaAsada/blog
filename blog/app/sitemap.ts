@@ -5,10 +5,6 @@ export default async function sitemap() {
 
   const staticPage = [
     {
-      url: "https://yasdtech.com",
-      lastModified: _lastModified,
-    },
-    {
       url: "https://yasdtech.com/profile",
       lastModified: _lastModified,
     },
