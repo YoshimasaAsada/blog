@@ -1,6 +1,27 @@
 import { client } from "@/libs/client";
 
 export default async function sitemap() {
+  const _lastModified = new Date();
+
+  const staticPage = [
+    {
+      url: "https://yasdtech.com",
+      lastModified: _lastModified,
+    },
+    {
+      url: "https://yasdtech.com/profile",
+      lastModified: _lastModified,
+    },
+    {
+      url: "https://yasdtech.com/privacy_poricy",
+      lastModified: _lastModified,
+    },
+    {
+      url: "https://yasdtech.com/contact",
+      lastModified: _lastModified,
+    },
+  ];
+
   const allBlogs = await client.get({
     endpoint: "blogs",
   });
@@ -11,5 +32,5 @@ export default async function sitemap() {
     lastModified: blog.createdAt,
   }));
 
-  return [...blogs];
+  return [...blogs, ...staticPage];
 }
