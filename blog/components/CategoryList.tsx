@@ -19,7 +19,6 @@ export const CategoryList = () => {
     fetchData();
   }, []);
 
-  console.log(categories);
   const [hoveredCategory, setHoveredCategory] = useState(null);
 
   // 通常時のスタイルとホバー時のスタイル

@@ -7,22 +7,15 @@ import { Container, Grid, Pagination, Stack, Typography } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import { CategoryList } from "@/components/CategoryList";
 import { BlogCard } from "@/components/BlogCard";
-import { BlogSwiper } from "@/components/BlogSwiper";
 
-interface PageProps {
-  searchParams: {
-    category: string;
-  };
-}
-
-export default function Page(props: any) {
+export default function Page() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const searchParams = useSearchParams();
   const searchCategory = searchParams.get("category");
 
   useEffect(() => {
+    // クエリパラメータ `category` が存在するかどうかに基づいて条件分岐
     const fetchData = async () => {
-      // クエリパラメータ `category` が存在するかどうかに基づいて条件分岐
       if (searchCategory) {
         const data = await client.get({
           endpoint: "blogs",
@@ -30,21 +23,17 @@ export default function Page(props: any) {
             filters: `category[contains]${searchCategory}`,
           },
         });
-        console.log("query");
         setBlogs(data.contents);
-        // console.log(data.contents);
       } else {
         const data = await client.get({
           endpoint: "blogs",
         });
-        console.log("all");
         setBlogs(data.contents);
-        console.log(data.contents);
       }
     };
 
     fetchData();
-  }, [props]);
+  }, []);
 
   // ページネーションの実装
   // 1. 状態の設定
@@ -58,7 +47,6 @@ export default function Page(props: any) {
   const paginate = (_: any, value: number) => {
     setCurrentPage(value);
   };
-
 
   return (
     <Container>
