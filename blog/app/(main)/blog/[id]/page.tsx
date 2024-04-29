@@ -33,67 +33,48 @@ export default function Page({ params }: PageProps) {
   const [blog, setBlog] = useState<Blog>();
   const [toc, setToc] = useState<TocItem[]>([]);
 
-  const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const data = await client.getListDetail({
-          endpoint: "blogs",
-          contentId: params.id,
-        });
-        setBlog(data);
+      const data = await client.getListDetail({
+        endpoint: "blogs",
+        contentId: params.id,
+      });
+      setBlog(data);
 
-        const toc = renderToc(data.content);
-        setToc(toc);
-        const $ = load(data.content);
+      const toc = renderToc(data.content);
+      setToc(toc);
+      const $ = load(data.content);
 
-        $("div[data-filename]").each((_, elm) => {
-          $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
-        });
+      $("div[data-filename]").each((_, elm) => {
+        $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
+      });
 
-        $("pre code").each((_, elm) => {
-          const language = $(elm).attr("class") || "";
-          let result: HighlightResult;
-          try {
-            if (language == "") {
-              result = hljs.highlightAuto($(elm).text());
-            } else {
-              result = hljs.highlight($(elm).text(), {
-                language: language.replace("language-", ""),
-              });
-            }
-            $(elm).html(result.value);
-            $(elm).addClass("hljs");
-          } catch (innerError) {
-            console.error("Syntax highlight failed", innerError);
-          }
-        });
+      $("pre code").each((_, elm) => {
+        const language = $(elm).attr("class") || "";
+        let result;
 
-        const cleanHTML = DOMPurify.sanitize($.html());
-        data.content = cleanHTML;
-      } catch (error) {
-        console.error("Failed to fetch or process blog data", error);
-        setError("Failed to load blog data.");
-      }
+        if (language == "") {
+          result = hljs.highlightAuto($(elm).text());
+        } else {
+          result = hljs.highlight($(elm).text(), {
+            language: language.replace("language-", ""),
+          });
+        }
+        $(elm).html(result.value);
+        $(elm).addClass("hljs");
+      });
+
+      const cleanHTML = DOMPurify.sanitize($.html());
+      data.content = cleanHTML;
     };
 
     fetchData();
   }, [params]);
 
   useEffect(() => {
-    if (blog) {
-      try {
-        hljs.highlightAll();
-      } catch (error) {
-        console.error("Highlighting failed", error);
-      }
-    }
-  }, [blog]);
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+    // コンテンツがDOMに挿入された後にハイライトを適用
+    hljs.highlightAll();
+  }, [blog]); // blogの状態が更新された後に実行
 
   if (!blog) {
     return <Loading />;
