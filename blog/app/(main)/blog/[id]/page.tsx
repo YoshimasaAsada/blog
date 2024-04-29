@@ -13,6 +13,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import Image from "next/image";
 import Loading from "@/app/loading";
+import DOMPurify from "dompurify";
 
 interface PageProps {
   params: {
@@ -44,23 +45,17 @@ export default function Page({ params }: PageProps) {
       setToc(toc);
       const $ = load(data.content);
 
-      // コードブロックのファイル名が入力されている場合の処理
       $("div[data-filename]").each((_, elm) => {
-        // data-filename属性の値を持つspanを
-        // <div data-filename="{入力したファイル名}">の最初の子要素として追加
         $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
       });
 
-      // コードブロックのシンタックスハイライトを行う
       $("pre code").each((_, elm) => {
         const language = $(elm).attr("class") || "";
-        let result: HighlightResult;
+        let result;
 
         if (language == "") {
-          // 言語が入力なしの場合、自動判定
           result = hljs.highlightAuto($(elm).text());
         } else {
-          // 言語が入力ありの場合、入力された言語で判定
           result = hljs.highlight($(elm).text(), {
             language: language.replace("language-", ""),
           });
@@ -69,8 +64,8 @@ export default function Page({ params }: PageProps) {
         $(elm).addClass("hljs");
       });
 
-      // 編集したHTMLを再設定
-      data.content = $.html();
+      const cleanHTML = DOMPurify.sanitize($.html());
+      data.content = cleanHTML;
     };
 
     fetchData();
