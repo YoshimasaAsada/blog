@@ -3,8 +3,10 @@ import { Category } from "./category";
 export interface Blog {
   id: string;
   title: string;
-  content: any;
-  eyecatch: any;
+  content: string;
+  eyecatch: {
+    url: string;
+  };
   category: Category[];
-  publishedAt: any;
+  publishedAt: string;
 }
