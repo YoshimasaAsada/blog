@@ -12,7 +12,7 @@ import { load } from "cheerio";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import Image from "next/image";
-import { BlogSwiper } from "@/components/BlogSwiper";
+import Loading from "@/app/loading";
 
 interface PageProps {
   params: {
@@ -23,13 +23,13 @@ interface PageProps {
 interface TocItem {
   text: string;
   id: string;
-  level: number; // Include hierarchy level
+  level: number;
 }
 
 export default function Page({ params }: PageProps) {
   const tocContainerRef = useRef(null);
 
-  const [blog, setBlog] = useState<Blog | null>(null);
+  const [blog, setBlog] = useState<Blog>();
   const [toc, setToc] = useState<TocItem[]>([]);
 
   useEffect(() => {
@@ -73,15 +73,17 @@ export default function Page({ params }: PageProps) {
       data.content = $.html();
     };
 
-    if (params && params.id) {
-      fetchData();
-    }
+    fetchData();
   }, [params]);
 
   useEffect(() => {
     // コンテンツがDOMに挿入された後にハイライトを適用
     hljs.highlightAll();
   }, [blog]); // blogの状態が更新された後に実行
+
+  if (!blog) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -115,7 +117,7 @@ export default function Page({ params }: PageProps) {
                 sx={{ paddingTop: "5px" }}>
                 <CalendarMonthIcon />
                 <Typography>投稿日：</Typography>
-                {new Date(blog?.publishedAt).toLocaleDateString("ja-JP")}
+                {new Date(blog.publishedAt).toLocaleDateString("ja-JP")}
               </Stack>
               <Stack
                 direction="row"
@@ -138,10 +140,9 @@ export default function Page({ params }: PageProps) {
             </Box>
             <div
               className="blog"
-              dangerouslySetInnerHTML={{ __html: blog?.content }}
+              dangerouslySetInnerHTML={{ __html: blog.content }}
             />
           </Grid>
-          {/* TOCサイドバー */}
           <Grid item xs={12} md={3}>
             <CardTest tocContainerRef={tocContainerRef} />
             <TableOfContents toc={toc} containerRef={tocContainerRef} />
