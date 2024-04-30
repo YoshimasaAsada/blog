@@ -8,7 +8,10 @@ import { useSearchParams } from "next/navigation";
 import { CategoryList } from "@/components/CategoryList";
 import { BlogCard } from "@/components/BlogCard";
 
-export default function Page() {
+export default function Page(props: any) {
+  // const { contents } = await getAllBlogs();
+  // console.log(contents);
+
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const searchParams = useSearchParams();
   const searchCategory = searchParams.get("category");
@@ -33,7 +36,7 @@ export default function Page() {
     };
 
     fetchData();
-  }, []);
+  }, [props]);
 
   // ページネーションの実装
   // 1. 状態の設定
@@ -82,7 +85,7 @@ export default function Page() {
       <Grid container spacing={2}>
         <Grid item xs={9}>
           <Grid container spacing={2}>
-            {currentItems?.map((content) => (
+            {currentItems.map((content) => (
               <Grid item xs={12} sm={6} key={content.id}>
                 <BlogCard content={content} />
               </Grid>

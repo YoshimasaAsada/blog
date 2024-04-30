@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export const CategoryList = () => {
+  // const categories = await getAllCategories();
+
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {

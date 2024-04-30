@@ -1,4 +1,3 @@
-"use client";
 import { Container, Typography } from "@mui/material";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
