@@ -77,7 +77,10 @@ export const BlogCard = ({ content }: any) => {
                 <Typography variant="h6" component="div" color="text.secondary">
                   {content.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  suppressHydrationWarning>
                   投稿日：
                   {new Date(content.publishedAt).toLocaleDateString("ja-JP")}
                 </Typography>
@@ -110,7 +113,10 @@ export const BlogCard = ({ content }: any) => {
               <Typography variant="h6" component="div" color="text.secondary">
                 {content.title}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                suppressHydrationWarning>
                 投稿日：
                 {new Date(content.publishedAt).toLocaleDateString("ja-JP")}
               </Typography>

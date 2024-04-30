@@ -111,8 +111,10 @@ export default function Page({ params }: PageProps) {
                 alignItems="center"
                 sx={{ paddingTop: "5px" }}>
                 <CalendarMonthIcon />
-                <Typography>投稿日：</Typography>
-                {new Date(blog.publishedAt).toLocaleDateString("ja-JP")}
+                <Typography suppressHydrationWarning>
+                  投稿日：
+                  {new Date(blog.publishedAt).toLocaleDateString("ja-JP")}
+                </Typography>
               </Stack>
               <Stack
                 direction="row"
