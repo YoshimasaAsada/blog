@@ -80,7 +80,7 @@ export const BlogCard = ({ content }: any) => {
                 <Typography
                   variant="body2"
                   color="text.secondary"
-                  suppressHydrationWarning>
+                  suppressHydrationWarning={true}>
                   投稿日：
                   {new Date(content.publishedAt).toLocaleDateString("ja-JP")}
                 </Typography>
@@ -116,7 +116,7 @@ export const BlogCard = ({ content }: any) => {
               <Typography
                 variant="body2"
                 color="text.secondary"
-                suppressHydrationWarning>
+                suppressHydrationWarning={true}>
                 投稿日：
                 {new Date(content.publishedAt).toLocaleDateString("ja-JP")}
               </Typography>

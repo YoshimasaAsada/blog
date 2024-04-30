@@ -111,7 +111,7 @@ export default function Page({ params }: PageProps) {
                 alignItems="center"
                 sx={{ paddingTop: "5px" }}>
                 <CalendarMonthIcon />
-                <Typography suppressHydrationWarning>
+                <Typography suppressHydrationWarning={true}>
                   投稿日：
                   {new Date(blog.publishedAt).toLocaleDateString("ja-JP")}
                 </Typography>
