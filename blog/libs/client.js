@@ -15,3 +15,28 @@ export const client = createClient({
   serviceDomain: process.env.NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN,
   apiKey: process.env.NEXT_PUBLIC_MICROCMS_API_KEY,
 });
+
+// export const getAllBlogs = async (searchCategory) => {
+//   if (searchCategory) {
+//     const blogs = await client.get({
+//       endpoint: "blogs",
+//       queries: {
+//         filters: `category[contains]${searchCategory}`,
+//       },
+//     });
+//     return blogs;
+//   } else {
+//     const blogs = await client.get({
+//       endpoint: "blogs",
+//     });
+//     return blogs;
+//   }
+// };
+
+
+// export const getAllCategories = async () => {
+//   const data = await client.get({
+//     endpoint: "categories",
+//   });
+//   return data.contents;
+// };
