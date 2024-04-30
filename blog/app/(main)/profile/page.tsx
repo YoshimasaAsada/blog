@@ -67,15 +67,21 @@ export default function Page() {
             </TimelineSeparator>
             <TimelineContent>
               <h2>EC系SaaSミドルベンチャー[新卒入社]（2023/4~現在）</h2>
-              情シス、インフラ構築,保守,運用(AlmaLinux)、バックエンド開発(Nestjs×Typescript)、フロントエンド開発(React×Typescript)をやってます。
+              <p>
+                情シス、インフラ構築,保守,運用(AlmaLinux)、バックエンド開発(Nestjs×Typescript)、フロントエンド開発(React×Typescript)をやってます。
+              </p>
               <h3>情シス</h3>
-              主にアクセス権の付与。AWSのIAM、Githubのリポジトリ権限管理など
+              <p>
+                主にアクセス権の付与。AWSのIAM、Githubのリポジトリ権限管理など
+              </p>
               <h3>インフラ</h3>
-              既存製品の保守、運用と新製品(4種)の開発に伴うインフラの構築(さくらサーバーにOS導入から環境構築、死活監視ツール導入、Nginx周りの設定、バックアップの設定など）を行いました。
+              <p>
+                既存製品の保守、運用と新製品(4種)の開発に伴うインフラの構築(さくらサーバーにOS導入から環境構築、死活監視ツール導入、Nginx周りの設定、バックアップの設定など）を行いました。
+              </p>
               <h3>フロントエンド</h3>
-              Reactで管理画面の作成
+              <p></p>Reactで管理画面の作成
               <h3>バックエンド</h3>
-              NestJSでAPI開発
+              <p>NestJSでAPI開発</p>
             </TimelineContent>
           </TimelineItem>
         </Timeline>
