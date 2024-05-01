@@ -8,7 +8,6 @@ import TableOfContents from "@/components/TableOfContents";
 import { CardTest } from "@/components/CardTest";
 import "highlight.js/styles/github-dark.css";
 import hljs, { HighlightResult } from "highlight.js";
-import { load } from "cheerio";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import Image from "next/image";
@@ -61,7 +60,7 @@ export default function Page({ params }: PageProps) {
             language: language.replace("language-", ""),
           });
         }
-        
+
         $(elm).html(result.value);
         $(elm).addClass("hljs");
       });
@@ -143,8 +142,8 @@ export default function Page({ params }: PageProps) {
             />
           </Grid>
           <Grid item xs={12} md={3}>
-            <CardTest tocContainerRef={tocContainerRef} />
-            <TableOfContents toc={toc} containerRef={tocContainerRef} />
+            <CardTest />
+            <TableOfContents toc={toc} />
           </Grid>
         </Grid>
         {/* <BlogSwiper /> */}
