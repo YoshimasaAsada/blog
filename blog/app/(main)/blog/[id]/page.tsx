@@ -14,6 +14,7 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import Image from "next/image";
 import Loading from "@/app/loading";
 import DOMPurify from "dompurify";
+import * as cheerio from "cheerio";
 
 interface PageProps {
   params: {
@@ -43,7 +44,7 @@ export default function Page({ params }: PageProps) {
 
       const toc = renderToc(data.content);
       setToc(toc);
-      const $ = load(data.content);
+      const $ = cheerio.load(data.content);
 
       $("div[data-filename]").each((_, elm) => {
         $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
@@ -60,6 +61,7 @@ export default function Page({ params }: PageProps) {
             language: language.replace("language-", ""),
           });
         }
+        
         $(elm).html(result.value);
         $(elm).addClass("hljs");
       });
