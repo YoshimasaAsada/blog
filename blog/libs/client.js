@@ -33,10 +33,17 @@ export const client = createClient({
 //   }
 // };
 
-
 // export const getAllCategories = async () => {
 //   const data = await client.get({
 //     endpoint: "categories",
 //   });
 //   return data.contents;
 // };
+
+export const getBlog = async (params) => {
+  const data = await client.getListDetail({
+    endpoint: "blogs",
+    contentId: params.id,
+  });
+  return data;
+};

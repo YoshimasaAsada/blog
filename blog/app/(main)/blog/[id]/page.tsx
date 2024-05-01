@@ -1,6 +1,6 @@
-"use client";
+// "use client";
 import { useEffect, useRef, useState } from "react";
-import { client } from "@/libs/client";
+import { client, getBlog } from "@/libs/client";
 import { Blog } from "@/types/blog";
 import { Box, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 import { renderToc } from "../../../../libs/render-toc";
@@ -27,59 +27,34 @@ interface TocItem {
   level: number;
 }
 
-export default function Page({ params }: PageProps) {
-  const tocContainerRef = useRef(null);
+export default async function Page({ params }: PageProps) {
+  const blog: Blog = await getBlog(params);
+  const toc = await renderToc(blog.content);
+  const $ = cheerio.load(blog.content);
 
-  const [blog, setBlog] = useState<Blog>();
-  const [toc, setToc] = useState<TocItem[]>([]);
+  // コードブロックのファイル名が入力されている場合の処理
+  $("div[data-filename]").each((_, elm) => {
+    $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await client.getListDetail({
-        endpoint: "blogs",
-        contentId: params.id,
+  // コードブロックのシンタックスハイライトを行う
+  $("pre code").each((_, elm) => {
+    const language = $(elm).attr("class") || "";
+    let result: HighlightResult;
+    if (language == "") {
+      // 言語が入力なしの場合、自動判定
+      result = hljs.highlightAuto($(elm).text());
+    } else {
+      // 言語が入力ありの場合、入力された言語で判定
+      result = hljs.highlight($(elm).text(), {
+        language: language.replace("language-", ""),
       });
-      setBlog(data);
-
-      const toc = renderToc(data.content);
-      setToc(toc);
-      const $ = cheerio.load(data.content);
-
-      $("div[data-filename]").each((_, elm) => {
-        $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
-      });
-
-      $("pre code").each((_, elm) => {
-        const language = $(elm).attr("class") || "";
-        let result;
-
-        if (language == "") {
-          result = hljs.highlightAuto($(elm).text());
-        } else {
-          result = hljs.highlight($(elm).text(), {
-            language: language.replace("language-", ""),
-          });
-        }
-
-        $(elm).html(result.value);
-        $(elm).addClass("hljs");
-      });
-
-      const cleanHTML = DOMPurify.sanitize($.html());
-      data.content = cleanHTML;
-    };
-
-    fetchData();
-  }, [params]);
-
-  useEffect(() => {
-    // コンテンツがDOMに挿入された後にハイライトを適用
-    hljs.highlightAll();
-  }, [blog]); // blogの状態が更新された後に実行
-
-  if (!blog) {
-    return <Loading />;
-  }
+    }
+    $(elm).html(result.value);
+    $(elm).addClass("hljs");
+  });
+  // 編集したHTMLを再設定
+  blog.content = $.html();
 
   return (
     <>
@@ -124,7 +99,7 @@ export default function Page({ params }: PageProps) {
                 sx={{ paddingTop: "5px" }}>
                 <LocalOfferIcon />
                 <Typography display="inline">関連：</Typography>
-                {blog?.category.map((category, index) => (
+                {blog?.category.map((category: any, index: number) => (
                   <Chip
                     key={index}
                     label={category.name}
