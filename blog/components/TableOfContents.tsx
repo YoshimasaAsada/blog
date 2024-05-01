@@ -15,20 +15,10 @@ type TocProps = {
 
 type TableOfContentsProps = {
   toc: TocProps[];
-  containerRef: React.RefObject<HTMLDivElement>;
 };
 
-export const TableOfContents = ({
-  toc,
-  containerRef,
-}: TableOfContentsProps) => {
-  const [isExpanded, setExpanded] = useState<boolean>(true);
-  const boxRef = useRef<HTMLDivElement | null>(null);
+export const TableOfContents = ({ toc }: TableOfContentsProps) => {
   const [activeId, setActiveId] = useState("");
-
-  const containerWidth = containerRef.current
-    ? containerRef.current.offsetWidth
-    : "100%";
 
   const smoothScrollTo = (id: string) => {
     const headerOffset = 70;
@@ -46,8 +36,6 @@ export const TableOfContents = ({
       window.clearTimeout(isScrolling);
 
       isScrolling = window.setTimeout(() => {
-        // タイプスクリプト環境での`setTimeout`はグローバルではなく`window`オブジェクト経由でアクセスするのが一般的
-        // スクロールが一定時間停止したとみなされたら実行
         setActiveId(id); // スクロール終了時にハイライトを更新
 
         // このスクロールハンドラを削除

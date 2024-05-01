@@ -9,15 +9,14 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 
-export const CardTest = ({ tocContainerRef }: any) => {
+export const CardTest = () => {
   return (
     <Card
       sx={{
         minWidth: 275,
         backgroundColor: "black",
         color: "white",
-      }}
-      ref={tocContainerRef}>
+      }}>
       <CardContent
         sx={{
           display: "flex",
