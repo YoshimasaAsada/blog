@@ -1,6 +1,4 @@
-// "use client";
-import { useEffect, useRef, useState } from "react";
-import { client, getBlog } from "@/libs/client";
+import { getBlog } from "@/libs/client";
 import { Blog } from "@/types/blog";
 import { Box, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 import { renderToc } from "../../../../libs/render-toc";
@@ -11,8 +9,6 @@ import hljs, { HighlightResult } from "highlight.js";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import Image from "next/image";
-import Loading from "@/app/loading";
-import DOMPurify from "dompurify";
 import * as cheerio from "cheerio";
 
 interface PageProps {
@@ -21,40 +17,34 @@ interface PageProps {
   };
 }
 
-interface TocItem {
-  text: string;
-  id: string;
-  level: number;
-}
-
 export default async function Page({ params }: PageProps) {
   const blog: Blog = await getBlog(params);
   const toc = await renderToc(blog.content);
-  const $ = cheerio.load(blog.content);
+  // const $ = cheerio.load(blog.content);
 
-  // コードブロックのファイル名が入力されている場合の処理
-  $("div[data-filename]").each((_, elm) => {
-    $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
-  });
+  // // コードブロックのファイル名が入力されている場合の処理
+  // $("div[data-filename]").each((_, elm) => {
+  //   $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
+  // });
 
-  // コードブロックのシンタックスハイライトを行う
-  $("pre code").each((_, elm) => {
-    const language = $(elm).attr("class") || "";
-    let result: HighlightResult;
-    if (language == "") {
-      // 言語が入力なしの場合、自動判定
-      result = hljs.highlightAuto($(elm).text());
-    } else {
-      // 言語が入力ありの場合、入力された言語で判定
-      result = hljs.highlight($(elm).text(), {
-        language: language.replace("language-", ""),
-      });
-    }
-    $(elm).html(result.value);
-    $(elm).addClass("hljs");
-  });
-  // 編集したHTMLを再設定
-  blog.content = $.html();
+  // // コードブロックのシンタックスハイライトを行う
+  // $("pre code").each((_, elm) => {
+  //   const language = $(elm).attr("class") || "";
+  //   let result: HighlightResult;
+  //   if (language == "") {
+  //     // 言語が入力なしの場合、自動判定
+  //     result = hljs.highlightAuto($(elm).text());
+  //   } else {
+  //     // 言語が入力ありの場合、入力された言語で判定
+  //     result = hljs.highlight($(elm).text(), {
+  //       language: language.replace("language-", ""),
+  //     });
+  //   }
+  //   $(elm).html(result.value);
+  //   $(elm).addClass("hljs");
+  // });
+  // // 編集したHTMLを再設定
+  // blog.content = $.html();
 
   return (
     <>
@@ -71,7 +61,7 @@ export default async function Page({ params }: PageProps) {
                     marginTop: "10px",
                     width: "100%",
                     height: "100%",
-                    backgroundColor: "#fff", // Set the background color to white
+                    backgroundColor: "#fff",
                   }}
                   src={blog?.eyecatch.url}
                   width={100}
