@@ -1,4 +1,4 @@
-import { getBlog } from "@/libs/client";
+import { getAllBlogs, getBlog } from "@/libs/client";
 import { Blog } from "@/types/blog";
 import { Box, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 import { renderToc } from "../../../../libs/render-toc";
@@ -16,7 +16,7 @@ import * as cheerio from "cheerio";
  * @returns
  */
 export async function generateStaticParams() {
-  const { contents } = await getBlog();
+  const { contents } = await getAllBlogs();
 
   const paths = contents.map((blog: any) => {
     return {
