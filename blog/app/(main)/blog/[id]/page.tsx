@@ -33,9 +33,9 @@ export default async function Page({ params }: { params: { id: string } }) {
   // ここでHydtrationWarning出てる
   const $ = cheerio.load(blog.content);
   // コードブロックのファイル名が入力されている場合の処理
-  $("div[data-filename]").each((_, elm) => {
-    $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
-  });
+  // $("div[data-filename]").each((_, elm) => {
+  //   $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
+  // });
 
   // コードブロックのシンタックスハイライトを行う
   $("pre code").each((_, elm) => {
