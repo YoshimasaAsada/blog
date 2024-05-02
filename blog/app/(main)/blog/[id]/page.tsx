@@ -11,13 +11,7 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import Image from "next/image";
 import * as cheerio from "cheerio";
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: { params: { id: string } }) {
   const blog: Blog = await getBlog(params);
   const toc = await renderToc(blog.content);
   const $ = cheerio.load(blog.content);
@@ -45,7 +39,7 @@ export default async function Page({ params }: PageProps) {
     $(elm).addClass("hljs");
   });
   // 編集したHTMLを再設定
-  blog.content = await $.html();
+  // blog.content = $.html();
 
   return (
     <>
