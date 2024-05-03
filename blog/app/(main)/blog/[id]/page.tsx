@@ -9,6 +9,7 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import Image from "next/image";
 import * as cheerio from "cheerio";
 import { getHighlighter } from "shiki";
+import SyncIcon from "@mui/icons-material/Sync";
 
 /**
  * ビルド時に詳細ページを作成させる
@@ -54,54 +55,68 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <Container>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Stack
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            sx={{ paddingTop: "5px" }}>
+            {/* <LocalOfferIcon /> */}
+            {/* <Typography display="inline">関連：</Typography> */}
+            {blog?.category.map((category: any, index: number) => (
+              <Chip
+                key={index}
+                label={category.name}
+                variant="outlined"
+                sx={{ color: "white" }}
+              />
+            ))}
+          </Stack>
+        </div>
+        <h1 className="title">{blog?.title}</h1>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Stack
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            sx={{ padding: "5px" }}>
+            <CalendarMonthIcon />
+            <Typography suppressHydrationWarning={true}>
+              投稿日：
+              {new Date(blog.publishedAt).toLocaleDateString("ja-JP")}
+            </Typography>
+          </Stack>
+          <Stack
+            direction="row"
+            spacing={1}
+            alignItems="center"
+            sx={{ padding: "5px" }}>
+            <SyncIcon />
+            <Typography suppressHydrationWarning={true}>
+              更新日：
+              {new Date(blog.updatedAt).toLocaleDateString("ja-JP")}
+            </Typography>
+          </Stack>
+        </div>
+        <Image
+          style={{
+            marginBottom: "10px",
+            marginTop: "10px",
+            width: "100%",
+            height: "100%",
+            backgroundColor: "#fff",
+          }}
+          src={blog?.eyecatch.url}
+          width={100}
+          height={200}
+          alt="Slider Image"
+          sizes="(min-width: 1024px) 100vw, 60vw"
+          className="slideImage"
+        />
         <Grid container spacing={2}>
           <Grid item xs={12} md={9}>
-            <h1 className="title">{blog?.title}</h1>
             <Box paddingBottom="15px">
-              <Grid container>
-                <Image
-                  style={{
-                    marginBottom: "10px",
-                    marginTop: "10px",
-                    width: "100%",
-                    height: "100%",
-                    backgroundColor: "#fff",
-                  }}
-                  src={blog?.eyecatch.url}
-                  width={100}
-                  height={200}
-                  alt="Slider Image"
-                  sizes="(min-width: 1024px) 100vw, 60vw"
-                  className="slideImage"
-                />
-              </Grid>
-              <Stack
-                direction="row"
-                spacing={1}
-                alignItems="center"
-                sx={{ paddingTop: "5px" }}>
-                <CalendarMonthIcon />
-                <Typography suppressHydrationWarning={true}>
-                  投稿日：
-                  {new Date(blog.publishedAt).toLocaleDateString("ja-JP")}
-                </Typography>
-              </Stack>
-              <Stack
-                direction="row"
-                spacing={1}
-                alignItems="center"
-                sx={{ paddingTop: "5px" }}>
-                <LocalOfferIcon />
-                <Typography display="inline">関連：</Typography>
-                {blog?.category.map((category: any, index: number) => (
-                  <Chip
-                    key={index}
-                    label={category.name}
-                    variant="outlined"
-                    sx={{ color: "white" }}
-                  />
-                ))}
-              </Stack>
+              <Grid container></Grid>
             </Box>
             <div
               className="blog"
@@ -109,7 +124,6 @@ export default async function Page({ params }: { params: { id: string } }) {
             />
           </Grid>
           <Grid item xs={12} md={3}>
-            <CardTest />
             <TableOfContents toc={toc} />
           </Grid>
         </Grid>
