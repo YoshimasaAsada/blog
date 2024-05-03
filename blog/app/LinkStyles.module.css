@@ -1,5 +1,5 @@
 /* 共通のフレックスボックススタイル */
-.slider,
+.links,
 .welcome {
   display: flex;
   justify-content: center;
@@ -8,16 +8,20 @@
   text-align: center;
 }
 
-/* スライダー固有のスタイリング */
-.slider {
-  position: absolute;
-  bottom: 10%; /* 調整された位置 */
-  overflow-x: auto;
-  height: 100vh;
-  padding: 0 20px;
+/* WIPテキストのスタイリング */
+.wip {
+  color: #ccc;
+  font-size: 20px;
 }
 
-/* リンク（惑星）のスタイリング */
+.links {
+  position: absolute;
+  bottom: 10%;
+  overflow-x: auto;
+  height: 100vh;
+}
+
+/* リンクのスタイリング */
 .link {
   flex: none;
   display: inline-flex;
@@ -27,61 +31,15 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  font-size: 16px;
+  font-size: 30px;
   color: white;
   text-decoration: none;
-  background: radial-gradient(
-    circle closest-side,
-    rgba(255, 255, 255, 0.3) 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    rgba(0, 0, 0, 0.2) 100%
-  );
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.2),
-    inset 0 0 40px rgba(255, 255, 255, 0.1);
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
 .link:hover {
   transform: scale(1.1);
   box-shadow: 0 0 40px rgba(255, 255, 255, 0.9),
     inset 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 40px rgba(255, 255, 255, 0.2);
-}
-
-/* 惑星色の設定 */
-.home {
-  background-image: radial-gradient(
-    circle at 30% 30%,
-    #ff6347,
-    #ff4500 60%,
-    #ff6347 100%
-  );
-}
-
-.blog {
-  background-image: radial-gradient(
-    circle at 30% 30%,
-    #4682b4,
-    #4169e1 60%,
-    #4682b4 100%
-  );
-}
-
-.profile {
-  background-image: radial-gradient(
-    circle at 30% 30%,
-    #32cd32,
-    #228b22 60%,
-    #32cd32 100%
-  );
-}
-
-.contact {
-  background-image: radial-gradient(
-    circle at 30% 30%,
-    #daa520,
-    #b8860b 60%,
-    #daa520 100%
-  );
 }
 
 /* Welcomeメッセージのスタイリング */
