@@ -9,9 +9,6 @@ import { CategoryList } from "@/components/CategoryList";
 import { BlogCard } from "@/components/BlogCard";
 
 export default function Page(props: any) {
-  // const { contents } = await getAllBlogs();
-  // console.log(contents);
-
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const searchParams = useSearchParams();
   const searchCategory = searchParams.get("category");
