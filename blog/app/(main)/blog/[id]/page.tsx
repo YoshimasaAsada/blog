@@ -1,13 +1,17 @@
+// ライブラリ関連
+import Image from "next/image";
+import { Box, Chip, Container, Grid, Stack, Typography } from "@mui/material";
+import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
+import SyncIcon from "@mui/icons-material/Sync";
+
+// 型定義とかその辺
 import { getAllBlogs, getBlog } from "@/libs/client";
 import { Blog } from "@/types/blog";
-import { Box, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 import { renderToc } from "../../../../libs/render-toc";
+
+// コンポーネント
 import TableOfContents from "@/components/TableOfContents";
-import Image from "next/image";
-import * as cheerio from "cheerio";
-import { getHighlighter } from "shiki";
-import SyncIcon from "@mui/icons-material/Sync";
-import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
+import { applySyntaxHighlighting } from "@/utils/applySyntaxHighlighting";
 
 /**
  * ビルド時に詳細ページを作成させる
@@ -24,31 +28,7 @@ export async function generateStaticParams() {
 export default async function Page({ params }: { params: { id: string } }) {
   const blog: Blog = await getBlog(params);
   const toc = renderToc(blog.content);
-
-  const highlighter = await getHighlighter({
-    themes: ["slack-dark"],
-    langs: ["tsx", "shell", "typescript"],
-  });
-
-  const $ = cheerio.load(blog.content);
-
-  // コードブロックのファイル名が入力されている場合の処理
-  $("div[data-filename]").each((_, elm) => {
-    $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
-  });
-
-  // コードブロックのシンタックスハイライトを行う
-  $("pre code").each((_, elm) => {
-    let language = $(elm).attr("class")?.split("language-")[1] || "";
-    console.log(language);
-    const codeText = $(elm).text();
-    const html = highlighter.codeToHtml(codeText, {
-      lang: language,
-      theme: "slack-dark",
-    });
-    // 直接親の <pre> タグに HTML を挿入し、不要な <code> タグを取り除く
-    $(elm).parent().replaceWith(html);
-  });
+  const highlightedContent = await applySyntaxHighlighting(blog.content);
 
   return (
     <>
@@ -113,7 +93,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <Grid item xs={12} md={9}>
             <Box
               className="blog"
-              dangerouslySetInnerHTML={{ __html: $.html() }}
+              dangerouslySetInnerHTML={{ __html: highlightedContent }}
             />
           </Grid>
           <Grid item xs={12} md={3}>
