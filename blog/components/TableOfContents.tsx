@@ -6,6 +6,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 
 type TocProps = {
   text: string;
@@ -87,8 +88,16 @@ export const TableOfContents = ({ toc }: TableOfContentsProps) => {
         maxHeight: "calc(100vh - 80px)", // ビューポート高さからtopの値を引いた高さを最大高さとする
         overflowY: "auto", // コンテンツが多い場合にスクロールバーを表示
       }}>
-      <Typography variant="h6" sx={{ m: 2, borderBottom: "1px solid #ccc" }}>
-        目次
+      <Typography
+        variant="h4"
+        sx={{
+          m: 2,
+          borderBottom: "1px solid #ccc",
+          display: "flex",
+          alignItems: "center",
+        }}>
+        <FormatListNumberedIcon fontSize="large" />
+        Index
       </Typography>
       <List>
         {toc.map((data) => (
