@@ -3,9 +3,7 @@ import { Blog } from "@/types/blog";
 import { Box, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 import { renderToc } from "../../../../libs/render-toc";
 import TableOfContents from "@/components/TableOfContents";
-import { CardTest } from "@/components/CardTest";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import Image from "next/image";
 import * as cheerio from "cheerio";
 import { getHighlighter } from "shiki";
@@ -25,7 +23,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: { id: string } }) {
   const blog: Blog = await getBlog(params);
-  const toc = await renderToc(blog.content);
+  const toc = renderToc(blog.content);
 
   const highlighter = await getHighlighter({
     themes: ["slack-dark"],
@@ -55,14 +53,12 @@ export default async function Page({ params }: { params: { id: string } }) {
   return (
     <>
       <Container>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <Box style={{ display: "flex", justifyContent: "center" }}>
           <Stack
             direction="row"
             spacing={1}
             alignItems="center"
             sx={{ paddingTop: "5px" }}>
-            {/* <LocalOfferIcon /> */}
-            {/* <Typography display="inline">関連：</Typography> */}
             {blog?.category.map((category: any, index: number) => (
               <Chip
                 key={index}
@@ -72,9 +68,9 @@ export default async function Page({ params }: { params: { id: string } }) {
               />
             ))}
           </Stack>
-        </div>
+        </Box>
         <h1 className="title">{blog?.title}</h1>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <Box style={{ display: "flex", justifyContent: "center" }}>
           <Stack
             direction="row"
             spacing={1}
@@ -97,7 +93,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               {new Date(blog.updatedAt).toLocaleDateString("ja-JP")}
             </Typography>
           </Stack>
-        </div>
+        </Box>
         <Image
           style={{
             marginBottom: "10px",
@@ -115,10 +111,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         />
         <Grid container spacing={2}>
           <Grid item xs={12} md={9}>
-            <Box paddingBottom="15px">
-              <Grid container></Grid>
-            </Box>
-            <div
+            <Box
               className="blog"
               dangerouslySetInnerHTML={{ __html: $.html() }}
             />
