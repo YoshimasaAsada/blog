@@ -3,11 +3,11 @@ import { Blog } from "@/types/blog";
 import { Box, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 import { renderToc } from "../../../../libs/render-toc";
 import TableOfContents from "@/components/TableOfContents";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import Image from "next/image";
 import * as cheerio from "cheerio";
 import { getHighlighter } from "shiki";
 import SyncIcon from "@mui/icons-material/Sync";
+import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
 
 /**
  * ビルド時に詳細ページを作成させる
@@ -76,7 +76,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             spacing={1}
             alignItems="center"
             sx={{ padding: "5px" }}>
-            <CalendarMonthIcon />
+            <AccessTimeRoundedIcon />
             <Typography suppressHydrationWarning={true}>
               投稿日：
               {new Date(blog.publishedAt).toLocaleDateString("ja-JP")}
