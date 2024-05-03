@@ -4,12 +4,11 @@ import { Box, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 import { renderToc } from "../../../../libs/render-toc";
 import TableOfContents from "@/components/TableOfContents";
 import { CardTest } from "@/components/CardTest";
-import "highlight.js/styles/github-dark.css";
-import hljs, { HighlightResult } from "highlight.js";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import Image from "next/image";
 import * as cheerio from "cheerio";
+import { getHighlighter } from "shiki";
 
 /**
  * ビルド時に詳細ページを作成させる
@@ -17,11 +16,8 @@ import * as cheerio from "cheerio";
  */
 export async function generateStaticParams() {
   const { contents } = await getAllBlogs();
-
   const paths = contents.map((blog: any) => {
-    return {
-      id: blog.id,
-    };
+    return { id: blog.id };
   });
   return [...paths];
 }
@@ -30,35 +26,35 @@ export default async function Page({ params }: { params: { id: string } }) {
   const blog: Blog = await getBlog(params);
   const toc = await renderToc(blog.content);
 
-  // ここでHydtrationWarning出てる
+  const highlighter = await getHighlighter({
+    themes: ["slack-dark"],
+    langs: ["tsx", "shell", "typescript"],
+  });
+
   const $ = cheerio.load(blog.content);
-  // // コードブロックのファイル名が入力されている場合の処理
+
+  // コードブロックのファイル名が入力されている場合の処理
   $("div[data-filename]").each((_, elm) => {
     $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
   });
 
   // コードブロックのシンタックスハイライトを行う
-  // $("pre code").each((_, elm) => {
-  //   const language = $(elm).attr("class") || "";
-  //   let result: HighlightResult;
-  //   if (language == "") {
-  //     // 言語が入力なしの場合、自動判定
-  //     result = hljs.highlightAuto($(elm).text());
-  //   } else {
-  //     // 言語が入力ありの場合、入力された言語で判定
-  //     result = hljs.highlight($(elm).text(), {
-  //       language: language.replace("language-", ""),
-  //     });
-  //   }
-  //   $(elm).html(result.value);
-  //   $(elm).addClass("hljs");
-  // });
+  $("pre code").each((_, elm) => {
+    let language = $(elm).attr("class")?.split("language-")[1] || "";
+    console.log(language);
+    const codeText = $(elm).text();
+    const html = highlighter.codeToHtml(codeText, {
+      lang: language,
+      theme: "slack-dark",
+    });
+    // 直接親の <pre> タグに HTML を挿入し、不要な <code> タグを取り除く
+    $(elm).parent().replaceWith(html);
+  });
 
   return (
     <>
       <Container>
         <Grid container spacing={2}>
-          {/* メインコンテンツ */}
           <Grid item xs={12} md={9}>
             <h1 className="title">{blog?.title}</h1>
             <Box paddingBottom="15px">
@@ -102,9 +98,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                     key={index}
                     label={category.name}
                     variant="outlined"
-                    sx={{
-                      color: "white", // テキスト色を黒に設定
-                    }}
+                    sx={{ color: "white" }}
                   />
                 ))}
               </Stack>
@@ -119,7 +113,6 @@ export default async function Page({ params }: { params: { id: string } }) {
             <TableOfContents toc={toc} />
           </Grid>
         </Grid>
-        {/* <BlogSwiper /> */}
       </Container>
     </>
   );
