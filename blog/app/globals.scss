@@ -151,13 +151,15 @@ div[data-filename] {
   margin-top: 16px;
   margin-bottom: 16px;
 }
+
 div[data-filename] > span {
-  display: inline-block;
+  display: block;
   background-color: #333333;
-  text-align: center;
+  // text-align: center;
   padding: 3px 15px;
   border-radius: 5px 5px 0px 0px;
 }
+
 div[data-filename] > pre {
   margin-top: 0px;
   border-top-left-radius: 0px;
