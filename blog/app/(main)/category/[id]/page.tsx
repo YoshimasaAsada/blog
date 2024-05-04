@@ -20,7 +20,6 @@ export async function generateStaticParams() {
 export default async function Page({ params }: { params: { id: string } }) {
   const blogs = await getBlogsFilterByCategoryId(params);
 
-  console.log(blogs);
   return (
     <Container>
       <Grid
