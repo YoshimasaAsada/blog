@@ -1,12 +1,26 @@
-import { getAllBlogs } from "@/libs/client";
-import Link from "next/link";
-import { Container, Grid, Typography } from "@mui/material";
-import { CategoryList } from "@/components/CategoryList";
 import { BlogCard } from "@/components/BlogCard";
+import { CategoryList } from "@/components/CategoryList";
+import { getAllCategories, getBlogsFilterByCategoryId } from "@/libs/client";
+import { Blog } from "@/types/blog";
+import { Container, Grid, Typography } from "@mui/material";
+import Link from "next/link";
 
-export default async function Page(props: any) {
-  const blogs = await getAllBlogs();
+/**
+ * ビルド時に詳細ページを作成させる
+ * @returns
+ */
+export async function generateStaticParams() {
+  const contents = await getAllCategories();
+  const paths = contents.map((category: any) => {
+    return { id: category.id };
+  });
+  return [...paths];
+}
 
+export default async function Page({ params }: { params: { id: string } }) {
+  const blogs: Blog[] = await getBlogsFilterByCategoryId(params);
+
+  console.log(blogs);
   return (
     <Container>
       <Grid

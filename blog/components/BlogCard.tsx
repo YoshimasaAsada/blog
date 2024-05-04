@@ -7,16 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import { useState } from "react";
 
 export const BlogCard = ({ content }: any) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const isHovered = false;
 
   return (
     <Link href={`/blog/${content.id}`}>
       <Card
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
         sx={{
           height: 300,
           backgroundColor: isHovered ? "#000" : "#fff",

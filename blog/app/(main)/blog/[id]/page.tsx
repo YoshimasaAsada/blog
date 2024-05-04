@@ -5,7 +5,7 @@ import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
 import SyncIcon from "@mui/icons-material/Sync";
 
 // 型定義とかその辺
-import { getAllBlogs, getBlog } from "@/libs/client";
+import { getAllBlogs, getBlogById } from "@/libs/client";
 import { Blog } from "@/types/blog";
 import { renderToc } from "../../../../libs/render-toc";
 import { applySyntaxHighlighting } from "@/utils/applySyntaxHighlighting";
@@ -18,7 +18,7 @@ import TableOfContents from "@/components/TableOfContents";
  * @returns
  */
 export async function generateStaticParams() {
-  const { contents } = await getAllBlogs();
+  const contents = await getAllBlogs();
   const paths = contents.map((blog: any) => {
     return { id: blog.id };
   });
@@ -26,7 +26,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const blog: Blog = await getBlog(params);
+  const blog: Blog = await getBlogById(params);
   const toc = renderToc(blog.content);
   const highlightedContent = await applySyntaxHighlighting(blog.content);
 
