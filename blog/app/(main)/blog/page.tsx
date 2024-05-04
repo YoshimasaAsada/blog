@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Container, Fade, Grid, Typography } from "@mui/material";
 import { CategoryList } from "@/components/CategoryList";
 import { BlogCard } from "@/components/BlogCard";
-import { BlogSwiper } from "@/components/BlogSwiper";
 
 export default async function Page() {
   const blogs = await getAllBlogs();
@@ -21,8 +20,8 @@ export default async function Page() {
             component="h3"
             style={{
               textDecoration: "underline",
-              textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
-              textDecorationThickness: "2px", // 下線の太さを調整
+              textUnderlineOffset: "8px",
+              textDecorationThickness: "2px",
             }}>
             Blogs
           </Typography>
