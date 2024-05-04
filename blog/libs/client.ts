@@ -16,34 +16,34 @@ export const client = createClient({
   apiKey: process.env.NEXT_PUBLIC_MICROCMS_API_KEY,
 });
 
-export const getAllBlogs = async (searchCategory) => {
-  if (searchCategory) {
-    const blogs = await client.get({
-      endpoint: "blogs",
-      queries: {
-        filters: `category[contains]${searchCategory}`,
-      },
-    });
-    return blogs;
-  } else {
-    const blogs = await client.get({
-      endpoint: "blogs",
-    });
-    return blogs;
-  }
+export const getAllBlogs = async () => {
+  const blogs = await client.get({
+    endpoint: "blogs",
+  });
+  return blogs.contents;
 };
 
-// export const getAllCategories = async () => {
-//   const data = await client.get({
-//     endpoint: "categories",
-//   });
-//   return data.contents;
-// };
-
-export const getBlog = async (params) => {
+export const getBlogById = async (params: any) => {
   const data = await client.getListDetail({
     endpoint: "blogs",
     contentId: params.id,
   });
   return data;
+};
+
+export const getAllCategories = async () => {
+  const data = await client.get({
+    endpoint: "categories",
+  });
+  return data.contents;
+};
+
+export const getBlogsFilterByCategoryId = async (params: any) => {
+  const data = await client.get({
+    endpoint: "blogs",
+    queries: {
+      filters: `category[contains]${params.id}`,
+    },
+  });
+  return data.contents;
 };
