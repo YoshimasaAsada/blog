@@ -1,6 +1,7 @@
 /**
  * microcmsとの繋ぎ込みのやつ
  */
+import { Blog, BlogsInContents } from "@/types/blog";
 import { createClient } from "microcms-js-sdk";
 
 if (!process.env.NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN) {
@@ -17,14 +18,14 @@ export const client = createClient({
 });
 
 export const getAllBlogs = async () => {
-  const blogs = await client.get({
+  const data = await client.get<BlogsInContents>({
     endpoint: "blogs",
   });
-  return blogs.contents;
+  return data.contents;
 };
 
 export const getBlogById = async (params: any) => {
-  const data = await client.getListDetail({
+  const data = await client.getListDetail<Blog>({
     endpoint: "blogs",
     contentId: params.id,
   });
@@ -32,14 +33,14 @@ export const getBlogById = async (params: any) => {
 };
 
 export const getAllCategories = async () => {
-  const data = await client.get({
+  const data = await client.get<BlogsInContents>({
     endpoint: "categories",
   });
   return data.contents;
 };
 
 export const getBlogsFilterByCategoryId = async (params: any) => {
-  const data = await client.get({
+  const data = await client.get<BlogsInContents>({
     endpoint: "blogs",
     queries: {
       filters: `category[contains]${params.id}`,

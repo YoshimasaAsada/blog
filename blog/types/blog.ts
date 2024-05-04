@@ -12,3 +12,7 @@ export interface Blog {
   publishedAt: string;
   updatedAt: string;
 }
+
+export interface BlogsInContents {
+  contents: Blog[];
+}
