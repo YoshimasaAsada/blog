@@ -1,10 +1,11 @@
 import { getAllBlogs } from "@/libs/client";
 import Link from "next/link";
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Fade, Grid, Typography } from "@mui/material";
 import { CategoryList } from "@/components/CategoryList";
 import { BlogCard } from "@/components/BlogCard";
+import { BlogSwiper } from "@/components/BlogSwiper";
 
-export default async function Page(props: any) {
+export default async function Page() {
   const blogs = await getAllBlogs();
 
   return (
@@ -41,9 +42,11 @@ export default async function Page(props: any) {
       <Grid container spacing={2}>
         <Grid item xs={9}>
           <Grid container spacing={2}>
-            {blogs.map((content: any) => (
+            {blogs.map((content: any, index: number) => (
               <Grid item xs={12} sm={6} key={content.id}>
-                <BlogCard content={content} />
+                <Fade in={true} timeout={(index + 1) * 1000}>
+                  <BlogCard content={content} />
+                </Fade>
               </Grid>
             ))}
           </Grid>
