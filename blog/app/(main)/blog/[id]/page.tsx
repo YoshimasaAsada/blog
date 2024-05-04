@@ -36,7 +36,7 @@ export async function generateStaticParams() {
 export default async function Page({ params }: { params: { id: string } }) {
   const blog: Blog = await getBlogById(params);
   const toc = renderToc(blog.content);
-  const highlightedContent = await applySyntaxHighlighting(blog.content);
+  // const highlightedContent = await applySyntaxHighlighting(blog.content);
 
   return (
     <Fade in={true} timeout={1000}>
@@ -101,7 +101,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <Grid item xs={12} md={9}>
             <Box
               className="blog"
-              dangerouslySetInnerHTML={{ __html: highlightedContent }}
+              dangerouslySetInnerHTML={{ __html: blog.content }}
             />
           </Grid>
           <Grid item xs={12} md={3}>
