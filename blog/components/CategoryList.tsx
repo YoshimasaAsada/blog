@@ -5,12 +5,6 @@ import Link from "next/link";
 export const CategoryList = async () => {
   const categories = await getAllCategories();
 
-  const normalStyle = {
-    color: "white",
-    borderColor: "white",
-    margin: "2px",
-  };
-
   return (
     <Box>
       <Typography
@@ -25,12 +19,20 @@ export const CategoryList = async () => {
       </Typography>
       {categories?.map((category: any) => {
         return (
-          <Link key={category.id} href={`/category/${category.id}`}>
+          <Link key={category.id} href={`/category/${category.id}`} passHref>
             <Chip
               label={category.name}
               clickable
               variant="outlined"
-              style={normalStyle}
+              sx={{
+                color: "white",
+                borderColor: "white",
+                margin: "2px",
+                "&:hover": {
+                  backgroundColor: "white",
+                  color: "gray",
+                },
+              }}
             />
           </Link>
         );
