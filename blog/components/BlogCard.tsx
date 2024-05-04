@@ -14,7 +14,7 @@ export const BlogCard = ({ content }: any) => {
       <Card
         sx={{
           position: "relative",
-          height: 300,
+          height: 350,
           overflow: "hidden",
           transition: "box-shadow ease-in-out",
           boxShadow: "none",
