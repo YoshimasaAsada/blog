@@ -12,13 +12,13 @@ export const metadata: Metadata = {
   description: "yasd tech",
 };
 
-export const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
+
   return (
     <html lang="ja">
       <head>
