@@ -1,5 +1,10 @@
 import { client } from "@/libs/client";
 
+/**
+ * サイトマップ作成用の関数。
+ * build時に1回通してサイトマップを作成。
+ * @returns 
+ */
 export default async function sitemap() {
   const _lastModified = new Date();
 
