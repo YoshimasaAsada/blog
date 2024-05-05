@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
@@ -19,34 +19,45 @@ type TableOfContentsProps = {
 };
 
 export const TableOfContents = ({ toc }: TableOfContentsProps) => {
+  // 現在見られているコンテンツの位置を保持する
   const [activeId, setActiveId] = useState("");
 
+  /**
+   * TOCが押された時のアクション
+   * @param id
+   */
   const smoothScrollTo = (id: string) => {
+    // ヘッダーの位置を考慮して該当コンテンツにスクロール
     const headerOffset = 70;
     const elementPosition = document.getElementById(id)?.offsetTop || 0;
     const offsetPosition = elementPosition - headerOffset;
 
+    // TOCで該当項目にいく時いい感じにゆっくりスクロールさせる
     window.scrollTo({
       top: offsetPosition,
       behavior: "smooth",
     });
 
-    let isScrolling: number; // `number`型として宣言
+    let isScrolling: number;
 
     const handleScroll = () => {
       window.clearTimeout(isScrolling);
 
+      // ボタンを押してスクロールした後、見てる項目にハイライト当てる
       isScrolling = window.setTimeout(() => {
-        setActiveId(id); // スクロール終了時にハイライトを更新
-
-        // このスクロールハンドラを削除
+        setActiveId(id);
         window.removeEventListener("scroll", handleScroll);
-      }, 66); // 66ミリ秒間隔でスクロールイベントの発生がなければ、スクロールが終了したとみなす
+      }, 66);
     };
 
     window.addEventListener("scroll", handleScroll);
   };
 
+  /**
+   * 目次の項目が押された時のアクション
+   * @param event
+   * @param id
+   */
   const handleLinkClick = (
     event: React.MouseEvent<HTMLDivElement>,
     id: string
@@ -56,6 +67,9 @@ export const TableOfContents = ({ toc }: TableOfContentsProps) => {
   };
 
   useEffect(() => {
+    /**
+     * スクロールを監視して、該当項目に辿り着いたらTOCのハイライト更新
+     */
     const handleScroll = () => {
       let foundSectionId = "";
       for (const section of toc) {
@@ -84,9 +98,9 @@ export const TableOfContents = ({ toc }: TableOfContentsProps) => {
     <Box
       sx={{
         position: "sticky",
-        top: "80px", // ヘッダーの高さが70pxなので、10px下に固定する
-        maxHeight: "calc(100vh - 80px)", // ビューポート高さからtopの値を引いた高さを最大高さとする
-        overflowY: "auto", // コンテンツが多い場合にスクロールバーを表示
+        top: "80px",
+        maxHeight: "calc(100vh - 80px)",
+        overflowY: "auto",
       }}>
       <Typography
         variant="h4"
@@ -107,21 +121,19 @@ export const TableOfContents = ({ toc }: TableOfContentsProps) => {
             onClick={(e) => handleLinkClick(e, data.id)}
             sx={{
               display: "block",
-              paddingTop: "0px", // 上のパディングを減らす
-              paddingBottom: "0px", // 下のパディングを減らす
+              paddingTop: "0px",
+              paddingBottom: "0px",
             }}>
             <ListItemButton
               sx={{
-                pl: `${data.level * 15}px`, // 階層に基づく左側のパディング
-                pr: "8px", // 右側のパディングを設定
-                minHeight: "36px", // ボタンの最小高さを設定して縦のスペースを減らす
-                // color: activeId === data.id ? "#6c6873" : "inherit",
-                borderLeft: activeId === data.id ? "4px solid" : "", // アクティブ時の左側ボーダー
+                pl: `${data.level * 15}px`,
+                pr: "8px",
+                minHeight: "36px",
+                borderLeft: activeId === data.id ? "4px solid" : "",
                 borderColor: activeId === data.id ? "#6c6873" : "",
                 "&:hover": {
-                  // color: "#6c6873",
-                  borderLeft: "4px solid", // ホバー時の左側ボーダー
-                  borderColor: "#6c6873", // ホバー時のボーダー色
+                  borderLeft: "4px solid",
+                  borderColor: "#6c6873",
                 },
               }}>
               <ListItemText primary={data.text} sx={{ m: 0 }} />
