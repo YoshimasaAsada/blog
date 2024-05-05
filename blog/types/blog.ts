@@ -1,18 +1,31 @@
 import { Category } from "./category";
 
-export interface Blog {
+/**
+ * ブログのデータ型
+ */
+export type Blog = {
+  /** ブログのID */
   id: string;
+  /** ブログのタイトル */
   title: string;
-  /** blogのコンテンツHTML */
+  /** ブログのコンテンツHTML */
   content: string;
+  /** ブログのアイキャッチ画像 */
   eyecatch: {
     url: string;
   };
+  /** ブログの持ってるカテゴリー */
   category: Category[];
+  /** 投稿日 */
   publishedAt: string;
+  /** 更新日 */
   updatedAt: string;
-}
+};
 
-export interface BlogsInContents {
+/**
+ * ブログがcontentsオブジェクトで帰ってくる時のデータ型
+ */
+export type BlogsInContents = {
+  /** ブログがcontenysオブジェクトで返ってくる時用 */
   contents: Blog[];
-}
+};
