@@ -33,6 +33,11 @@ export async function generateStaticParams() {
   return [...paths];
 }
 
+/**
+ * 
+ * @param params ブログのID
+ * @returns 
+ */
 export default async function Page({ params }: { params: { id: string } }) {
   const blog: Blog = await getBlogById(params);
   const toc = renderToc(blog.content);
