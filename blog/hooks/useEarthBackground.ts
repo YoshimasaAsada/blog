@@ -1,6 +1,10 @@
-import { useRef, useEffect } from "react";
+import { useEffect } from "react";
 import * as THREE from "three";
 
+/**
+ * Homeページで使ってる背景
+ * @param ref 
+ */
 export function useEarthBackground(ref: any) {
   useEffect(() => {
     if (!ref.current) return;
