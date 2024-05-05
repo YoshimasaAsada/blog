@@ -1,5 +1,4 @@
 import { getAllBlogs } from "@/libs/client";
-import Link from "next/link";
 import { Container, Fade, Grid, Typography } from "@mui/material";
 import { CategoryList } from "@/components/CategoryList";
 import { BlogCard } from "@/components/BlogCard";
@@ -14,29 +13,16 @@ export default async function Page() {
         alignItems="center"
         style={{ paddingTop: "20px", paddingBottom: "20px" }}>
         {/* <BlogSwiper blogs={blogs} /> */}
-        <Grid item xs={6}>
-          <Typography
-            variant="h3"
-            component="h3"
-            style={{
-              textDecoration: "underline",
-              textUnderlineOffset: "8px",
-              textDecorationThickness: "2px",
-            }}>
-            Blogs
-          </Typography>
-        </Grid>
-        <Grid item xs={6} style={{ textAlign: "right" }}>
-          <Link href="/blog" passHref>
-            <div
-              className="to-blog-animation"
-              style={{
-                cursor: "pointer",
-              }}>
-              All Blogs
-            </div>
-          </Link>
-        </Grid>
+        <Typography
+          variant="h3"
+          component="h3"
+          style={{
+            textDecoration: "underline",
+            textUnderlineOffset: "8px",
+            textDecorationThickness: "2px",
+          }}>
+          Blogs
+        </Typography>
       </Grid>
       <Grid container spacing={2}>
         <Grid item xs={9}>
