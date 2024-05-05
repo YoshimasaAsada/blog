@@ -1,7 +1,7 @@
 import * as cheerio from "cheerio";
 
 /**
- * ブログのTOC
+ * ブログのTOC作成関数
  * @param body ブログコンテンツの中身のHTML
  * @returns
  */
