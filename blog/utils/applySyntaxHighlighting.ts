@@ -4,7 +4,7 @@ import * as cheerio from "cheerio";
 /**
  * ブログコンテンツにシンタックスハイライトを当てる関数
  * @param content コンテンツのHTML丸ごと
- * @returns 
+ * @returns
  */
 export async function applySyntaxHighlighting(content: string) {
   const highlighter = await getHighlighter({
@@ -15,7 +15,11 @@ export async function applySyntaxHighlighting(content: string) {
 
   // コードブロックのファイル名が入力されている場合の処理
   $("div[data-filename]").each((_, elm) => {
-    $(elm).prepend(`<span>${$(elm).attr("data-filename")}</span>`);
+    $(elm).prepend(
+      `<div class="code-bar"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div><div class="file-name">${$(
+        elm
+      ).attr("data-filename")}</div><div>`
+    );
   });
 
   // コードブロックのシンタックスハイライトを行う

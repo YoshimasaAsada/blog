@@ -150,19 +150,62 @@ pre {
 div[data-filename] {
   margin-top: 16px;
   margin-bottom: 16px;
+  background-color: #333333;
+  border-radius: 8px;
 }
 
-div[data-filename] > span {
-  display: block;
-  background-color: #333333;
+div[data-filename] > .code-bar > span {
+  // display: block;
+  // background-color: #333333;
   // text-align: center;
-  padding: 3px 15px;
-  border-radius: 5px 5px 0px 0px;
+  // padding: 3px 15px;
+  // border-radius: 5px 5px 0px 0px;
 }
 
 div[data-filename] > pre {
   margin-top: 0px;
   border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.code-bar {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  gap: 5px;
+}
+
+.red,
+.yellow,
+.green {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  // margin: 5px; /* 余計なスペースをなくす */
+}
+
+.red {
+  background-color: #ff5f56;
+  border-radius: 50%;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.yellow {
+  background-color: #ffbd2e;
+  border-radius: 50%;
+  margin: 5px;
+  display: inline-block;
+}
+
+.green {
+  background-color: #27c93f;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.file-name {
+  margin: 5px;
 }
 
 // スライダー
