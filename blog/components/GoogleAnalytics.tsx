@@ -46,7 +46,7 @@ const GoogleAnalytics = () => {
 };
 
 const LoadSearchParamsWrapper = ({ setSearchParams }: any) => {
-  const searchParamsString = LoadSearchParams(); // This calls useSearchParams internally
+  const searchParamsString = LoadSearchParams();
   useEffect(() => {
     setSearchParams(searchParamsString);
   }, [searchParamsString]);
