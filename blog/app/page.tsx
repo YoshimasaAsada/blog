@@ -3,7 +3,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { Box, Typography, Fade } from "@mui/material";
 import { useEarthBackground } from "@/hooks/useEarthBackground";
-import styles from "./LinkStyles.module.css";
+import styles from "./page.module.css";
 
 export default function Page() {
   const mountRef = useRef(null);
