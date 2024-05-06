@@ -1,26 +1,18 @@
 import React from "react";
-import {
-  Container,
-  Grid,
-  TextField,
-  Button,
-  Typography,
-  Paper,
-} from "@mui/material";
+import { Container, Grid, TextField, Button, Typography } from "@mui/material";
 import { sendInquiry } from "@/utils/sendInquiry";
 
 export default function InquiryPage() {
   return (
     <Container maxWidth="sm">
-      {/* <Paper elevation={4} sx={{ p: 4, backgroundColor: "grey.200" }}> */}
       <Typography
         component="h3"
         variant="h3"
-        sx={{ paddingTop: "20px" }}
+        sx={{ paddingTop: "20px", paddingBottom: "20px" }}
         style={{
           textDecoration: "underline",
-          textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
-          textDecorationThickness: "2px", // 下線の太さを調整
+          textUnderlineOffset: "8px",
+          textDecorationThickness: "2px",
         }}>
         お問い合わせ
       </Typography>
@@ -41,7 +33,27 @@ export default function InquiryPage() {
               InputProps={{
                 sx: {
                   color: "white",
-                  backgroundColor: "gray",
+                  backgroundColor: "#666666",
+                },
+              }}
+              sx={{
+                color: "white",
+                "& label.Mui-focused": {
+                  color: "#fff",
+                },
+                "& .MuiInput-underline:after": {
+                  borderBottomColor: "#0000ff",
+                },
+                "& .MuiOutlinedInput-root": {
+                  // "& fieldset": {
+                  //   borderColor: "#fff",
+                  // },
+                  // "&:hover fieldset": {
+                  //   borderColor: "#ffff",
+                  // },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "gray",
+                  },
                 },
               }}
             />
@@ -63,7 +75,27 @@ export default function InquiryPage() {
               InputProps={{
                 sx: {
                   color: "white",
-                  backgroundColor: "gray",
+                  backgroundColor: "#666666",
+                },
+              }}
+              sx={{
+                color: "white",
+                "& label.Mui-focused": {
+                  color: "#fff",
+                },
+                "& .MuiInput-underline:after": {
+                  borderBottomColor: "#0000ff",
+                },
+                "& .MuiOutlinedInput-root": {
+                  // "& fieldset": {
+                  //   borderColor: "#fff",
+                  // },
+                  // "&:hover fieldset": {
+                  //   borderColor: "#ffff",
+                  // },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "gray",
+                  },
                 },
               }}
             />
@@ -86,7 +118,27 @@ export default function InquiryPage() {
               InputProps={{
                 sx: {
                   color: "white",
-                  backgroundColor: "gray",
+                  backgroundColor: "#666666",
+                },
+              }}
+              sx={{
+                color: "white",
+                "& label.Mui-focused": {
+                  color: "#fff",
+                },
+                "& .MuiInput-underline:after": {
+                  borderBottomColor: "#0000ff",
+                },
+                "& .MuiOutlinedInput-root": {
+                  // "& fieldset": {
+                  //   borderColor: "#fff",
+                  // },
+                  // "&:hover fieldset": {
+                  //   borderColor: "#ffff",
+                  // },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "gray",
+                  },
                 },
               }}
             />
@@ -100,7 +152,6 @@ export default function InquiryPage() {
           </Grid>
         </Grid>
       </form>
-      {/* </Paper> */}
     </Container>
   );
 }
