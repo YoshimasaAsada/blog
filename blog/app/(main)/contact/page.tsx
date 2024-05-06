@@ -108,7 +108,7 @@ export default function InquiryPage() {
               fullWidth
               id="message"
               name="message"
-              label="メッセージ"
+              label="問い合わせ内容"
               multiline
               rows={4}
               variant="outlined"
