@@ -1,3 +1,4 @@
+import { Blog } from "@/types/blog";
 import {
   Card,
   CardActionArea,
@@ -8,9 +9,14 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 
-export const BlogCard = ({ content }: any) => {
+/**
+ * ブログカードのテンプレート
+ * @param param0
+ * @returns
+ */
+export const BlogCard = ({ content }: { content: Blog }) => {
   return (
-    <Link href={`/blog/${content.id}`} passHref>
+    <Link href={`/blog/${content.id}`}>
       <Card
         sx={{
           position: "relative",
@@ -52,7 +58,6 @@ export const BlogCard = ({ content }: any) => {
             View
           </Typography>
         </CardActionArea>
-
         <CardMedia
           component="img"
           height="140"
@@ -62,7 +67,6 @@ export const BlogCard = ({ content }: any) => {
             transition: "transform 0.5s ease-in-out",
           }}
         />
-
         <CardContent
           sx={{
             flexDirection: "column",
