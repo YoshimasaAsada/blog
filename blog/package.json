@@ -20,6 +20,8 @@
     "@types/dompurify": "^3.0.5",
     "cheerio": "^1.0.0-rc.12",
     "dompurify": "^3.1.1",
+    "google-auth-library": "^9.9.0",
+    "google-spreadsheet": "^4.1.1",
     "highlight.js": "^11.9.0",
     "html-react-parser": "^5.1.10",
     "microcms-js-sdk": "^3.1.0",
