@@ -10,12 +10,17 @@ import Link from "next/link";
  */
 export async function generateStaticParams() {
   const contents = await getAllCategories();
-  const paths = contents.map((category: any) => {
+  const paths = contents.map((category) => {
     return { id: category.id };
   });
   return [...paths];
 }
 
+/**
+ * 
+ * @param param0 カテゴリーのID
+ * @returns 
+ */
 export default async function Page({ params }: { params: { id: string } }) {
   const blogs = await getBlogsFilterByCategoryId(params);
 
@@ -60,7 +65,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 </Typography>
               </Grid>
             ) : (
-              blogs.map((content: any, index: number) => (
+              blogs.map((content, index: number) => (
                 <Grid item xs={12} sm={6} key={content.id}>
                   <Fade in={true} timeout={(index + 1) * 1000}>
                     <BlogCard content={content} />
