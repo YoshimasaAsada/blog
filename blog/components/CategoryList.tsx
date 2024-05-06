@@ -17,11 +17,11 @@ export const CategoryList = async () => {
         }}>
         Categories
       </Typography>
-      {categories?.map((category: any) => {
+      {categories?.map((category) => {
         return (
           <Link key={category.id} href={`/category/${category.id}`} passHref>
             <Chip
-              label={category.name}
+              label={`# ${category.name}`}
               clickable
               variant="outlined"
               sx={{
