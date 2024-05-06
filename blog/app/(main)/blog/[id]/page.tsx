@@ -34,9 +34,9 @@ export async function generateStaticParams() {
 }
 
 /**
- * 
+ *
  * @param params ブログのID
- * @returns 
+ * @returns
  */
 export default async function Page({ params }: { params: { id: string } }) {
   const blog: Blog = await getBlogById(params);
@@ -55,7 +55,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             {blog.category.map((category: any, index: number) => (
               <Chip
                 key={index}
-                label={category.name}
+                label={`# ${category.name}`}
                 variant="outlined"
                 sx={{ color: "white" }}
               />
