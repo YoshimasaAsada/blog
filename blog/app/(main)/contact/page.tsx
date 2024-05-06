@@ -146,7 +146,15 @@ export default function InquiryPage() {
 
           {/* 送信ボタン */}
           <Grid item xs={12}>
-            <Button type="submit" fullWidth variant="contained" color="primary">
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{
+                background: "#333333",
+                color: "white",
+                ":hover": { background: "#1a1a1a" },
+              }}>
               送信
             </Button>
           </Grid>
