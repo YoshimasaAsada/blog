@@ -27,7 +27,7 @@ export default async function Page() {
       <Grid container spacing={2}>
         <Grid item xs={9}>
           <Grid container spacing={2}>
-            {blogs.map((content: any, index: number) => (
+            {blogs.map((content, index: number) => (
               <Grid item xs={12} sm={6} key={content.id}>
                 <Fade in={true} timeout={(index + 1) * 1000}>
                   <BlogCard content={content} />
