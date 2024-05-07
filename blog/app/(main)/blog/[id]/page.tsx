@@ -87,23 +87,26 @@ export default async function Page({ params }: { params: { id: string } }) {
             </Typography>
           </Stack>
         </Box>
-        <Image
-          style={{
-            marginBottom: "10px",
-            marginTop: "10px",
-            width: "100%",
-            height: "100%",
-            backgroundColor: "#fff",
-          }}
-          src={blog.eyecatch.url}
-          width={100}
-          height={200}
-          alt="Slider Image"
-          sizes="(min-width: 1024px) 100vw, 60vw"
-          className="slideImage"
-        />
         <Grid container spacing={2}>
           <Grid item xs={12} md={9}>
+            <Box style={{ display: "flex", justifyContent: "center" }}>
+              <Image
+                style={{
+                  marginBottom: "10px",
+                  marginTop: "10px",
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: "#fff",
+                  borderRadius: "10px",
+                }}
+                src={blog.eyecatch.url}
+                width={100}
+                height={200}
+                alt="Slider Image"
+                sizes="(min-width: 1024px) 100vw, 60vw"
+                className="slideImage"
+              />
+            </Box>
             <Box
               className="blog"
               dangerouslySetInnerHTML={{ __html: highlightedContent }}

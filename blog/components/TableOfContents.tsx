@@ -105,7 +105,8 @@ export const TableOfContents = ({ toc }: TableOfContentsProps) => {
       <Typography
         variant="h4"
         sx={{
-          m: 2,
+          mr: 2,
+          ml: 2,
           borderBottom: "1px solid #ccc",
           display: "flex",
           alignItems: "center",
