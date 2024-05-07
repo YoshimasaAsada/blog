@@ -2,6 +2,7 @@
 import Image from "next/image";
 import {
   Box,
+  Button,
   Chip,
   Container,
   Fade,
@@ -20,6 +21,8 @@ import { applySyntaxHighlighting } from "@/utils/applySyntaxHighlighting";
 
 // コンポーネント
 import TableOfContents from "@/components/TableOfContents";
+import Link from "next/link";
+import styles from "./page.module.scss";
 
 /**
  * ビルド時に詳細ページを作成させる
@@ -116,6 +119,24 @@ export default async function Page({ params }: { params: { id: string } }) {
             <TableOfContents toc={toc} />
           </Grid>
         </Grid>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <Link href="/blog">
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{
+                marginTop: "40px",
+                width: "300px",
+                height: "50px",
+                background: "#666666",
+                color: "white",
+                borderRadius: 5,
+                ":hover": { background: "#333333" },
+              }}>
+              All Blogs
+            </Button>
+          </Link>
+        </div>
       </Container>
     </Fade>
   );

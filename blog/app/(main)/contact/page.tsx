@@ -153,7 +153,8 @@ export default function InquiryPage() {
               sx={{
                 background: "#333333",
                 color: "white",
-                ":hover": { background: "#1a1a1a" },
+                borderRadius: 5,
+                ":hover": { background: "#666666" },
               }}>
               送信
             </Button>
