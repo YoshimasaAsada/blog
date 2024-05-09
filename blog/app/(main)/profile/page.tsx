@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
@@ -31,6 +31,81 @@ export default function Page() {
         <Typography
           component="h3"
           variant="h3"
+          sx={{ paddingTop: "20px", paddingBottom: "20px" }}
+          style={{
+            textDecoration: "underline",
+            textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
+            textDecorationThickness: "2px", // 下線の太さを調整
+          }}>
+          Profile
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={8}>
+            こんにちは〜
+            <br />
+            EC系のSssSミドルベンチャーでエンジニアをやりつつ、副業でプログラミングスクールのメンターをしている管理人です！
+            <br />
+            現職ではフロントエンド開発、バックエンド開発、インフラ、情シスと全部やっています
+            俗にいうフルスタックエンジニアなのかなと思っています。
+            器用貧乏になりそうなのが心配です。。
+            <br />
+            最近の趣味はこのブログを立ち上げたこともあり、おしゃれな個人のTechブログを探すのにハマっています。
+            探せば意外とオシャレでいけてる個人テックブログがあってびっくりします！
+            Qitaのドメインマジで強すぎだろ、、とSEOについて悩む日々です。
+            あとはこの前フットサルに行ったらめちゃくちゃ楽しかったので、個サルにも通いたいです。
+            <Typography variant="h5" paddingTop={2} paddingBottom={1}>
+              今後の展望
+            </Typography>
+            直近2-3年でフルスタックのtechリードを目指したいと思っています。
+            そこからはあまり詳細には考えていないですが、AIの発展状況とかもみつつ何をするかは考えたいですね！
+          </Grid>
+          <Grid item xs={4}>
+            <Typography
+              component="h4"
+              variant="h4"
+              sx={{ paddingBottom: "20px" }}
+              style={{
+                textDecoration: "underline",
+                textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
+                textDecorationThickness: "2px", // 下線の太さを調整
+              }}>
+              Skils
+            </Typography>
+            <TsIcon width={50} height={50} />
+            <ReactIcon width={50} height={50} />
+            <NestIcon width={50} height={50} />
+            <CentosIcon width={50} height={50} />
+            <AwsIcon width={50} height={50} />
+            <LinuxIcon width={50} height={50} />
+            <RubyIcon width={50} height={50} />
+            <RailsIcon width={50} height={50} />
+            <DockerIcon width={50} height={50} />
+            <NginxIcon width={50} height={50} />
+            <PythonIcon width={50} height={50} />
+            <NextIcon width={50} height={50} />
+            <Typography
+              component="h4"
+              variant="h4"
+              sx={{ paddingTop: "20px", paddingBottom: "20px" }}
+              style={{
+                textDecoration: "underline",
+                textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
+                textDecorationThickness: "2px", // 下線の太さを調整
+              }}>
+              qualification
+            </Typography>
+            <Image
+              src="/images/SAA.png"
+              alt="SAAIcon"
+              width={100}
+              height={100}
+            />
+          </Grid>
+        </Grid>
+        {/* <Profile /> */}
+        <Typography
+          component="h3"
+          variant="h3"
           sx={{ marginBottom: "20px", paddingTop: "20px" }}
           style={{
             textDecoration: "underline",
@@ -39,7 +114,6 @@ export default function Page() {
           }}>
           Career
         </Typography>
-        {/* <Profile /> */}
         <Timeline
           sx={{
             padding: 0,
@@ -139,55 +213,15 @@ export default function Page() {
                 フロントエンド
               </Typography>
               <p>
-                Reactで不正検知アプリの管理画面の作成。初めてTypescript使ったんですけどマジでいいですね。
-                静的型付け言語の沼にハマりそうです。
+                Reactで不正検知アプリの管理画面の作成。ライブラリとしてReactAdmin、MUIを利用しています。
               </p>
               <Typography variant="h5" marginBottom={1} marginTop={1}>
                 バックエンド
               </Typography>
-              <p>
-                NestJSで不正検知アプリのAPI開発。これも同様初めてTypescript。
-                Railsと比較すると開発速度は落ちますが、チーム開発とか大規模開発やるなら圧倒的静的片付け言語だなと思いました！
-                あとはコメント残すのほんと大事ですね。
-              </p>
+              <p>NestJSで不正検知アプリのAPI開発。</p>
             </TimelineContent>
           </TimelineItem>
         </Timeline>
-        <Typography
-          component="h3"
-          variant="h3"
-          sx={{ paddingTop: "20px", paddingBottom: "20px" }}
-          style={{
-            textDecoration: "underline",
-            textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
-            textDecorationThickness: "2px", // 下線の太さを調整
-          }}>
-          Skils
-        </Typography>
-        <TsIcon width={100} height={100} />
-        <ReactIcon width={100} height={100} />
-        <NestIcon width={100} height={100} />
-        <CentosIcon width={100} height={100} />
-        <AwsIcon width={100} height={100} />
-        <LinuxIcon width={100} height={100} />
-        <RubyIcon width={100} height={100} />
-        <RailsIcon width={100} height={100} />
-        <DockerIcon width={100} height={100} />
-        <NginxIcon width={100} height={100} />
-        <PythonIcon width={100} height={100} />
-        <NextIcon width={100} height={100} />
-        <Typography
-          component="h3"
-          variant="h3"
-          sx={{ paddingTop: "20px", paddingBottom: "20px" }}
-          style={{
-            textDecoration: "underline",
-            textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
-            textDecorationThickness: "2px", // 下線の太さを調整
-          }}>
-          qualification
-        </Typography>
-        <Image src="/images/SAA.png" alt="SAAIcon" width={150} height={150} />
       </Container>
     </>
   );
