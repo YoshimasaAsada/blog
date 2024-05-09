@@ -133,7 +133,7 @@ export default function Page() {
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent>
-              <Typography variant="h4" marginBottom={2}>
+              <Typography variant="h5" marginBottom={2}>
                 大学卒業（2019/4〜2023/4）
               </Typography>
               経営学部卒
@@ -147,7 +147,7 @@ export default function Page() {
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent>
-              <Typography variant="h4" marginBottom={2}>
+              <Typography variant="h5" marginBottom={2}>
                 某大手プログラミングスクールのメンター（2021/4~現在）
               </Typography>
               <Box marginBottom="10px">
@@ -172,7 +172,7 @@ export default function Page() {
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent>
-              <Typography variant="h4" marginBottom={2}>
+              <Typography variant="h5" marginBottom={2}>
                 EC系SaaSミドルベンチャー[新卒入社]（2023/4~現在）
               </Typography>
               <Box marginBottom="10px">
@@ -192,7 +192,7 @@ export default function Page() {
                 <br />
                 フルスタックエンジニアです😃
               </p>
-              <Typography variant="h5" marginBottom={1} marginTop={1}>
+              <Typography variant="h6" marginBottom={1} marginTop={1}>
                 情シス
               </Typography>
               <p>
@@ -200,7 +200,7 @@ export default function Page() {
                 AWSのIAM、Githubのリポジトリ権限管理とかを色々いじいじしています。
                 あとは業務効率化ツールの作成したり、GMV算出したりしてます。
               </p>
-              <Typography variant="h5" marginBottom={1} marginTop={1}>
+              <Typography variant="h6" marginBottom={1} marginTop={1}>
                 インフラ
               </Typography>
               <p>
@@ -209,13 +209,13 @@ export default function Page() {
                 一応今のところインフラ起因のバグはないのでいいかんじにいけてて嬉しいです。
                 でもやっぱりAWS使いたかったなぁ。。。
               </p>
-              <Typography variant="h5" marginBottom={1} marginTop={1}>
+              <Typography variant="h6" marginBottom={1} marginTop={1}>
                 フロントエンド
               </Typography>
               <p>
                 Reactで不正検知アプリの管理画面の作成。ライブラリとしてReactAdmin、MUIを利用しています。
               </p>
-              <Typography variant="h5" marginBottom={1} marginTop={1}>
+              <Typography variant="h6" marginBottom={1} marginTop={1}>
                 バックエンド
               </Typography>
               <p>NestJSで不正検知アプリのAPI開発。</p>
