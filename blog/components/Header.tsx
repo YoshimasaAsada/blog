@@ -8,40 +8,60 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import Link from "next/link";
 
 const pages = ["Blog", "Profile", "Contact"];
 
-/**
- * ヘッダー
- * @returns
- */
 export function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+  const NavButton = ({
+    page,
+    onClick,
+  }: {
+    page: string;
+    onClick: () => void;
+  }) => (
+    <Link href={page.toLowerCase() === "home" ? "/" : `/${page.toLowerCase()}`}>
+      <Button
+        onClick={onClick}
+        sx={{
+          height: `100%`,
+          color: "white",
+          display: "block",
+          position: "relative",
+          overflow: "hidden",
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            height: "2px",
+            backgroundColor: "white",
+            transform: "translateX(-100%)",
+            transition: "transform 0.3s ease-in-out",
+          },
+          "&:hover::before": {
+            transform: "translateX(0)",
+          },
+        }}>
+        {page}
+      </Button>
+    </Link>
+  );
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "rgba(66, 66, 66, 0.8)" }}>
@@ -91,13 +111,17 @@ export function Header() {
               sx={{
                 display: { xs: "block", md: "none" },
               }}>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Home</Typography>
-              </MenuItem>
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              <Link href="/" passHref>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Home</Typography>
                 </MenuItem>
+              </Link>
+              {pages.map((page) => (
+                <Link key={page} href={`/${page.toLowerCase()}`} passHref>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -119,22 +143,9 @@ export function Header() {
             YASD TECH
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Link href="/">
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}>
-                Home
-              </Button>
-            </Link>
+            <NavButton page="Home" onClick={handleCloseNavMenu} />
             {pages.map((page) => (
-              <Link key={page} href={`/${page.toLocaleLowerCase()}`}>
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}>
-                  {page}
-                </Button>
-              </Link>
+              <NavButton key={page} page={page} onClick={handleCloseNavMenu} />
             ))}
           </Box>
         </Toolbar>
