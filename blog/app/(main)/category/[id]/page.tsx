@@ -1,8 +1,13 @@
-import { BlogCard } from "@/components/BlogCard";
-import { CategoryList } from "@/components/CategoryList";
-import { getAllCategories, getBlogsFilterByCategoryId } from "@/libs/client";
+// ライブラリ関連
 import { Container, Fade, Grid, Typography } from "@mui/material";
 import Link from "next/link";
+
+// 型定義とかその辺
+import { getAllCategories, getBlogsFilterByCategoryId } from "@/libs/client";
+
+// コンポーネント
+import { BlogCard } from "@/components/BlogCard";
+import { CategoryList } from "@/components/CategoryList";
 
 /**
  * ビルド時に詳細ページを作成させる
