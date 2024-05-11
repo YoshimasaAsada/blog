@@ -1,7 +1,11 @@
 "use client";
+
+// ライブラリ関連
 import { useRef } from "react";
 import Link from "next/link";
 import { Box, Typography, Fade } from "@mui/material";
+
+// 型定義とかその辺
 import { useEarthBackground } from "@/hooks/useEarthBackground";
 import styles from "./page.module.css";
 
@@ -21,15 +25,15 @@ export default function Page() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        overflow: "hidden", // Prevent overflow issues
+        overflow: "hidden",
       }}>
       <Typography
         variant="h3"
         className={styles.welcome}
         sx={{
-          mb: { xs: 5, sm: 10 }, // More margin on smaller screens
+          mb: { xs: 5, sm: 10 },
           animation: "fadeInGlow 4s ease-out forwards",
-          textAlign: "center", // Ensure text is centered on all screen sizes
+          textAlign: "center",
         }}>
         Welcome to YASD TECH
       </Typography>
@@ -41,7 +45,7 @@ export default function Page() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            paddingTop: { xs: "30vh", sm: "0" }, // Increase padding on smaller screens to lower the links
+            paddingTop: { xs: "30vh", sm: "0" },
           }}>
           <Box
             sx={{
@@ -49,7 +53,7 @@ export default function Page() {
               flexDirection: { xs: "column", sm: "row" },
               gap: { xs: 2, sm: 0 },
               alignItems: "center",
-              justifyContent: "center", // Center the links horizontally
+              justifyContent: "center",
             }}>
             <Link href="/blog" passHref>
               <Typography className={styles.link}>Blog</Typography>
