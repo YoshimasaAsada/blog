@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Chip, Container, Grid, Typography } from "@mui/material";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
@@ -148,7 +148,15 @@ export default function Page() {
             </TimelineSeparator>
             <TimelineContent>
               <Typography variant="h5" marginBottom={2}>
-                某大手プログラミングスクールのメンター（2021/4~現在）
+                某大手プログラミングスクールのメンター（2021/4~）
+                <Chip
+                  label="現在"
+                  sx={{
+                    color: "black",
+                    backgroundColor: "white",
+                    marginBottom: 1,
+                  }}
+                />
               </Typography>
               <Box marginBottom="10px">
                 <RubyIcon width={50} height={50} />
@@ -172,9 +180,20 @@ export default function Page() {
               <TimelineConnector />
             </TimelineSeparator>
             <TimelineContent>
-              <Typography variant="h5" marginBottom={2}>
-                EC系SaaSミドルベンチャー[新卒入社]（2023/4~現在）
+              <Typography
+                variant="h5"
+                sx={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
+                EC系SaaSミドルベンチャー[新卒入社]（2023/4〜）
+                <Chip
+                  label="現在"
+                  sx={{
+                    color: "black",
+                    backgroundColor: "white",
+                    marginBottom: 1,
+                  }}
+                />
               </Typography>
+
               <Box marginBottom="10px">
                 <TsIcon width={50} height={50} />
                 <ReactIcon width={50} height={50} />
