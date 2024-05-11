@@ -1,7 +1,14 @@
-import { getAllCategories } from "@/libs/client";
+// ライブラリ関連
 import { Box, Chip, Typography } from "@mui/material";
 import Link from "next/link";
 
+// 型定義とかその辺
+import { getAllCategories } from "@/libs/client";
+
+/**
+ * カテゴリー一覧のテンプレート
+ * @returns
+ */
 export const CategoryList = async () => {
   const categories = await getAllCategories();
 

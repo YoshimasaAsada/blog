@@ -1,4 +1,4 @@
-import * as React from "react";
+// ライブラリ関連
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
@@ -7,11 +7,6 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { AppBar } from "@mui/material";
-
-const logoStyle = {
-  width: "140px",
-  height: "auto",
-};
 
 function Copyright() {
   return (
@@ -22,6 +17,10 @@ function Copyright() {
   );
 }
 
+/**
+ * フッターのテンプレート
+ * @returns
+ */
 export default function Footer() {
   return (
     <AppBar

@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+// ライブラリ関連
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,13 +11,16 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
+import { useState } from "react";
 
 const pages = ["Blog", "Profile", "Contact"];
 
+/**
+ * ヘッダーのテンプレート
+ * @returns
+ */
 export function Header() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
-    null
-  );
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);

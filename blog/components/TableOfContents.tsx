@@ -1,4 +1,5 @@
 "use client";
+// ライブラリ関連
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -18,6 +19,11 @@ type TableOfContentsProps = {
   toc: TocProps[];
 };
 
+/**
+ * ブログのTOCのコンポーネント
+ * @param param0
+ * @returns
+ */
 export const TableOfContents = ({ toc }: TableOfContentsProps) => {
   // 現在見られているコンテンツの位置を保持する
   const [activeId, setActiveId] = useState("");

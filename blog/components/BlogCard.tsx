@@ -1,4 +1,4 @@
-import { Blog } from "@/types/blog";
+// ライブラリ関連
 import {
   Card,
   CardActionArea,
@@ -8,6 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
+
+// 型定義とかその辺
+import { Blog } from "@/types/blog";
 
 /**
  * ブログカードのテンプレート
