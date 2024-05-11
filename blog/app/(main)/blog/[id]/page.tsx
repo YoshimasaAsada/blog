@@ -22,7 +22,6 @@ import { applySyntaxHighlighting } from "@/utils/applySyntaxHighlighting";
 // コンポーネント
 import TableOfContents from "@/components/TableOfContents";
 import Link from "next/link";
-import styles from "./page.module.scss";
 
 /**
  * ビルド時に詳細ページを作成させる
@@ -37,7 +36,7 @@ export async function generateStaticParams() {
 }
 
 /**
- *
+ * 各ブログのページ
  * @param params ブログのID
  * @returns
  */
@@ -55,7 +54,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             spacing={1}
             alignItems="center"
             sx={{ paddingTop: "5px" }}>
-            {blog.category.map((category: any, index: number) => (
+            {blog.category.map((category, index: number) => (
               <Chip
                 key={index}
                 label={`# ${category.name}`}
