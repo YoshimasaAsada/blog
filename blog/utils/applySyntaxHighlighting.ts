@@ -2,6 +2,31 @@ import { getHighlighter } from "shiki";
 import * as cheerio from "cheerio";
 
 /**
+ * ブログで使っているリンクのOGPデータ取得用関数
+ * @param url 
+ * @returns 
+ */
+async function fetchOGPData(url: string) {
+  const response = await fetch(url);
+  const html = await response.text();
+  const $ = cheerio.load(html);
+
+  const getMetaTag = (name: string) => {
+    return (
+      $(`meta[name=${name}]`).attr("content") ||
+      $(`meta[property="og:${name}"]`).attr("content") ||
+      $(`meta[property="twitter:${name}"]`).attr("content")
+    );
+  };
+
+  return {
+    title: getMetaTag("title"),
+    description: getMetaTag("description"),
+    image: getMetaTag("image"),
+  };
+}
+
+/**
  * ブログコンテンツにシンタックスハイライトを当てる関数
  * @param content コンテンツのHTML丸ごと
  * @returns
@@ -30,9 +55,29 @@ export async function applySyntaxHighlighting(content: string) {
       lang: language,
       theme: "slack-dark",
     });
-    // 直接親の <pre> タグに HTML を挿入し、不要な <code> タグを取り除く
     $(elm).parent().replaceWith(html);
   });
+
+  // リンクカードを適用する
+  const linkPromises = $("a").map(async (_, elm) => {
+    const url = $(elm).attr("href");
+    if (!url) return
+    const ogpData = await fetchOGPData(url);
+    const linkCardHtml = `<div class="link-card mt-3 mb-3">
+    <a href="${url}" target="_blank" rel="noopener noreferrer">
+      <div class="link-card-body">
+        <div class="link-card-info">
+          <div class="link-card-title">${ogpData.title}</div>
+          <div class="link-card-url">${url}</div>
+        </div>
+        <img src="${ogpData.image}" class="link-card-thumbnail" />
+      </div>
+    </a>
+  </div>`;
+    $(elm).replaceWith(linkCardHtml);
+  });
+
+  await Promise.all(linkPromises.get());
 
   return $.html();
 }
