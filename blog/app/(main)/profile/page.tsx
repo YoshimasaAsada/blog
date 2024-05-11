@@ -1,3 +1,4 @@
+// ライブラリ関連
 import { Box, Chip, Container, Grid, Typography } from "@mui/material";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
@@ -7,6 +8,9 @@ import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import LaptopChromebookIcon from "@mui/icons-material/LaptopChromebook";
 import SchoolIcon from "@mui/icons-material/School";
+import Image from "next/image";
+
+// コンポーネント
 import {
   AwsIcon,
   CentosIcon,
@@ -22,11 +26,13 @@ import {
   RubyIcon,
   TsIcon,
 } from "@/components/SvgIcon";
-import Image from "next/image";
 
+/**
+ * プロフィールページ作成
+ * @returns 
+ */
 export default function Page() {
   return (
-    <>
       <Container>
         <Typography
           component="h3"
@@ -102,7 +108,6 @@ export default function Page() {
             />
           </Grid>
         </Grid>
-        {/* <Profile /> */}
         <Typography
           component="h3"
           variant="h3"
@@ -241,6 +246,5 @@ export default function Page() {
           </TimelineItem>
         </Timeline>
       </Container>
-    </>
   );
 }

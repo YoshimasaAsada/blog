@@ -22,7 +22,7 @@ export async function generateStaticParams() {
 }
 
 /**
- * 
+ * カテゴリー検索した時の
  * @param param0 カテゴリーのID
  * @returns 
  */

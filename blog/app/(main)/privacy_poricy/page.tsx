@@ -1,5 +1,10 @@
+// ライブラリ関連
 import { Container, Typography } from "@mui/material";
 
+/**
+ * プライバシーポリシーのページ
+ * @returns 
+ */
 export default function Page() {
   return (
     <Container>
@@ -9,8 +14,8 @@ export default function Page() {
         sx={{ paddingTop: "10px", paddingBottom: "10px" }}
         style={{
           textDecoration: "underline",
-          textUnderlineOffset: "8px", // 下線とテキストの間の距離を調整
-          textDecorationThickness: "2px", // 下線の太さを調整
+          textUnderlineOffset: "8px",
+          textDecorationThickness: "2px",
         }}>
         プライバシーポリシー
       </Typography>

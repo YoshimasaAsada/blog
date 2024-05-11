@@ -4,6 +4,10 @@ import { Container, Grid, TextField, Button, Typography } from "@mui/material";
 // 型定義とかhooksとかその辺
 import { sendInquiry } from "@/utils/sendInquiry";
 
+/**
+ * 問い合わせページ
+ * @returns 
+ */
 export default function Page() {
   return (
     <Container maxWidth="sm">
