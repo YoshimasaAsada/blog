@@ -1,8 +1,10 @@
-import React from "react";
+// ライブラリ関連
 import { Container, Grid, TextField, Button, Typography } from "@mui/material";
+
+// 型定義とかhooksとかその辺
 import { sendInquiry } from "@/utils/sendInquiry";
 
-export default function InquiryPage() {
+export default function Page() {
   return (
     <Container maxWidth="sm">
       <Typography
@@ -18,7 +20,6 @@ export default function InquiryPage() {
       </Typography>
       <form action={sendInquiry}>
         <Grid container spacing={3}>
-          {/* 名前フィールド */}
           <Grid item xs={12}>
             <TextField
               required
@@ -45,12 +46,6 @@ export default function InquiryPage() {
                   borderBottomColor: "#0000ff",
                 },
                 "& .MuiOutlinedInput-root": {
-                  // "& fieldset": {
-                  //   borderColor: "#fff",
-                  // },
-                  // "&:hover fieldset": {
-                  //   borderColor: "#ffff",
-                  // },
                   "&.Mui-focused fieldset": {
                     borderColor: "gray",
                   },
@@ -58,8 +53,6 @@ export default function InquiryPage() {
               }}
             />
           </Grid>
-
-          {/* メールアドレスフィールド */}
           <Grid item xs={12}>
             <TextField
               required
@@ -87,12 +80,6 @@ export default function InquiryPage() {
                   borderBottomColor: "#0000ff",
                 },
                 "& .MuiOutlinedInput-root": {
-                  // "& fieldset": {
-                  //   borderColor: "#fff",
-                  // },
-                  // "&:hover fieldset": {
-                  //   borderColor: "#ffff",
-                  // },
                   "&.Mui-focused fieldset": {
                     borderColor: "gray",
                   },
@@ -100,8 +87,6 @@ export default function InquiryPage() {
               }}
             />
           </Grid>
-
-          {/* メッセージフィールド */}
           <Grid item xs={12}>
             <TextField
               required
@@ -130,12 +115,6 @@ export default function InquiryPage() {
                   borderBottomColor: "#0000ff",
                 },
                 "& .MuiOutlinedInput-root": {
-                  // "& fieldset": {
-                  //   borderColor: "#fff",
-                  // },
-                  // "&:hover fieldset": {
-                  //   borderColor: "#ffff",
-                  // },
                   "&.Mui-focused fieldset": {
                     borderColor: "gray",
                   },
@@ -143,8 +122,6 @@ export default function InquiryPage() {
               }}
             />
           </Grid>
-
-          {/* 送信ボタン */}
           <Grid item xs={12}>
             <Button
               type="submit"
