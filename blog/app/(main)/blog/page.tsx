@@ -1,8 +1,17 @@
-import { getAllBlogs } from "@/libs/client";
+// ライブラリ関連
 import { Container, Fade, Grid, Typography } from "@mui/material";
+
+// 型定義とかその辺
+import { getAllBlogs } from "@/libs/client";
+
+// コンポーネント
 import { CategoryList } from "@/components/CategoryList";
 import { BlogCard } from "@/components/BlogCard";
 
+/**
+ * ブログの一覧ページ
+ * @returns 
+ */
 export default async function Page() {
   const blogs = await getAllBlogs();
 
