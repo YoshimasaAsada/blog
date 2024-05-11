@@ -21,11 +21,16 @@ export default function Page() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
+        overflow: "hidden", // Prevent overflow issues
       }}>
       <Typography
         variant="h3"
         className={styles.welcome}
-        sx={{ mb: 10, animation: "fadeInGlow 4s ease-out forwards" }}>
+        sx={{
+          mb: { xs: 5, sm: 10 }, // More margin on smaller screens
+          animation: "fadeInGlow 4s ease-out forwards",
+          textAlign: "center", // Ensure text is centered on all screen sizes
+        }}>
         Welcome to YASD TECH
       </Typography>
       <Fade in={true} timeout={1000}>
@@ -36,8 +41,16 @@ export default function Page() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            paddingTop: { xs: "30vh", sm: "0" }, // Increase padding on smaller screens to lower the links
           }}>
-          <Box sx={{ display: "flex" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              gap: { xs: 2, sm: 0 },
+              alignItems: "center",
+              justifyContent: "center", // Center the links horizontally
+            }}>
             <Link href="/blog" passHref>
               <Typography className={styles.link}>Blog</Typography>
             </Link>
