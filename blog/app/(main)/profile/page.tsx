@@ -40,7 +40,7 @@ export default function Page() {
           Profile
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={8}>
+          <Grid item xs={12} md={8}>
             こんにちは〜
             <br />
             EC系のSssSミドルベンチャーでエンジニアをやりつつ、副業でプログラミングスクールのメンターをしている新卒二年目のエンジニアです！
@@ -59,7 +59,7 @@ export default function Page() {
             直近2-3年でフルスタックのtechリードを目指したいと思っています。
             そこからはあまり詳細には考えていないですが、AIの発展状況とかもみつつ何をするかは考えたいですね！
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={12} md={4}>
             <Typography
               component="h4"
               variant="h4"

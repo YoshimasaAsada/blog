@@ -91,7 +91,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </Stack>
         </Box>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={9}>
+          <Grid item xs={12} md={9} order={{ xs: 2, md: 1 }}>
             <Box style={{ display: "flex", justifyContent: "center" }}>
               <Image
                 style={{
@@ -115,7 +115,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               dangerouslySetInnerHTML={{ __html: highlightedContent }}
             />
           </Grid>
-          <Grid item xs={12} md={3}>
+          <Grid item xs={12} md={3} order={{ xs: 1, md: 2 }}>
             <TableOfContents toc={toc} />
           </Grid>
         </Grid>

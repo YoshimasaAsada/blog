@@ -25,10 +25,10 @@ export default async function Page() {
         </Typography>
       </Grid>
       <Grid container spacing={2}>
-        <Grid item xs={9}>
+        <Grid item xs={12} md={9}>
           <Grid container spacing={2}>
             {blogs.map((content, index: number) => (
-              <Grid item xs={12} sm={6} key={content.id}>
+              <Grid item xs={12} sm={12} md={6} key={content.id}>
                 <Fade in={true} timeout={(index + 1) * 1000}>
                   <BlogCard content={content} />
                 </Fade>
@@ -36,7 +36,7 @@ export default async function Page() {
             ))}
           </Grid>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <CategoryList />
         </Grid>
       </Grid>
