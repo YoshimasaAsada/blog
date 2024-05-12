@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "yasd tech",
     description: "yasdのテックブログです",
+    images: ["./opengraph-image.png"],
   },
 };
 
