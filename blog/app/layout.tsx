@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     siteName: "yasd tech",
     locale: "ja_JP",
     type: "website",
-    images: "./opengraph-image.png",
+    images: ["./opengraph-image.png"],
   },
   twitter: {
     card: "summary_large_image",
