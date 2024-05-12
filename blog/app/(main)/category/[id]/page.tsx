@@ -24,10 +24,11 @@ export async function generateStaticParams() {
 /**
  * カテゴリー検索した時の
  * @param param0 カテゴリーのID
- * @returns 
+ * @returns
  */
 export default async function Page({ params }: { params: { id: string } }) {
   const blogs = await getBlogsFilterByCategoryId(params);
+  const categories = await getAllCategories();
 
   return (
     <Container>
@@ -81,7 +82,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           </Grid>
         </Grid>
         <Grid item xs={3}>
-          <CategoryList />
+          <CategoryList contents={categories} />
         </Grid>
       </Grid>
     </Container>
