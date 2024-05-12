@@ -75,12 +75,12 @@ a {
   padding: 3px;
 }
 .blog a {
-  color: #3498db; /* Blue link color */
+  color: #3498db;
   text-decoration: none;
   transition: color 0.2s;
 }
 .blog a:hover {
-  color: #2980b9; /* Slightly darker blue on hover */
+  color: #2980b9;
   text-decoration: underline;
 }
 .blog div {
@@ -88,13 +88,12 @@ a {
 }
 
 .blog code {
-  // background-color: #141313;
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
-  font-family: "Fira Code", monospace; /* Monospace font for code */
+  font-family: "Fira Code", monospace;
 }
 .blog blockquote {
-  border-left: 5px solid #b6c9d6; /* Matching blue border */
+  border-left: 5px solid #b6c9d6;
   padding-left: 1rem;
   margin: 10px;
   margin-left: 2rem;
@@ -103,7 +102,7 @@ a {
 }
 .blog hr {
   border: none;
-  border-top: 2px solid #ecf0f1; /* Light grey border */
+  border-top: 2px solid #ecf0f1;
   margin: 1.5rem 0;
 }
 .blog img {
@@ -111,7 +110,7 @@ a {
   height: auto;
   display: block;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .index_img {
   width: 700px;
@@ -124,8 +123,8 @@ a {
 /* コードブロック */
 pre {
   overflow-x: auto;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   border-radius: 5px;
   padding: 15px;
 }
@@ -199,8 +198,8 @@ div[data-filename] > pre {
 // more blogsボタンのアクション
 .to-blog-animation {
   position: relative;
-  width: 150px; /*サイズは自由に変更してください。*/
-  height: 50px; /*サイズは自由に変更してください。*/
+  width: 150px;
+  height: 50px;
   color: white;
   text-align: center;
   display: table-cell;
@@ -255,8 +254,8 @@ div[data-filename] > pre {
 
 /** リンクカードのレイアウト **/
 .link-card {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   -webkit-box-align: center;
   background-color: #2b2b2b;
   border-radius: 8px;
