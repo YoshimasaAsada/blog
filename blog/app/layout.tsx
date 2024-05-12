@@ -7,7 +7,20 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "yasd tech",
-  description: "yasd tech",
+  description: "yasdのテックブログです",
+  openGraph: {
+    title: "yasd tech",
+    description: "yasdのテックブログです",
+    url: "https://yasdtech.com/",
+    siteName: "yasd tech",
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "yasd tech",
+    description: "yasdのテックブログです",
+  },
 };
 
 export default function RootLayout({

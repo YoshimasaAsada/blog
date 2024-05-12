@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
 import SyncIcon from "@mui/icons-material/Sync";
+import * as cheerio from "cheerio";
 
 // 型定義とかその辺
 import { getAllBlogs, getBlogById } from "@/libs/client";
@@ -22,6 +23,7 @@ import { applySyntaxHighlighting } from "@/utils/applySyntaxHighlighting";
 // コンポーネント
 import TableOfContents from "@/components/TableOfContents";
 import Link from "next/link";
+import { Metadata } from "next";
 
 /**
  * ビルド時に詳細ページを作成させる
@@ -33,6 +35,38 @@ export async function generateStaticParams() {
     return { id: blog.id };
   });
   return [...paths];
+}
+
+/**
+ * ビルド時にメタデータを作成させる
+ * @param param0 
+ * @returns 
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const blog = await getBlogById(params);
+  const $ = cheerio.load(blog.content);
+  const text = $("body").text();
+
+  return {
+    title: blog.title,
+    description: text.slice(0, 100),
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description: text.slice(0, 100),
+    },
+    openGraph: {
+      title: blog.title,
+      description: text.slice(0, 100),
+      locale: "ja_JP",
+      type: "website",
+      images: blog.eyecatch,
+    },
+  };
 }
 
 /**
