@@ -6,6 +6,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://yasdtech.com"),
   title: "yasd tech",
   description: "yasdのテックブログです",
   openGraph: {
