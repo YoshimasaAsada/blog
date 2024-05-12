@@ -21,8 +21,8 @@ type TableOfContentsProps = {
 
 /**
  * ブログのTOCのコンポーネント
- * @param param0
- * @returns
+ * @param param0 
+ * @returns 
  */
 export const TableOfContents = ({ toc }: TableOfContentsProps) => {
   // 現在見られているコンテンツの位置を保持する

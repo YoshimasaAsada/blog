@@ -89,7 +89,7 @@ export const BlogCard = ({ content }: { content: Blog }) => {
           <Typography color="text.secondary" display="inline">
             タグ：
           </Typography>
-          {content.category.map((category: any, index: number) => (
+          {content.category.map((category, index: number) => (
             <Chip key={index} label={category?.name} variant="outlined" />
           ))}
         </CardContent>
