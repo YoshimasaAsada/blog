@@ -2,7 +2,7 @@
 import { Container, Fade, Grid, Typography } from "@mui/material";
 
 // 型定義とかその辺
-import { getAllBlogs } from "@/libs/client";
+import { getAllBlogs, getAllCategories } from "@/libs/client";
 
 // コンポーネント
 import { CategoryList } from "@/components/CategoryList";
@@ -10,10 +10,11 @@ import { BlogCard } from "@/components/BlogCard";
 
 /**
  * ブログの一覧ページ
- * @returns 
+ * @returns
  */
 export default async function Page() {
   const blogs = await getAllBlogs();
+  const categories = await getAllCategories();
 
   return (
     <Container>
@@ -46,7 +47,7 @@ export default async function Page() {
           </Grid>
         </Grid>
         <Grid item xs={12} md={3}>
-          <CategoryList />
+          <CategoryList contents={categories} />
         </Grid>
       </Grid>
     </Container>
