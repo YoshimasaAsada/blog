@@ -27,11 +27,12 @@ async function fetchOGPData(url: string) {
 }
 
 /**
- * ブログコンテンツにシンタックスハイライトを当てる関数
+ * ブログコンテンツを加工する
+ * シンタックスハイライトとリンクカードの適用
  * @param content コンテンツのHTML丸ごと
  * @returns
  */
-export async function applySyntaxHighlighting(content: string) {
+export async function processBlogContent(content: string) {
   const highlighter = await getHighlighter({
     themes: ["slack-dark"],
     langs: ["tsx", "shell", "typescript"],

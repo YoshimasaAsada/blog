@@ -18,7 +18,7 @@ import * as cheerio from "cheerio";
 import { getAllBlogs, getBlogById } from "@/libs/client";
 import { Blog } from "@/types/blog";
 import { renderToc } from "../../../../libs/render-toc";
-import { applySyntaxHighlighting } from "@/utils/applySyntaxHighlighting";
+import { processBlogContent } from "@/utils/processBlogContent";
 
 // コンポーネント
 import TableOfContents from "@/components/TableOfContents";
@@ -39,8 +39,8 @@ export async function generateStaticParams() {
 
 /**
  * ビルド時にメタデータを作成させる
- * @param param0 
- * @returns 
+ * @param param0
+ * @returns
  */
 export async function generateMetadata({
   params,
@@ -77,7 +77,7 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: { id: string } }) {
   const blog: Blog = await getBlogById(params);
   const toc = renderToc(blog.content);
-  const highlightedContent = await applySyntaxHighlighting(blog.content);
+  const highlightedContent = await processBlogContent(blog.content);
 
   return (
     <Fade in={true} timeout={1000}>
