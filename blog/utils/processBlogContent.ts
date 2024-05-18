@@ -3,8 +3,8 @@ import * as cheerio from "cheerio";
 
 /**
  * ブログで使っているリンクのOGPデータ取得用関数
- * @param url 
- * @returns 
+ * @param url
+ * @returns
  */
 async function fetchOGPData(url: string) {
   const response = await fetch(url);
@@ -35,7 +35,7 @@ async function fetchOGPData(url: string) {
 export async function processBlogContent(content: string) {
   const highlighter = await getHighlighter({
     themes: ["slack-dark"],
-    langs: ["tsx", "shell", "typescript"],
+    langs: ["tsx", "shell", "typescript", "dockerfile", "yml"],
   });
   const $ = cheerio.load(content);
 
@@ -62,7 +62,7 @@ export async function processBlogContent(content: string) {
   // リンクカードを適用する
   const linkPromises = $("a").map(async (_, elm) => {
     const url = $(elm).attr("href");
-    if (!url) return
+    if (!url) return;
     const ogpData = await fetchOGPData(url);
     const linkCardHtml = `<div class="link-card mt-3 mb-3">
     <a href="${url}" target="_blank" rel="noopener noreferrer">
