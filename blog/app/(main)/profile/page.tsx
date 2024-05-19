@@ -45,6 +45,11 @@ export default function Page() {
     visible: { opacity: 1, y: 0 },
   };
 
+  /**
+   * タイムラインのアニメーション用のコンポーネント
+   * @param param0
+   * @returns
+   */
   const TimelineItemWithAnimation: React.FC<TimelineItemWithAnimationProps> = ({
     children,
     delay,
