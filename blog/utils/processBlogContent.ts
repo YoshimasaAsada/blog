@@ -35,7 +35,7 @@ async function fetchOGPData(url: string) {
 export async function processBlogContent(content: string) {
   const highlighter = await getHighlighter({
     themes: ["slack-dark"],
-    langs: ["tsx", "shell", "typescript", "dockerfile", "yml"],
+    langs: ["tsx", "shell", "typescript", "dockerfile", "yml", "json", "ruby"],
   });
   const $ = cheerio.load(content);
 
