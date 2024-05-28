@@ -1,6 +1,6 @@
 "use client";
 // ライブラリ関連
-import { Box, Chip, Container, Grid, Typography } from "@mui/material";
+import { Box, Chip, Container, Grid, Typography, Avatar } from "@mui/material";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
@@ -75,6 +75,22 @@ export default function Page() {
 
   return (
     <Container>
+      <Box
+        display="flex"
+        alignItems="center"
+        flexDirection="column"
+        sx={{ marginTop: 4, marginBottom: 4 }}>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}>
+          <Avatar
+            alt="Profile Image"
+            src="images/character_with_new_background.png"
+            sx={{ width: 150, height: 150, marginBottom: 2 }}
+          />
+        </motion.div>
+      </Box>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
