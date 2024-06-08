@@ -10,24 +10,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useEffect, useState } from "react";
-import { client } from "@/libs/client";
+import { client, getAllBlogs } from "@/libs/client";
 import { Blog } from "@/types/blog";
 
-export const BlogSwiper = () => {
-  const [blogs, setBlogs] = useState<Blog[]>();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await client.get({
-        endpoint: "blogs",
-      });
-      console.log("all");
-      setBlogs(data.contents);
-      console.log(data.contents);
-    };
-
-    fetchData();
-  }, []);
+export const BlogSwiper = async (blogs: any) => {
+  // const blogs = await getAllBlogs();
 
   const slideSettings = {
     0: {
