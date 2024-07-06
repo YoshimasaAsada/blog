@@ -1,46 +1,42 @@
 // ライブラリ関連
-import { Box, Chip, Typography } from "@mui/material";
-import Link from "next/link";
+import { Box, Chip, Typography } from '@mui/material';
 
 // 型定義とかその辺
-import { getAllCategories } from "@/libs/client";
-import { CategoryInContents } from "@/types/category";
+import { Category } from '@/types/category';
+
+type PropsType = {
+  contents: Category[];
+  onSelectCategory: any;
+};
 
 /**
  * カテゴリー一覧のテンプレート
  * @returns
  */
-export const CategoryList = ({ contents }: CategoryInContents) => {
-
+export const CategoryList = ({ contents, onSelectCategory }: PropsType) => {
   return (
     <Box>
       <Typography
         variant="h3"
         component="h3"
-        style={{
-          textDecoration: "underline",
-          textUnderlineOffset: "8px",
-          textDecorationThickness: "2px",
-        }}>
+        sx={{ textDecoration: 'underline', textUnderlineOffset: '8px', textDecorationThickness: '2px' }}
+      >
         Categories
       </Typography>
       {contents.map((category) => (
-        <Link key={category.id} href={`/category/${category.id}`} passHref>
-          <Chip
-            label={`# ${category.name}`}
-            clickable
-            variant="outlined"
-            sx={{
-              color: "white",
-              borderColor: "white",
-              margin: "2px",
-              "&:hover": {
-                backgroundColor: "white",
-                color: "gray",
-              },
-            }}
-          />
-        </Link>
+        <Chip
+          key={category.id}
+          label={category.name}
+          clickable
+          variant="outlined"
+          sx={{
+            color: 'white',
+            borderColor: 'white',
+            margin: '2px',
+            '&:hover': { backgroundColor: 'white', color: 'gray' },
+          }}
+          onClick={() => onSelectCategory(category.id)}
+        />
       ))}
     </Box>
   );
