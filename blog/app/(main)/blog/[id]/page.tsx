@@ -1,5 +1,5 @@
 // ライブラリ関連
-import Image from "next/image";
+import Image from 'next/image'
 import {
   Box,
   Button,
@@ -9,32 +9,32 @@ import {
   Grid,
   Stack,
   Typography,
-} from "@mui/material";
-import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
-import SyncIcon from "@mui/icons-material/Sync";
-import * as cheerio from "cheerio";
+} from '@mui/material'
+import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded'
+import SyncIcon from '@mui/icons-material/Sync'
+import * as cheerio from 'cheerio'
 
 // 型定義とかその辺
-import { getAllBlogs, getBlogById } from "@/libs/client";
-import { Blog } from "@/types/blog";
-import { renderToc } from "../../../../libs/render-toc";
-import { processBlogContent } from "@/utils/processBlogContent";
+import { getAllBlogs, getBlogById } from '@/libs/client'
+import { Blog } from '@/types/blog'
+import { renderToc } from '../../../../libs/render-toc'
+import { processBlogContent } from '@/utils/processBlogContent'
 
 // コンポーネント
-import TableOfContents from "@/components/TableOfContents";
-import Link from "next/link";
-import { Metadata } from "next";
+import TableOfContents from '@/components/TableOfContents'
+import Link from 'next/link'
+import { Metadata } from 'next'
 
 /**
  * ビルド時に詳細ページを作成させる
  * @returns
  */
 export async function generateStaticParams() {
-  const contents = await getAllBlogs();
+  const contents = await getAllBlogs()
   const paths = contents.map((blog: any) => {
-    return { id: blog.id };
-  });
-  return [...paths];
+    return { id: blog.id }
+  })
+  return [...paths]
 }
 
 /**
@@ -45,28 +45,28 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: { id: string }
 }): Promise<Metadata> {
-  const blog = await getBlogById(params);
-  const $ = cheerio.load(blog.content);
-  const text = $("body").text();
+  const blog = await getBlogById(params)
+  const $ = cheerio.load(blog.content)
+  const text = $('body').text()
 
   return {
     title: blog.title,
     description: text.slice(0, 100),
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: blog.title,
       description: text.slice(0, 100),
     },
     openGraph: {
       title: blog.title,
       description: text.slice(0, 100),
-      locale: "ja_JP",
-      type: "website",
+      locale: 'ja_JP',
+      type: 'website',
       images: blog.eyecatch,
     },
-  };
+  }
 }
 
 /**
@@ -75,66 +75,70 @@ export async function generateMetadata({
  * @returns
  */
 export default async function Page({ params }: { params: { id: string } }) {
-  const blog: Blog = await getBlogById(params);
-  const toc = renderToc(blog.content);
-  const highlightedContent = await processBlogContent(blog.content);
+  const blog: Blog = await getBlogById(params)
+  const toc = renderToc(blog.content)
+  const highlightedContent = await processBlogContent(blog.content)
 
   return (
     <Fade in={true} timeout={1000}>
       <Container>
-        <Box style={{ display: "flex", justifyContent: "center" }}>
+        <Box style={{ display: 'flex', justifyContent: 'center' }}>
           <Stack
             direction="row"
             spacing={1}
             alignItems="center"
-            sx={{ paddingTop: "5px" }}>
+            sx={{ paddingTop: '5px' }}
+          >
             {blog.category.map((category, index: number) => (
               <Chip
                 key={index}
                 label={`# ${category.name}`}
                 variant="outlined"
-                sx={{ color: "white" }}
+                sx={{ color: 'white' }}
               />
             ))}
           </Stack>
         </Box>
         <h1 className="title">{blog.title}</h1>
-        <Box style={{ display: "flex", justifyContent: "center" }}>
+        <Box style={{ display: 'flex', justifyContent: 'center' }}>
           <Stack
             direction="row"
             spacing={1}
             alignItems="center"
-            sx={{ padding: "5px" }}>
+            sx={{ padding: '5px' }}
+          >
             <AccessTimeRoundedIcon />
             <Typography suppressHydrationWarning={true}>
               投稿日：
-              {new Date(blog.publishedAt).toLocaleDateString("ja-JP")}
+              {new Date(blog.publishedAt).toLocaleDateString('ja-JP')}
             </Typography>
           </Stack>
           <Stack
             direction="row"
             spacing={1}
             alignItems="center"
-            sx={{ padding: "5px" }}>
+            sx={{ padding: '5px' }}
+          >
             <SyncIcon />
             <Typography suppressHydrationWarning={true}>
               更新日：
-              {new Date(blog.updatedAt).toLocaleDateString("ja-JP")}
+              {new Date(blog.updatedAt).toLocaleDateString('ja-JP')}
             </Typography>
           </Stack>
         </Box>
         <Grid container spacing={2}>
           <Grid item xs={12} md={9} order={{ xs: 2, md: 1 }}>
-            <Box style={{ display: "flex", justifyContent: "center" }}>
+            <Box style={{ display: 'flex', justifyContent: 'center' }}>
               <Image
                 style={{
-                  marginBottom: "10px",
-                  marginTop: "10px",
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: "#fff",
-                  borderRadius: "10px",
+                  marginBottom: '10px',
+                  marginTop: '10px',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: '#fff',
+                  borderRadius: '10px',
                 }}
+                placeholder="blur"
                 src={blog.eyecatch.url}
                 width={100}
                 height={200}
@@ -152,25 +156,26 @@ export default async function Page({ params }: { params: { id: string } }) {
             <TableOfContents toc={toc} />
           </Grid>
         </Grid>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Link href="/blog">
             <Button
               fullWidth
               variant="contained"
               sx={{
-                marginTop: "40px",
-                width: "300px",
-                height: "50px",
-                background: "#666666",
-                color: "white",
+                marginTop: '40px',
+                width: '300px',
+                height: '50px',
+                background: '#666666',
+                color: 'white',
                 borderRadius: 5,
-                ":hover": { background: "#333333" },
-              }}>
+                ':hover': { background: '#333333' },
+              }}
+            >
               All Blogs
             </Button>
           </Link>
         </div>
       </Container>
     </Fade>
-  );
+  )
 }
