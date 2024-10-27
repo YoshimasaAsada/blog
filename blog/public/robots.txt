@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://yasdtech.com/
-
-# Sitemaps
-Sitemap: https://yasdtech.com/sitemap.xml
