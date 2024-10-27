@@ -138,7 +138,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                   backgroundColor: '#fff',
                   borderRadius: '10px',
                 }}
-                placeholder="blur"
+                // placeholder="blur"
+                priority
                 src={blog.eyecatch.url}
                 width={100}
                 height={200}
