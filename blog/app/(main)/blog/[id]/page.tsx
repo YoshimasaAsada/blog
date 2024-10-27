@@ -140,6 +140,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 }}
                 // placeholder="blur"
                 priority
+                layout="fill"
                 src={blog.eyecatch.url}
                 width={100}
                 height={200}
