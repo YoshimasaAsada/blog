@@ -9,6 +9,19 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://yasdtech.com'),
   title: 'yasd tech',
   description: 'yasdのテックブログです',
+  keywords: [
+    'テックブログ',
+    'ポートフォリオ',
+    'プログラミング',
+    'エンジニア',
+    'フロントエンド',
+    'バックエンド',
+  ],
+  /** 正規URLの指定 */
+  alternates: {
+    canonical: 'https://yasdtech.com/',
+  },
+  /** SNSでの見え方を設定 */
   openGraph: {
     title: 'yasd tech',
     description: 'yasdのテックブログです',
@@ -18,12 +31,18 @@ export const metadata: Metadata = {
     type: 'website',
     images: ['./opengraph-image.png'],
   },
+  /** 検索エンジン周りの設定。インデックス、リンクフォローの制御 */
+  robots: {
+    index: true,
+    follow: true,
+  },
   twitter: {
     card: 'summary_large_image',
     title: 'yasd tech',
     description: 'yasdのテックブログです',
     images: ['./opengraph-image.png'],
   },
+  generator: 'Next.js',
 }
 
 export default function RootLayout({
