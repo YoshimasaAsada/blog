@@ -11,7 +11,7 @@ import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
 import Link from 'next/link'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 
 const pages = ['Blog', 'Profile', 'Contact']
 
@@ -19,7 +19,7 @@ const pages = ['Blog', 'Profile', 'Contact']
  * ヘッダーのテンプレート
  * @returns
  */
-export function Header() {
+const Header = memo(() => {
   console.log('ヘッダー読み込み')
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
 
@@ -161,4 +161,7 @@ export function Header() {
       </Container>
     </AppBar>
   )
-}
+})
+
+Header.displayName = 'Header'
+export default Header
