@@ -24,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: _lastModified,
     },
     {
-      url: 'https://yasdtech.com/blogs',
+      url: 'https://yasdtech.com/blog',
       lastModified: _lastModified,
     },
   ]
