@@ -38,14 +38,11 @@ const Header = memo(() => {
     page: string;
     onClick: () => void;
   }) => (
-    <Link
-      href={page.toLowerCase() === 'home' ? '/' : `/${page.toLowerCase()}`}
-      passHref
-    >
-      <Button
+    <Link href={page.toLowerCase() === 'home' ? '/' : `/${page.toLowerCase()}`}>
+      {/* <Button
         onClick={onClick}
         sx={{
-          height: '100%',
+          height: `100%`,
           color: 'white',
           display: 'block',
           position: 'relative',
@@ -65,9 +62,9 @@ const Header = memo(() => {
             transform: 'translateX(0)',
           },
         }}
-      >
-        {page}
-      </Button>
+      > */}
+      {page}
+      {/* </Button> */}
     </Link>
   );
 
