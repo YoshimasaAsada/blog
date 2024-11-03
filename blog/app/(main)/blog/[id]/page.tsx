@@ -51,21 +51,32 @@ export async function generateMetadata({
   const blog = await getBlogById(params);
   const $ = cheerio.load(blog.content);
   const text = $('body').text();
+  const description = text.slice(0, 100).replace(/\s+/g, ' ').trim();
+  const eyecatchUrl = blog.eyecatch.url;
 
   return {
     title: blog.title,
-    description: text.slice(0, 100),
+    description: description,
     twitter: {
       card: 'summary_large_image',
       title: blog.title,
-      description: text.slice(0, 100),
+      description: description,
+      images: [eyecatchUrl],
     },
     openGraph: {
       title: blog.title,
-      description: text.slice(0, 100),
+      description: description,
       locale: 'ja_JP',
-      type: 'website',
-      images: blog.eyecatch,
+      type: 'article',
+      url: `https://yasdtech.com/blog/${blog.id}`,
+      images: [
+        {
+          url: eyecatchUrl,
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ],
     },
   };
 }
