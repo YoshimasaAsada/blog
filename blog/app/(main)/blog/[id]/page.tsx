@@ -134,7 +134,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                   marginBottom: '10px',
                   marginTop: '10px',
                   width: '100%',
-                  height: '100%',
+                  height: '300px',
+                  objectFit: 'cover', // 画像が縮小されすぎないようにカバー
                   backgroundColor: '#fff',
                   borderRadius: '10px',
                 }}
