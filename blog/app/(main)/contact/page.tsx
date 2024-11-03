@@ -1,12 +1,12 @@
 // ライブラリ関連
-import { Container, Grid, TextField, Button, Typography } from "@mui/material";
+import { Container, Grid, TextField, Button, Typography } from '@mui/material';
 
 // 型定義とかhooksとかその辺
-import { sendInquiry } from "@/utils/sendInquiry";
+import { sendInquiry } from '@/utils/sendInquiry';
 
 /**
  * 問い合わせページ
- * @returns 
+ * @returns
  */
 export default function Page() {
   return (
@@ -14,12 +14,13 @@ export default function Page() {
       <Typography
         component="h3"
         variant="h3"
-        sx={{ paddingTop: "20px", paddingBottom: "20px" }}
+        sx={{ paddingTop: '20px', paddingBottom: '20px' }}
         style={{
-          textDecoration: "underline",
-          textUnderlineOffset: "8px",
-          textDecorationThickness: "2px",
-        }}>
+          textDecoration: 'underline',
+          textUnderlineOffset: '8px',
+          textDecorationThickness: '2px',
+        }}
+      >
         お問い合わせ
       </Typography>
       <form action={sendInquiry}>
@@ -33,25 +34,25 @@ export default function Page() {
               label="名前"
               variant="outlined"
               InputLabelProps={{
-                style: { color: "white" },
+                style: { color: 'white' },
               }}
               InputProps={{
                 sx: {
-                  color: "white",
-                  backgroundColor: "#666666",
+                  color: 'white',
+                  backgroundColor: '#666666',
                 },
               }}
               sx={{
-                color: "white",
-                "& label.Mui-focused": {
-                  color: "#fff",
+                color: 'white',
+                '& label.Mui-focused': {
+                  color: '#fff',
                 },
-                "& .MuiInput-underline:after": {
-                  borderBottomColor: "#0000ff",
+                '& .MuiInput-underline:after': {
+                  borderBottomColor: '#0000ff',
                 },
-                "& .MuiOutlinedInput-root": {
-                  "&.Mui-focused fieldset": {
-                    borderColor: "gray",
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'gray',
                   },
                 },
               }}
@@ -67,25 +68,25 @@ export default function Page() {
               type="email"
               variant="outlined"
               InputLabelProps={{
-                style: { color: "white" },
+                style: { color: 'white' },
               }}
               InputProps={{
                 sx: {
-                  color: "white",
-                  backgroundColor: "#666666",
+                  color: 'white',
+                  backgroundColor: '#666666',
                 },
               }}
               sx={{
-                color: "white",
-                "& label.Mui-focused": {
-                  color: "#fff",
+                color: 'white',
+                '& label.Mui-focused': {
+                  color: '#fff',
                 },
-                "& .MuiInput-underline:after": {
-                  borderBottomColor: "#0000ff",
+                '& .MuiInput-underline:after': {
+                  borderBottomColor: '#0000ff',
                 },
-                "& .MuiOutlinedInput-root": {
-                  "&.Mui-focused fieldset": {
-                    borderColor: "gray",
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'gray',
                   },
                 },
               }}
@@ -102,25 +103,25 @@ export default function Page() {
               rows={4}
               variant="outlined"
               InputLabelProps={{
-                style: { color: "white" },
+                style: { color: 'white' },
               }}
               InputProps={{
                 sx: {
-                  color: "white",
-                  backgroundColor: "#666666",
+                  color: 'white',
+                  backgroundColor: '#666666',
                 },
               }}
               sx={{
-                color: "white",
-                "& label.Mui-focused": {
-                  color: "#fff",
+                color: 'white',
+                '& label.Mui-focused': {
+                  color: '#fff',
                 },
-                "& .MuiInput-underline:after": {
-                  borderBottomColor: "#0000ff",
+                '& .MuiInput-underline:after': {
+                  borderBottomColor: '#0000ff',
                 },
-                "& .MuiOutlinedInput-root": {
-                  "&.Mui-focused fieldset": {
-                    borderColor: "gray",
+                '& .MuiOutlinedInput-root': {
+                  '&.Mui-focused fieldset': {
+                    borderColor: 'gray',
                   },
                 },
               }}
@@ -132,11 +133,12 @@ export default function Page() {
               fullWidth
               variant="contained"
               sx={{
-                background: "#333333",
-                color: "white",
+                background: '#333333',
+                color: 'white',
                 borderRadius: 5,
-                ":hover": { background: "#666666" },
-              }}>
+                ':hover': { background: '#666666' },
+              }}
+            >
               送信
             </Button>
           </Grid>

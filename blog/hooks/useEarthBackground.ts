@@ -1,9 +1,9 @@
-import { useEffect } from "react";
-import * as THREE from "three";
+import { useEffect } from 'react';
+import * as THREE from 'three';
 
 /**
  * Homeページで使ってる背景
- * @param ref 
+ * @param ref
  */
 export function useEarthBackground(ref: any) {
   useEffect(() => {
@@ -29,7 +29,7 @@ export function useEarthBackground(ref: any) {
     }
 
     starsGeometry.setAttribute(
-      "position",
+      'position',
       new THREE.Float32BufferAttribute(starVertices, 3)
     );
 

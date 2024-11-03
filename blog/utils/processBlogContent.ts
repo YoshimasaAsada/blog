@@ -1,5 +1,5 @@
-import { getHighlighter } from "shiki";
-import * as cheerio from "cheerio";
+import { getHighlighter } from 'shiki';
+import * as cheerio from 'cheerio';
 
 /**
  * ブログで使っているリンクのOGPデータ取得用関数
@@ -13,16 +13,16 @@ async function fetchOGPData(url: string) {
 
   const getMetaTag = (name: string) => {
     return (
-      $(`meta[name=${name}]`).attr("content") ||
-      $(`meta[property="og:${name}"]`).attr("content") ||
-      $(`meta[property="twitter:${name}"]`).attr("content")
+      $(`meta[name=${name}]`).attr('content') ||
+      $(`meta[property="og:${name}"]`).attr('content') ||
+      $(`meta[property="twitter:${name}"]`).attr('content')
     );
   };
 
   return {
-    title: getMetaTag("title"),
-    description: getMetaTag("description"),
-    image: getMetaTag("image"),
+    title: getMetaTag('title'),
+    description: getMetaTag('description'),
+    image: getMetaTag('image'),
   };
 }
 
@@ -34,34 +34,34 @@ async function fetchOGPData(url: string) {
  */
 export async function processBlogContent(content: string) {
   const highlighter = await getHighlighter({
-    themes: ["slack-dark"],
-    langs: ["tsx", "shell", "typescript", "dockerfile", "yml", "json", "ruby"],
+    themes: ['slack-dark'],
+    langs: ['tsx', 'shell', 'typescript', 'dockerfile', 'yml', 'json', 'ruby'],
   });
   const $ = cheerio.load(content);
 
   // コードブロックのファイル名が入力されている場合の処理
-  $("div[data-filename]").each((_, elm) => {
+  $('div[data-filename]').each((_, elm) => {
     $(elm).prepend(
       `<div class="code-bar"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div><div class="file-name">${$(
         elm
-      ).attr("data-filename")}</div><div>`
+      ).attr('data-filename')}</div><div>`
     );
   });
 
   // コードブロックのシンタックスハイライトを行う
-  $("pre code").each((_, elm) => {
-    let language = $(elm).attr("class")?.split("language-")[1] || "";
+  $('pre code').each((_, elm) => {
+    let language = $(elm).attr('class')?.split('language-')[1] || '';
     const codeText = $(elm).text();
     const html = highlighter.codeToHtml(codeText, {
       lang: language,
-      theme: "slack-dark",
+      theme: 'slack-dark',
     });
     $(elm).parent().replaceWith(html);
   });
 
   // リンクカードを適用する
-  const linkPromises = $("a").map(async (_, elm) => {
-    const url = $(elm).attr("href");
+  const linkPromises = $('a').map(async (_, elm) => {
+    const url = $(elm).attr('href');
     if (!url) return;
     const ogpData = await fetchOGPData(url);
     const linkCardHtml = `<div class="link-card mt-3 mb-3">

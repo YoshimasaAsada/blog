@@ -1,78 +1,78 @@
-'use client'
+'use client';
 // ライブラリ関連
-import { Container, Grid, Pagination, Typography } from '@mui/material'
+import { Container, Grid, Pagination, Typography } from '@mui/material';
 
 // 型定義とかその辺
-import { getAllBlogs, getAllCategories } from '@/libs/client'
+import { getAllBlogs, getAllCategories } from '@/libs/client';
 
 // コンポーネント
-import { CategoryList } from '@/components/CategoryList'
-import { BlogCard } from '@/components/BlogCard'
-import { SetStateAction, useEffect, useState } from 'react'
-import { Blog } from '@/types/blog'
-import { Category } from '@/types/category'
-import Loading from '@/app/loading'
+import { CategoryList } from '@/components/CategoryList';
+import { BlogCard } from '@/components/BlogCard';
+import { SetStateAction, useEffect, useState } from 'react';
+import { Blog } from '@/types/blog';
+import { Category } from '@/types/category';
+import Loading from '@/app/loading';
 
 /**
  * ブログの一覧ページ
  * @returns
  */
 export default function Page() {
-  const [allBlogs, setAllBlogs] = useState<Blog[]>([])
-  const [displayBlogs, setDisplayBlogs] = useState<Blog[]>([])
-  const [categories, setCategories] = useState<Category[]>([])
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
-  const [postsPerPage] = useState(4)
-  const [isLoading, setIsLoading] = useState(true)
+  const [allBlogs, setAllBlogs] = useState<Blog[]>([]);
+  const [displayBlogs, setDisplayBlogs] = useState<Blog[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [postsPerPage] = useState(4);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true)
+      setIsLoading(true);
       try {
-        const blogsData = await getAllBlogs()
-        const categoriesData = await getAllCategories()
-        setAllBlogs(blogsData)
-        setDisplayBlogs(blogsData)
-        setCategories(categoriesData)
-        setIsLoading(false)
+        const blogsData = await getAllBlogs();
+        const categoriesData = await getAllCategories();
+        setAllBlogs(blogsData);
+        setDisplayBlogs(blogsData);
+        setCategories(categoriesData);
+        setIsLoading(false);
       } catch (err) {
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    }
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (selectedCategory) {
       const filteredBlogs = allBlogs.filter((blog) =>
         blog.category.some((cat) => cat.id === selectedCategory)
-      )
-      setDisplayBlogs(filteredBlogs)
+      );
+      setDisplayBlogs(filteredBlogs);
     } else {
-      setDisplayBlogs(allBlogs)
+      setDisplayBlogs(allBlogs);
     }
-  }, [allBlogs, selectedCategory])
+  }, [allBlogs, selectedCategory]);
 
   const handleSelectCategory = (categoryId: string) => {
-    setSelectedCategory(categoryId)
-  }
+    setSelectedCategory(categoryId);
+  };
 
   const resetFilter = () => {
-    setSelectedCategory(null)
-  }
+    setSelectedCategory(null);
+  };
 
   const paginate = (_: any, value: SetStateAction<number>) => {
-    setCurrentPage(value)
-  }
+    setCurrentPage(value);
+  };
 
-  const indexOfLastPost = currentPage * postsPerPage
-  const indexOfFirstPost = indexOfLastPost - postsPerPage
-  const currentPosts = displayBlogs.slice(indexOfFirstPost, indexOfLastPost)
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = displayBlogs.slice(indexOfFirstPost, indexOfLastPost);
 
   if (isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   return (
@@ -152,5 +152,5 @@ export default function Page() {
         </Grid>
       </Grid>
     </Container>
-  )
+  );
 }

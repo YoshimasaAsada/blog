@@ -46,7 +46,7 @@ a {
   border-bottom: 1px solid #ddd;
 }
 .blog {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.7;
   color: rgb(var(--foreground-rgb));
 }
@@ -92,7 +92,7 @@ a {
 .blog code {
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
-  font-family: "Fira Code", monospace;
+  font-family: 'Fira Code', monospace;
 }
 .blog blockquote {
   border-left: 5px solid #b6c9d6;
@@ -219,7 +219,7 @@ div[data-filename] > pre {
 
 .to-blog-animation:before {
   z-index: -1;
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   top: 0;
@@ -236,7 +236,7 @@ div[data-filename] > pre {
 }
 
 .to-blog-animation:after {
-  content: "";
+  content: '';
   display: block;
   position: absolute;
   top: 50%;

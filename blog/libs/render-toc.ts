@@ -1,4 +1,4 @@
-import * as cheerio from "cheerio";
+import * as cheerio from 'cheerio';
 
 /**
  * ブログのTOC作成関数
@@ -7,11 +7,11 @@ import * as cheerio from "cheerio";
  */
 export const renderToc = (body: string) => {
   const $ = cheerio.load(body);
-  const headings = $("h1, h2, h3").toArray();
+  const headings = $('h1, h2, h3').toArray();
   const toc = headings.map((heading) => {
     const level = parseInt(heading.tagName[1], 10);
     const text = $(heading).text();
-    const id = $(heading).attr("id") || "";
+    const id = $(heading).attr('id') || '';
 
     return { text, id, level };
   });

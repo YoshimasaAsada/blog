@@ -1,9 +1,9 @@
 // ライブラリ関連
-import { Container, Typography } from "@mui/material";
+import { Container, Typography } from '@mui/material';
 
 /**
  * プライバシーポリシーのページ
- * @returns 
+ * @returns
  */
 export default function Page() {
   return (
@@ -11,18 +11,20 @@ export default function Page() {
       <Typography
         component="h3"
         variant="h3"
-        sx={{ paddingTop: "10px", paddingBottom: "10px" }}
+        sx={{ paddingTop: '10px', paddingBottom: '10px' }}
         style={{
-          textDecoration: "underline",
-          textUnderlineOffset: "8px",
-          textDecorationThickness: "2px",
-        }}>
+          textDecoration: 'underline',
+          textUnderlineOffset: '8px',
+          textDecorationThickness: '2px',
+        }}
+      >
         プライバシーポリシー
       </Typography>
       <Typography
         component="h5"
         variant="h5"
-        sx={{ paddingTop: "10px", paddingBottom: "10px" }}>
+        sx={{ paddingTop: '10px', paddingBottom: '10px' }}
+      >
         1.個人情報の利用目的
       </Typography>
       <p>
@@ -31,7 +33,8 @@ export default function Page() {
       <Typography
         component="h5"
         variant="h5"
-        sx={{ paddingTop: "10px", paddingBottom: "10px" }}>
+        sx={{ paddingTop: '10px', paddingBottom: '10px' }}
+      >
         2.個人情報の第三者への開示
       </Typography>
       <p>
@@ -41,7 +44,8 @@ export default function Page() {
       <Typography
         component="h5"
         variant="h5"
-        sx={{ paddingTop: "10px", paddingBottom: "10px" }}>
+        sx={{ paddingTop: '10px', paddingBottom: '10px' }}
+      >
         3.アクセス解析ツールについて
       </Typography>
       <p>
@@ -50,7 +54,8 @@ export default function Page() {
       <Typography
         component="h5"
         variant="h5"
-        sx={{ paddingTop: "10px", paddingBottom: "10px" }}>
+        sx={{ paddingTop: '10px', paddingBottom: '10px' }}
+      >
         4.免責事項
       </Typography>
       <p>

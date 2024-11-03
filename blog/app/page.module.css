@@ -38,8 +38,10 @@
 
 .link:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 40px rgba(255, 255, 255, 0.9),
-    inset 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 40px rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 0 40px rgba(255, 255, 255, 0.9),
+    inset 0 0 20px rgba(0, 0, 0, 0.3),
+    inset 0 0 40px rgba(255, 255, 255, 0.2);
 }
 
 /* Welcomeメッセージのスタイリング */
@@ -61,7 +63,14 @@
   50%,
   100% {
     opacity: 1;
-    text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #ffaa00,
-      0 0 70px #ffaa00, 0 0 80px #ffaa00, 0 0 100px #ffaa00, 0 0 150px #ffaa00;
+    text-shadow:
+      0 0 20px #fff,
+      0 0 30px #fff,
+      0 0 40px #fff,
+      0 0 50px #ffaa00,
+      0 0 70px #ffaa00,
+      0 0 80px #ffaa00,
+      0 0 100px #ffaa00,
+      0 0 150px #ffaa00;
   }
 }

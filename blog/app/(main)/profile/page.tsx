@@ -1,17 +1,17 @@
-"use client";
+'use client';
 // ライブラリ関連
-import { Box, Chip, Container, Grid, Typography, Avatar } from "@mui/material";
-import Timeline from "@mui/lab/Timeline";
-import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineDot from "@mui/lab/TimelineDot";
-import LaptopChromebookIcon from "@mui/icons-material/LaptopChromebook";
-import SchoolIcon from "@mui/icons-material/School";
-import Image from "next/image";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { Box, Chip, Container, Grid, Typography, Avatar } from '@mui/material';
+import Timeline from '@mui/lab/Timeline';
+import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineDot from '@mui/lab/TimelineDot';
+import LaptopChromebookIcon from '@mui/icons-material/LaptopChromebook';
+import SchoolIcon from '@mui/icons-material/School';
+import Image from 'next/image';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 // コンポーネント
 import {
@@ -28,7 +28,7 @@ import {
   ReactIcon,
   RubyIcon,
   TsIcon,
-} from "@/components/SvgIcon";
+} from '@/components/SvgIcon';
 
 interface TimelineItemWithAnimationProps {
   children: React.ReactNode;
@@ -58,7 +58,7 @@ export default function Page() {
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
     if (inView) {
-      controls.start("visible");
+      controls.start('visible');
     }
 
     return (
@@ -67,7 +67,8 @@ export default function Page() {
         initial="hidden"
         animate={controls}
         variants={timelineVariants}
-        transition={{ duration: 0.6, delay }}>
+        transition={{ duration: 0.6, delay }}
+      >
         {children}
       </motion.div>
     );
@@ -79,11 +80,13 @@ export default function Page() {
         display="flex"
         alignItems="center"
         flexDirection="column"
-        sx={{ marginTop: 4, marginBottom: 4 }}>
+        sx={{ marginTop: 4, marginBottom: 4 }}
+      >
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}>
+          transition={{ duration: 0.5 }}
+        >
           <Avatar
             alt="Profile Image"
             src="images/character_with_new_background.png"
@@ -94,16 +97,18 @@ export default function Page() {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}>
+        transition={{ duration: 0.5 }}
+      >
         <Typography
           component="h3"
           variant="h3"
-          sx={{ paddingTop: "20px", paddingBottom: "20px" }}
+          sx={{ paddingTop: '20px', paddingBottom: '20px' }}
           style={{
-            textDecoration: "underline",
-            textUnderlineOffset: "8px",
-            textDecorationThickness: "2px",
-          }}>
+            textDecoration: 'underline',
+            textUnderlineOffset: '8px',
+            textDecorationThickness: '2px',
+          }}
+        >
           Profile
         </Typography>
       </motion.div>
@@ -112,7 +117,8 @@ export default function Page() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}>
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             こんにちは〜
             <br />
             EC系のSaaSミドルベンチャーでエンジニアをやりつつ、副業でプログラミングスクールのメンターをしている新卒二年目のエンジニアです！
@@ -136,16 +142,18 @@ export default function Page() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}>
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <Typography
               component="h4"
               variant="h4"
-              sx={{ paddingBottom: "20px" }}
+              sx={{ paddingBottom: '20px' }}
               style={{
-                textDecoration: "underline",
-                textUnderlineOffset: "8px",
-                textDecorationThickness: "2px",
-              }}>
+                textDecoration: 'underline',
+                textUnderlineOffset: '8px',
+                textDecorationThickness: '2px',
+              }}
+            >
               Skils
             </Typography>
             <TsIcon width={50} height={50} />
@@ -163,12 +171,13 @@ export default function Page() {
             <Typography
               component="h4"
               variant="h4"
-              sx={{ paddingTop: "20px", paddingBottom: "20px" }}
+              sx={{ paddingTop: '20px', paddingBottom: '20px' }}
               style={{
-                textDecoration: "underline",
-                textUnderlineOffset: "8px",
-                textDecorationThickness: "2px",
-              }}>
+                textDecoration: 'underline',
+                textUnderlineOffset: '8px',
+                textDecorationThickness: '2px',
+              }}
+            >
               qualification
             </Typography>
             <Image
@@ -183,16 +192,18 @@ export default function Page() {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}>
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
         <Typography
           component="h3"
           variant="h3"
-          sx={{ marginBottom: "20px", paddingTop: "20px" }}
+          sx={{ marginBottom: '20px', paddingTop: '20px' }}
           style={{
-            textDecoration: "underline",
-            textUnderlineOffset: "8px",
-            textDecorationThickness: "2px",
-          }}>
+            textDecoration: 'underline',
+            textUnderlineOffset: '8px',
+            textDecorationThickness: '2px',
+          }}
+        >
           Career
         </Typography>
       </motion.div>
@@ -204,9 +215,10 @@ export default function Page() {
             padding: 0,
           },
           [`& .${timelineItemClasses.root}`]: {
-            marginBottom: "20px",
+            marginBottom: '20px',
           },
-        }}>
+        }}
+      >
         <TimelineItemWithAnimation delay={0.2}>
           <TimelineItem>
             <TimelineSeparator>
@@ -237,8 +249,8 @@ export default function Page() {
                 <Chip
                   label="現在"
                   sx={{
-                    color: "black",
-                    backgroundColor: "white",
+                    color: 'black',
+                    backgroundColor: 'white',
                     marginBottom: 1,
                   }}
                 />
@@ -269,13 +281,14 @@ export default function Page() {
             <TimelineContent>
               <Typography
                 variant="h5"
-                sx={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
+                sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}
+              >
                 EC系SaaSミドルベンチャー[新卒入社]（2023/4〜）
                 <Chip
                   label="現在"
                   sx={{
-                    color: "black",
-                    backgroundColor: "white",
+                    color: 'black',
+                    backgroundColor: 'white',
                     marginBottom: 1,
                   }}
                 />

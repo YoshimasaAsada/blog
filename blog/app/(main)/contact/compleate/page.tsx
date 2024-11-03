@@ -1,13 +1,5 @@
-import React from "react";
-import {
-  Container,
-  Grid,
-  TextField,
-  Button,
-  Typography,
-  Paper,
-} from "@mui/material";
-import { sendInquiry } from "@/utils/sendInquiry";
+import React from 'react';
+import { Container } from '@mui/material';
 
 export default function InquiryPage() {
   return (

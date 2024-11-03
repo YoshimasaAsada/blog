@@ -1,16 +1,16 @@
 /**
  * microcmsとの繋ぎ込みのやつ
  */
-import { Blog, BlogsInContents } from "@/types/blog";
-import { CategoryInContents } from "@/types/category";
-import { createClient } from "microcms-js-sdk";
+import { Blog, BlogsInContents } from '@/types/blog';
+import { CategoryInContents } from '@/types/category';
+import { createClient } from 'microcms-js-sdk';
 
 if (!process.env.NEXT_PUBLIC_MICROCMS_SERVICE_DOMAIN) {
-  throw new Error("MICROCMS_SERVICE_DOMAIN is required");
+  throw new Error('MICROCMS_SERVICE_DOMAIN is required');
 }
 
 if (!process.env.NEXT_PUBLIC_MICROCMS_API_KEY) {
-  throw new Error("MICROCMS_API_KEY is required");
+  throw new Error('MICROCMS_API_KEY is required');
 }
 
 /**
@@ -27,7 +27,7 @@ export const client = createClient({
  */
 export const getAllBlogs = async () => {
   const data = await client.get<BlogsInContents>({
-    endpoint: "blogs",
+    endpoint: 'blogs',
   });
   return data.contents;
 };
@@ -39,7 +39,7 @@ export const getAllBlogs = async () => {
  */
 export const getBlogById = async (params: { id: string }) => {
   const data = await client.getListDetail<Blog>({
-    endpoint: "blogs",
+    endpoint: 'blogs',
     contentId: params.id,
   });
   return data;
@@ -51,7 +51,7 @@ export const getBlogById = async (params: { id: string }) => {
  */
 export const getAllCategories = async () => {
   const data = await client.get<CategoryInContents>({
-    endpoint: "categories",
+    endpoint: 'categories',
   });
   return data.contents;
 };
@@ -63,7 +63,7 @@ export const getAllCategories = async () => {
  */
 export const getBlogsFilterByCategoryId = async (params: { id: string }) => {
   const data = await client.get<BlogsInContents>({
-    endpoint: "blogs",
+    endpoint: 'blogs',
     queries: {
       filters: `category[contains]${params.id}`,
     },

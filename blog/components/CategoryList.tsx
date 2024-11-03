@@ -19,7 +19,11 @@ export const CategoryList = ({ contents, onSelectCategory }: PropsType) => {
       <Typography
         variant="h3"
         component="h3"
-        sx={{ textDecoration: 'underline', textUnderlineOffset: '8px', textDecorationThickness: '2px' }}
+        sx={{
+          textDecoration: 'underline',
+          textUnderlineOffset: '8px',
+          textDecorationThickness: '2px',
+        }}
       >
         Categories
       </Typography>

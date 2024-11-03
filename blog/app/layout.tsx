@@ -1,10 +1,10 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.scss'
-import { GoogleAnalytics } from '@next/third-parties/google'
-import Script from 'next/script'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.scss';
+import { GoogleAnalytics } from '@next/third-parties/google';
+import Script from 'next/script';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://yasdtech.com'),
@@ -44,14 +44,14 @@ export const metadata: Metadata = {
     images: ['./opengraph-image.png'],
   },
   generator: 'Next.js',
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
-  const GA_ID = process.env.NEXT_PUBLIC_GA_ID || ''
+  const GA_ID = process.env.NEXT_PUBLIC_GA_ID || '';
 
   return (
     <html lang="ja">
@@ -74,5 +74,5 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>{children}</body>
     </html>
-  )
+  );
 }

@@ -1,42 +1,42 @@
-'use client'
+'use client';
 // ライブラリ関連
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import Menu from '@mui/material/Menu'
-import MenuIcon from '@mui/icons-material/Menu'
-import Container from '@mui/material/Container'
-import Button from '@mui/material/Button'
-import MenuItem from '@mui/material/MenuItem'
-import Link from 'next/link'
-import { memo, useState } from 'react'
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import Link from 'next/link';
+import { memo, useState } from 'react';
 
-const pages = ['Blog', 'Profile', 'Contact']
+const pages = ['Blog', 'Profile', 'Contact'];
 
 /**
  * ヘッダーのテンプレート
  * @returns
  */
 const Header = memo(() => {
-  console.log('ヘッダー読み込み')
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
+  console.log('ヘッダー読み込み');
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget)
-  }
+    setAnchorElNav(event.currentTarget);
+  };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
+    setAnchorElNav(null);
+  };
 
   const NavButton = ({
     page,
     onClick,
   }: {
-    page: string
-    onClick: () => void
+    page: string;
+    onClick: () => void;
   }) => (
     <Link href={page.toLowerCase() === 'home' ? '/' : `/${page.toLowerCase()}`}>
       <Button
@@ -66,7 +66,7 @@ const Header = memo(() => {
         {page}
       </Button>
     </Link>
-  )
+  );
 
   return (
     <AppBar position="fixed" sx={{ backgroundColor: 'rgba(66, 66, 66, 0.8)' }}>
@@ -160,8 +160,8 @@ const Header = memo(() => {
         </Toolbar>
       </Container>
     </AppBar>
-  )
-})
+  );
+});
 
-Header.displayName = 'Header'
-export default Header
+Header.displayName = 'Header';
+export default Header;

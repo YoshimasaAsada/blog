@@ -1,8 +1,8 @@
 /**
  * ロード中のに出すやつ
  */
-import { LinearProgress } from "@mui/material";
-import styles from "./loading.module.css";
+import { LinearProgress } from '@mui/material';
+import styles from './loading.module.css';
 
 export default function Loading() {
   return (

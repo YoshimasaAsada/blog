@@ -1,5 +1,12 @@
 // ライブラリ関連
-import { Card, CardActionArea, CardContent, CardMedia, Chip, Typography } from '@mui/material';
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Chip,
+  Typography,
+} from '@mui/material';
 import { motion } from 'framer-motion'; // Framer Motionをインポート
 import Link from 'next/link';
 
@@ -56,7 +63,11 @@ export const BlogCard = ({ content }: { content: Blog }) => {
               zIndex: 2,
             }}
           >
-            <Typography variant="h5" component="div" sx={{ color: 'white', textAlign: 'center' }}>
+            <Typography
+              variant="h5"
+              component="div"
+              sx={{ color: 'white', textAlign: 'center' }}
+            >
               View
             </Typography>
           </CardActionArea>
@@ -79,7 +90,11 @@ export const BlogCard = ({ content }: { content: Blog }) => {
             <Typography variant="h6" component="div" color="text.secondary">
               {content.title}
             </Typography>
-            <Typography variant="body2" color="text.secondary" suppressHydrationWarning={true}>
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              suppressHydrationWarning={true}
+            >
               投稿日：
               {new Date(content.publishedAt).toLocaleDateString('ja-JP')}
             </Typography>

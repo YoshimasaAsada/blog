@@ -5,6 +5,6 @@
 
 export default {
   images: {
-    domains: ["images.microcms-assets.io"], // 使用するホスト名をここに追加
+    domains: ['images.microcms-assets.io'], // 使用するホスト名をここに追加
   },
 };

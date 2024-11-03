@@ -1,11 +1,11 @@
-import Header from '@/components/Header'
-import { Box } from '@mui/material'
-import Footer from '@/components/Footer'
+import Header from '@/components/Header';
+import { Box } from '@mui/material';
+import Footer from '@/components/Footer';
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <Box
@@ -20,5 +20,5 @@ export default function RootLayout({
       <Box sx={{ flex: 1, mt: '70px', mb: '70px' }}>{children}</Box>
       <Footer />
     </Box>
-  )
+  );
 }

@@ -1,5 +1,5 @@
 // ライブラリ関連
-import Image from 'next/image'
+import Image from 'next/image';
 import {
   Box,
   Button,
@@ -9,32 +9,32 @@ import {
   Grid,
   Stack,
   Typography,
-} from '@mui/material'
-import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded'
-import SyncIcon from '@mui/icons-material/Sync'
-import * as cheerio from 'cheerio'
+} from '@mui/material';
+import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
+import SyncIcon from '@mui/icons-material/Sync';
+import * as cheerio from 'cheerio';
 
 // 型定義とかその辺
-import { getAllBlogs, getBlogById } from '@/libs/client'
-import { Blog } from '@/types/blog'
-import { renderToc } from '../../../../libs/render-toc'
-import { processBlogContent } from '@/utils/processBlogContent'
+import { getAllBlogs, getBlogById } from '@/libs/client';
+import { Blog } from '@/types/blog';
+import { renderToc } from '../../../../libs/render-toc';
+import { processBlogContent } from '@/utils/processBlogContent';
 
 // コンポーネント
-import TableOfContents from '@/components/TableOfContents'
-import Link from 'next/link'
-import { Metadata } from 'next'
+import TableOfContents from '@/components/TableOfContents';
+import Link from 'next/link';
+import { Metadata } from 'next';
 
 /**
  * ビルド時に詳細ページを作成させる
  * @returns
  */
 export async function generateStaticParams() {
-  const contents = await getAllBlogs()
+  const contents = await getAllBlogs();
   const paths = contents.map((blog: any) => {
-    return { id: blog.id }
-  })
-  return [...paths]
+    return { id: blog.id };
+  });
+  return [...paths];
 }
 
 /**
@@ -45,11 +45,11 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string }
+  params: { id: string };
 }): Promise<Metadata> {
-  const blog = await getBlogById(params)
-  const $ = cheerio.load(blog.content)
-  const text = $('body').text()
+  const blog = await getBlogById(params);
+  const $ = cheerio.load(blog.content);
+  const text = $('body').text();
 
   return {
     title: blog.title,
@@ -66,7 +66,7 @@ export async function generateMetadata({
       type: 'website',
       images: blog.eyecatch,
     },
-  }
+  };
 }
 
 /**
@@ -75,9 +75,9 @@ export async function generateMetadata({
  * @returns
  */
 export default async function Page({ params }: { params: { id: string } }) {
-  const blog: Blog = await getBlogById(params)
-  const toc = renderToc(blog.content)
-  const highlightedContent = await processBlogContent(blog.content)
+  const blog: Blog = await getBlogById(params);
+  const toc = renderToc(blog.content);
+  const highlightedContent = await processBlogContent(blog.content);
 
   return (
     <Fade in={true} timeout={1000}>
@@ -179,5 +179,5 @@ export default async function Page({ params }: { params: { id: string } }) {
         </div>
       </Container>
     </Fade>
-  )
+  );
 }
