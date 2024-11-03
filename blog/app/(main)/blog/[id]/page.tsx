@@ -13,6 +13,7 @@ import {
 import AccessTimeRoundedIcon from '@mui/icons-material/AccessTimeRounded';
 import SyncIcon from '@mui/icons-material/Sync';
 import * as cheerio from 'cheerio';
+import XIcon from '@mui/icons-material/X';
 
 // 型定義とかその辺
 import { getAllBlogs, getBlogById } from '@/libs/client';
@@ -158,25 +159,56 @@ export default async function Page({ params }: { params: { id: string } }) {
             <TableOfContents toc={toc} />
           </Grid>
         </Grid>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            marginTop: '20px',
+          }}
+        >
           <Link href="/blog">
             <Button
               fullWidth
               variant="contained"
               sx={{
-                marginTop: '40px',
+                marginTop: '20px',
                 width: '300px',
                 height: '50px',
                 background: '#666666',
                 color: 'white',
                 borderRadius: 5,
-                ':hover': { background: '#333333' },
+                ':hover': { background: '#333' },
               }}
             >
               All Blogs
             </Button>
           </Link>
-        </div>
+          <Link
+            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+              `https://yasdtech.com/blog/${blog.id}`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button
+              variant="contained"
+              sx={{
+                marginTop: '20px',
+                width: '200px',
+                height: '50px',
+                background: '#1DA1F2',
+                color: 'white',
+                borderRadius: 5,
+                ':hover': { background: '#0d95e8' },
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <XIcon sx={{ marginRight: '5px' }} />
+              シェアする
+            </Button>
+          </Link>
+        </Box>
       </Container>
     </Fade>
   );
