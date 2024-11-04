@@ -165,13 +165,13 @@ const Header = memo(() => {
     // </AppBar>
     <>
       {' '}
-      <Link href="/blog" passHref>
+      <Link href="/blog">
         <Typography>Blog</Typography>
       </Link>
-      <Link href="/profile" passHref>
+      <Link href="/profile">
         <Typography>Profile</Typography>
       </Link>
-      <Link href="/contact" passHref>
+      <Link href="/contact">
         <Typography>Contact</Typography>
       </Link>
     </>
