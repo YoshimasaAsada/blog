@@ -72,109 +72,97 @@ const Header = memo(() => {
   );
 
   return (
-    // <AppBar position="fixed" sx={{ backgroundColor: 'rgba(66, 66, 66, 0.8)' }}>
-    //   <Container maxWidth="xl">
-    //     <Toolbar disableGutters>
-    //       <Typography
-    //         variant="h6"
-    //         noWrap
-    //         component="a"
-    //         href="/"
-    //         sx={{
-    //           mr: 2,
-    //           display: { xs: 'none', md: 'flex' },
-    //           fontFamily: 'monospace',
-    //           fontWeight: 700,
-    //           letterSpacing: '.3rem',
-    //           color: 'inherit',
-    //           textDecoration: 'none',
-    //         }}
-    //       >
-    //         YASD-TECH
-    //       </Typography>
+    <AppBar position="fixed" sx={{ backgroundColor: 'rgba(66, 66, 66, 0.8)' }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            YASD-TECH
+          </Typography>
 
-    //       <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-    //         <IconButton
-    //           size="large"
-    //           aria-label="account of current user"
-    //           aria-controls="menu-appbar"
-    //           aria-haspopup="true"
-    //           onClick={handleOpenNavMenu}
-    //           color="inherit"
-    //         >
-    //           <MenuIcon />
-    //         </IconButton>
-    //         <Menu
-    //           id="menu-appbar"
-    //           anchorEl={anchorElNav}
-    //           anchorOrigin={{
-    //             vertical: 'bottom',
-    //             horizontal: 'left',
-    //           }}
-    //           keepMounted
-    //           transformOrigin={{
-    //             vertical: 'top',
-    //             horizontal: 'left',
-    //           }}
-    //           open={Boolean(anchorElNav)}
-    //           onClose={handleCloseNavMenu}
-    //           sx={{
-    //             display: { xs: 'block', md: 'none' },
-    //           }}
-    //         >
-    //           <Link href="/" passHref>
-    //             <MenuItem onClick={handleCloseNavMenu}>
-    //               <Typography textAlign="center">Home</Typography>
-    //             </MenuItem>
-    //           </Link>
-    //           {pages.map((page) => (
-    //             <Link key={page} href={`/${page.toLowerCase()}`} passHref>
-    //               <MenuItem onClick={handleCloseNavMenu}>
-    //                 <Typography textAlign="center">{page}</Typography>
-    //               </MenuItem>
-    //             </Link>
-    //           ))}
-    //         </Menu>
-    //       </Box>
-    //       <Typography
-    //         variant="h5"
-    //         noWrap
-    //         component="a"
-    //         href="/blog"
-    //         sx={{
-    //           mr: 2,
-    //           display: { xs: 'flex', md: 'none' },
-    //           flexGrow: 1,
-    //           fontFamily: 'monospace',
-    //           fontWeight: 700,
-    //           letterSpacing: '.3rem',
-    //           color: 'inherit',
-    //           textDecoration: 'none',
-    //         }}
-    //       >
-    //         YASD TECH
-    //       </Typography>
-    //       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-    //         <NavButton page="Home" onClick={handleCloseNavMenu} />
-    //         {pages.map((page) => (
-    //           <NavButton key={page} page={page} onClick={handleCloseNavMenu} />
-    //         ))}
-    //       </Box>
-    //     </Toolbar>
-    //   </Container>
-    // </AppBar>
-    <>
-      {' '}
-      <Link href="/blog">
-        <Typography>Blog</Typography>
-      </Link>
-      <Link href="/profile">
-        <Typography>Profile</Typography>
-      </Link>
-      <Link href="/contact">
-        <Typography>Contact</Typography>
-      </Link>
-    </>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              <Link href="/" passHref>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Home</Typography>
+                </MenuItem>
+              </Link>
+              {pages.map((page) => (
+                <Link key={page} href={`/${page.toLowerCase()}`} passHref>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                </Link>
+              ))}
+            </Menu>
+          </Box>
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/blog"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            YASD TECH
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <NavButton page="Home" onClick={handleCloseNavMenu} />
+            {pages.map((page) => (
+              <NavButton key={page} page={page} onClick={handleCloseNavMenu} />
+            ))}
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 });
 
