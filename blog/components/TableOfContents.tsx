@@ -111,6 +111,7 @@ export const TableOfContents = ({ toc }: TableOfContentsProps) => {
     >
       <Typography
         variant="h4"
+        component="h1"
         sx={{
           mr: 2,
           ml: 2,
