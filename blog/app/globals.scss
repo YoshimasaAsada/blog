@@ -8,14 +8,14 @@
   --blockquote-border-color: #4caf50; /* 強調した色 */
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --background-color: #ffffff;
-    --foreground-color: #000000;
-    --link-color: #0056b3;
-    --link-hover-color: #003d80;
-    --border-color: #cccccc;
-    --blockquote-border-color: #4caf50;
+    --background-color: #1a1a1a;
+    --foreground-color: #ffffff;
+    --link-color: #3498db;
+    --link-hover-color: #2980b9;
+    --border-color: #ecf0f1;
+    --blockquote-border-color: #4caf50; /* 強調した色 */
   }
 }
 
