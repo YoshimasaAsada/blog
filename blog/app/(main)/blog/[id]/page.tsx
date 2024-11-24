@@ -57,6 +57,9 @@ export async function generateMetadata({
   return {
     title: blog.title,
     description: description,
+    alternates: {
+      canonical: `https://yasdtech.com/blog/${blog.id}`,
+    },
     twitter: {
       card: 'summary_large_image',
       title: blog.title,
