@@ -1,4 +1,25 @@
-// ページ全体
+/* 基本設定 */
+:root {
+  --background-color: #1a1a1a;
+  --foreground-color: #ffffff;
+  --link-color: #3498db;
+  --link-hover-color: #2980b9;
+  --border-color: #ecf0f1;
+  --blockquote-border-color: #4caf50; /* 強調した色 */
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color: #ffffff;
+    --foreground-color: #000000;
+    --link-color: #0056b3;
+    --link-hover-color: #003d80;
+    --border-color: #cccccc;
+    --blockquote-border-color: #4caf50;
+  }
+}
+
+/* ページ全体 */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -7,121 +28,94 @@
 html,
 body {
   max-width: 100vw;
-  background-color: #1a1a1a;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
 }
 a {
-  color: inherit;
+  color: var(--link-color);
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--link-hover-color);
 }
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
 }
-// -------------------------------------------------------------------
 
 /* blogのスタイル */
 .title {
   font-size: 40px;
   font-weight: bold;
   text-align: center;
-  padding-bottom: 20px;
-  padding-top: 20px;
+  padding: 20px 0;
+  color: var(--foreground-color);
 }
 .blog > h1 {
   font-size: 30px;
   font-weight: bold;
-  margin-bottom: 30px;
-  margin-top: 50px;
-  border-bottom: 2px solid;
-  border-image: linear-gradient(to right, #fff 0%, #1a1a1a 90%);
+  margin: 50px 0 30px;
+  color: var(--foreground-color);
+  border-bottom: 2px solid var(--border-color);
+  border-image: linear-gradient(
+    to right,
+    var(--border-color) 0%,
+    var(--background-color) 90%
+  );
   border-image-slice: 1;
 }
-.blog > h2 {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 40px 0 16px;
-}
+.blog > h2,
 .blog > h3 {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 40px 0 16px;
+  color: var(--foreground-color);
 }
 .blog {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.7;
-  color: rgb(var(--foreground-rgb));
+  color: var(--foreground-color);
 }
-.blog ul {
-  list-style-type: disc;
-  margin-left: 2rem;
-  padding-left: 10px;
-}
-.blog ol > li {
-  font-weight: bold;
-  padding: 3px;
-}
-.blog ol > li::marker {
-  color: rgb(var(--foreground-rgb));
-}
-.blog ul > li::marker {
-  color: rgb(var(--foreground-rgb));
-}
+.blog ul,
 .blog ol {
-  list-style-type: decimal;
   margin-left: 2rem;
   padding-left: 10px;
 }
-.blog li {
-  font-size: 1rem;
-}
+.blog ol > li,
 .blog ul > li {
+  color: var(--foreground-color);
   padding: 3px;
 }
-.blog a {
-  color: #3498db;
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.blog a:hover {
-  color: #2980b9;
-  text-decoration: underline;
-}
-.blog div {
-  position: relative;
-}
-
 .blog code {
+  color: var(--foreground-color);
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-family: 'Fira Code', monospace;
 }
 .blog blockquote {
-  border-left: 5px solid #b6c9d6;
+  border-left: 5px solid var(--blockquote-border-color);
   padding-left: 1rem;
-  margin: 10px;
-  margin-left: 2rem;
+  margin: 10px 0 10px 2rem;
   font-style: italic;
-  color: rgb(var(--foreground-rgb)) !important;
+  color: var(--foreground-color);
 }
 .blog hr {
   border: none;
-  border-top: 2px solid #ecf0f1;
+  border-top: 2px solid var(--border-color);
   margin: 1.5rem 0;
 }
 .blog img {
   max-width: 100%;
   height: auto;
   border-radius: 5px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 .index_img {
   width: 700px;
   height: 260px;
   object-fit: fill;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
 }
+
 // -------------------------------------------------------------------
 
 /** syntaxハイライトの記述
