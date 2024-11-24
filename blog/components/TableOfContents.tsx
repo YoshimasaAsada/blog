@@ -65,7 +65,7 @@ export const TableOfContents = ({ toc }: TableOfContentsProps) => {
    * @param id
    */
   const handleLinkClick = (
-    event: React.MouseEvent<HTMLDivElement>,
+    event: React.MouseEvent<HTMLLIElement>,
     id: string
   ) => {
     event.preventDefault();
@@ -129,7 +129,6 @@ export const TableOfContents = ({ toc }: TableOfContentsProps) => {
         {toc.map((data) => (
           <ListItem
             key={data.id}
-            component="div"
             onClick={(e) => handleLinkClick(e, data.id)}
             sx={{
               display: 'block',
