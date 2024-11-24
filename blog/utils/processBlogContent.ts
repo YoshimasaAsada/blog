@@ -64,17 +64,26 @@ export async function processBlogContent(content: string) {
     const url = $(elm).attr('href');
     if (!url) return;
     const ogpData = await fetchOGPData(url);
+    const optimizedImageUrl = `${ogpData.image}?w=270&h=150&fit=crop`;
     const linkCardHtml = `<div class="link-card mt-3 mb-3">
-    <a href="${url}" target="_blank" rel="noopener noreferrer">
-      <div class="link-card-body">
-        <div class="link-card-info">
-          <div class="link-card-title">${ogpData.title}</div>
-          <div class="link-card-url">${url}</div>
+      <a href="${url}" target="_blank" rel="noopener noreferrer">
+        <div class="link-card-body">
+          <div class="link-card-info">
+            <div class="link-card-title">${ogpData.title}</div>
+            <div class="link-card-url">${url}</div>
+          </div>
+          <img 
+            alt="link card image" 
+            data-src="${optimizedImageUrl}" 
+            class="link-card-thumbnail" 
+            loading="lazy" 
+            decoding="async" 
+            srcset="${optimizedImageUrl} 270w, ${ogpData.image}?w=540&fit=crop 540w" 
+            sizes="(max-width: 768px) 100vw, 270px"
+          />
         </div>
-        <img alt="link card image" src="${ogpData.image}" class="link-card-thumbnail" />
-      </div>
-    </a>
-  </div>`;
+      </a>
+    </div>`;
     $(elm).replaceWith(linkCardHtml);
   });
 
