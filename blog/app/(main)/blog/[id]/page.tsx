@@ -92,135 +92,135 @@ export default async function Page({ params }: { params: { id: string } }) {
   const highlightedContent = await processBlogContent(blog.content);
 
   return (
-    <Fade in={true} timeout={1000}>
-      <Container>
-        <Box style={{ display: 'flex', justifyContent: 'center' }}>
-          <Stack
-            direction="row"
-            spacing={1}
-            alignItems="center"
-            sx={{ paddingTop: '5px' }}
-          >
-            {blog.category.map((category, index: number) => (
-              <Chip
-                key={index}
-                label={`# ${category.name}`}
-                variant="outlined"
-                sx={{ color: 'white' }}
-              />
-            ))}
-          </Stack>
-        </Box>
-        <h1 className="title">{blog.title}</h1>
-        <Box style={{ display: 'flex', justifyContent: 'center' }}>
-          <Stack
-            direction="row"
-            spacing={1}
-            alignItems="center"
-            sx={{ padding: '5px' }}
-          >
-            <AccessTimeRoundedIcon />
-            <Typography suppressHydrationWarning={true}>
-              投稿日：
-              {new Date(blog.publishedAt).toLocaleDateString('ja-JP')}
-            </Typography>
-          </Stack>
-          <Stack
-            direction="row"
-            spacing={1}
-            alignItems="center"
-            sx={{ padding: '5px' }}
-          >
-            <SyncIcon />
-            <Typography suppressHydrationWarning={true}>
-              更新日：
-              {new Date(blog.updatedAt).toLocaleDateString('ja-JP')}
-            </Typography>
-          </Stack>
-        </Box>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={9} order={{ xs: 2, md: 1 }}>
-            <Box style={{ display: 'flex', justifyContent: 'center' }}>
-              <Image
-                style={{
-                  marginBottom: '10px',
-                  marginTop: '10px',
-                  width: '100%',
-                  height: '300px',
-                  objectFit: 'cover', // 画像が縮小されすぎないようにカバー
-                  backgroundColor: '#fff',
-                  borderRadius: '10px',
-                }}
-                // placeholder="blur"
-                priority
-                src={blog.eyecatch.url}
-                width={100}
-                height={200}
-                alt="Slider Image"
-                sizes="(min-width: 1024px) 100vw, 60vw"
-                className="slideImage"
-              />
-            </Box>
-            <Box
-              className="blog"
-              dangerouslySetInnerHTML={{ __html: highlightedContent }}
-            />
-          </Grid>
-          <Grid item xs={12} md={3} order={{ xs: 1, md: 2 }}>
-            <TableOfContents toc={toc} />
-          </Grid>
-        </Grid>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-around',
-            marginTop: '20px',
-          }}
+    // <Fade in={true} timeout={1000}>
+    <Container>
+      <Box style={{ display: 'flex', justifyContent: 'center' }}>
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          sx={{ paddingTop: '5px' }}
         >
-          <Link href="/blog">
-            <Button
-              fullWidth
-              variant="contained"
-              sx={{
-                marginTop: '20px',
-                width: '300px',
-                height: '50px',
-                background: '#666666',
-                color: 'white',
-                borderRadius: 5,
-                ':hover': { background: '#333' },
+          {blog.category.map((category, index: number) => (
+            <Chip
+              key={index}
+              label={`# ${category.name}`}
+              variant="outlined"
+              sx={{ color: 'white' }}
+            />
+          ))}
+        </Stack>
+      </Box>
+      <h1 className="title">{blog.title}</h1>
+      <Box style={{ display: 'flex', justifyContent: 'center' }}>
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          sx={{ padding: '5px' }}
+        >
+          <AccessTimeRoundedIcon />
+          <Typography suppressHydrationWarning={true}>
+            投稿日：
+            {new Date(blog.publishedAt).toLocaleDateString('ja-JP')}
+          </Typography>
+        </Stack>
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          sx={{ padding: '5px' }}
+        >
+          <SyncIcon />
+          <Typography suppressHydrationWarning={true}>
+            更新日：
+            {new Date(blog.updatedAt).toLocaleDateString('ja-JP')}
+          </Typography>
+        </Stack>
+      </Box>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={9} order={{ xs: 2, md: 1 }}>
+          <Box style={{ display: 'flex', justifyContent: 'center' }}>
+            <Image
+              style={{
+                marginBottom: '10px',
+                marginTop: '10px',
+                width: '100%',
+                height: '300px',
+                objectFit: 'cover', // 画像が縮小されすぎないようにカバー
+                backgroundColor: '#fff',
+                borderRadius: '10px',
               }}
-            >
-              All Blogs
-            </Button>
-          </Link>
-          <Link
-            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
-              `https://yasdtech.com/blog/${blog.id}`
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
+              // placeholder="blur"
+              priority
+              src={blog.eyecatch.url}
+              width={100}
+              height={200}
+              alt="ttitleImage"
+              sizes="(min-width: 1024px) 100vw, 60vw"
+              className="titleImage"
+            />
+          </Box>
+          <Box
+            className="blog"
+            dangerouslySetInnerHTML={{ __html: highlightedContent }}
+          />
+        </Grid>
+        <Grid item xs={12} md={3} order={{ xs: 1, md: 2 }}>
+          <TableOfContents toc={toc} />
+        </Grid>
+      </Grid>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-around',
+          marginTop: '20px',
+        }}
+      >
+        <Link href="/blog">
+          <Button
+            fullWidth
+            variant="contained"
+            sx={{
+              marginTop: '20px',
+              width: '300px',
+              height: '50px',
+              background: '#666666',
+              color: 'white',
+              borderRadius: 5,
+              ':hover': { background: '#333' },
+            }}
           >
-            <Button
-              variant="contained"
-              sx={{
-                marginTop: '20px',
-                width: '200px',
-                height: '50px',
-                background: '#1DA1F2',
-                color: 'white',
-                borderRadius: 5,
-                ':hover': { background: '#0d95e8' },
-                display: 'flex',
-                alignItems: 'center',
-              }}
-            >
-              <XIcon sx={{ marginRight: '5px' }} />
-              シェアする
-            </Button>
-          </Link>
-        </Box>
-      </Container>
-    </Fade>
+            All Blogs
+          </Button>
+        </Link>
+        <Link
+          href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+            `https://yasdtech.com/blog/${blog.id}`
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Button
+            variant="contained"
+            sx={{
+              marginTop: '20px',
+              width: '200px',
+              height: '50px',
+              background: '#1DA1F2',
+              color: 'white',
+              borderRadius: 5,
+              ':hover': { background: '#0d95e8' },
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <XIcon sx={{ marginRight: '5px' }} />
+            シェアする
+          </Button>
+        </Link>
+      </Box>
+    </Container>
+    // </Fade>
   );
 }
