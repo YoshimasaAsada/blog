@@ -176,18 +176,21 @@ export default async function Page({ params }: { params: { id: string } }) {
         <Box
           sx={{
             display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' }, // スマホで縦に並ぶように調整
             justifyContent: 'space-around',
+            alignItems: 'center',
             marginTop: '20px',
+            gap: '12px', // ボタン間のスペースを十分に確保
           }}
         >
-          <Link href="/blog">
+          <Link href="/blog" passHref>
             <Button
               fullWidth
               variant="contained"
               sx={{
-                marginTop: '20px',
-                width: '300px',
-                height: '50px',
+                padding: '12px 24px', // 内部パディングでタップ領域を拡大
+                width: { xs: '100%', sm: '300px' }, // スマホでは幅を100%に
+                height: '56px', // 高さを48px以上に
                 background: '#666666',
                 color: 'white',
                 borderRadius: 5,
@@ -203,13 +206,15 @@ export default async function Page({ params }: { params: { id: string } }) {
             )}`}
             target="_blank"
             rel="noopener noreferrer"
+            passHref
           >
             <Button
+              fullWidth
               variant="contained"
               sx={{
-                marginTop: '20px',
-                width: '200px',
-                height: '50px',
+                padding: '12px 24px',
+                width: { xs: '100%', sm: '200px' },
+                height: '56px',
                 background: '#1DA1F2',
                 color: 'white',
                 borderRadius: 5,
@@ -218,7 +223,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 alignItems: 'center',
               }}
             >
-              <XIcon sx={{ marginRight: '5px' }} />
+              <XIcon sx={{ marginRight: '8px', fontSize: '24px' }} />
               シェアする
             </Button>
           </Link>
