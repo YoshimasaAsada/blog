@@ -71,7 +71,7 @@ export async function processBlogContent(content: string) {
           <div class="link-card-title">${ogpData.title}</div>
           <div class="link-card-url">${url}</div>
         </div>
-        <img src="${ogpData.image}" class="link-card-thumbnail" />
+        <img alt="link card image" src="${ogpData.image}" class="link-card-thumbnail" />
       </div>
     </a>
   </div>`;
