@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.scss';
 import Script from 'next/script';
-import { GoogleAnalytics } from '@next/third-parties/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -58,7 +57,7 @@ export default function RootLayout({
       <head>
         {/* <GoogleAnalytics gaId={GA_ID} /> */}
         {/* Google Analyticsのスクリプトをasyncで非同期に読み込む */}
-        {/* <Script
+        <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="lazyOnload"
         />
@@ -69,8 +68,7 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', '${GA_ID}', { page_path: window.location.pathname });
           `}
-        </Script> */}
-        <GoogleAnalytics gaId={GA_ID} />
+        </Script>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
