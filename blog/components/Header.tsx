@@ -41,6 +41,7 @@ const Header = memo(() => {
     <Link
       href={page.toLowerCase() === 'home' ? '/' : `/${page.toLowerCase()}`}
       passHref
+      prefetch={false}
     >
       <Button
         onClick={onClick}
