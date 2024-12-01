@@ -95,7 +95,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const highlightedContent = await processBlogContent(blog.content);
 
   return (
-    <Fade in={true} timeout={500}>
+    <Fade in={true} timeout={400}>
       <Container>
         <Box style={{ display: 'flex', justifyContent: 'center' }}>
           <Stack
