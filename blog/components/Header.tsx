@@ -123,13 +123,18 @@ const Header = memo(() => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              <Link href="/" passHref>
+              <Link href="/" passHref prefetch={false}>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">Home</Typography>
                 </MenuItem>
               </Link>
               {pages.map((page) => (
-                <Link key={page} href={`/${page.toLowerCase()}`} passHref>
+                <Link
+                  key={page}
+                  prefetch={false}
+                  href={`/${page.toLowerCase()}`}
+                  passHref
+                >
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
