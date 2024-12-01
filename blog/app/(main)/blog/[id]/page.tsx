@@ -22,9 +22,13 @@ import { renderToc } from '../../../../libs/render-toc';
 import { processBlogContent } from '@/utils/processBlogContent';
 
 // コンポーネント
-import TableOfContents from '@/components/TableOfContents';
+// import TableOfContents from '@/components/TableOfContents';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+const TableOfContents = dynamic(() => import('@/components/TableOfContents'), {
+  ssr: false, // サーバーサイドレンダリングを無効化
+});
 
 /**
  * ビルド時に詳細ページを作成させる
