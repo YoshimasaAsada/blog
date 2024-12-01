@@ -59,10 +59,9 @@ export default function RootLayout({
         {/* Google Analyticsのスクリプトをasyncで非同期に読み込む */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-          strategy="afterInteractive"
-          async // またはdeferを使用
+          strategy="lazyOnload"
         />
-        <Script id="ga-setup" strategy="afterInteractive">
+        <Script id="ga-setup" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
