@@ -87,6 +87,28 @@ export async function processBlogContent(content: string) {
     $(elm).replaceWith(linkCardHtml);
   });
 
+  // 画像最適化処理
+  $('img').each((_, elm) => {
+    const src = $(elm).attr('src');
+    if (!src) return;
+
+    // 最適化画像の URL を生成
+    const optimizedSrc = `${src}?w=800&fit=crop`;
+    const optimizedSrcSet = `
+      ${src}?w=400&fit=crop 400w, 
+      ${src}?w=800&fit=crop 800w, 
+      ${src}?w=1200&fit=crop 1200w
+    `;
+    const sizes = '(max-width: 768px) 100vw, 800px';
+
+    // 最適化された属性を追加
+    $(elm).attr('src', optimizedSrc);
+    $(elm).attr('srcset', optimizedSrcSet);
+    $(elm).attr('sizes', sizes);
+    $(elm).attr('loading', 'lazy');
+    $(elm).attr('decoding', 'async');
+  });
+
   await Promise.all(linkPromises.get());
 
   return $.html();
