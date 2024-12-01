@@ -65,7 +65,11 @@ export async function processBlogContent(content: string) {
     if (!url) return;
     const ogpData = await fetchOGPData(url);
     const optimizedImageUrl = `${ogpData.image}?w=270&h=150&fit=crop`;
-    const linkCardHtml = `<div class="link-card mt-3 mb-3">
+    const optimizedImageUrlWebP = `${ogpData.image}?w=270&h=150&fit=crop&format=webp`;
+    const optimizedImageUrlAVIF = `${ogpData.image}?w=270&h=150&fit=crop&format=avif`;
+
+    const linkCardHtml = `
+    <div class="link-card mt-3 mb-3">
       <a href="${url}" target="_blank" rel="noopener noreferrer">
         <div class="link-card-body">
           <div class="link-card-info">
@@ -78,12 +82,13 @@ export async function processBlogContent(content: string) {
             class="link-card-thumbnail" 
             loading="lazy" 
             decoding="async" 
-            srcset="${optimizedImageUrl} 270w, ${ogpData.image}?w=540&fit=crop 540w" 
+            srcset="${optimizedImageUrlAVIF} 270w, ${optimizedImageUrlWebP} 270w, ${optimizedImageUrl} 270w" 
             sizes="(max-width: 768px) 100vw, 270px"
           />
         </div>
       </a>
     </div>`;
+
     $(elm).replaceWith(linkCardHtml);
   });
 
@@ -92,18 +97,20 @@ export async function processBlogContent(content: string) {
     const src = $(elm).attr('src');
     if (!src) return;
 
-    // 最適化画像の URL を生成
-    const optimizedSrc = `${src}?w=800&fit=crop`;
-    const optimizedSrcSet = `
-      ${src}?w=400&fit=crop 400w, 
-      ${src}?w=800&fit=crop 800w, 
-      ${src}?w=1200&fit=crop 1200w
-    `;
+    // WebPとAVIFのURLを生成
+    const webpSrc = `${src}?w=800&fit=crop&format=webp`;
+    const avifSrc = `${src}?w=800&fit=crop&format=avif`;
+    const defaultSrc = `${src}?w=800&fit=crop`;
+
+    const srcSet = `
+    ${avifSrc} 800w, 
+    ${webpSrc} 800w, 
+    ${defaultSrc} 800w
+  `;
     const sizes = '(max-width: 768px) 100vw, 800px';
 
-    // 最適化された属性を追加
-    $(elm).attr('src', optimizedSrc);
-    $(elm).attr('srcset', optimizedSrcSet);
+    $(elm).attr('src', defaultSrc);
+    $(elm).attr('srcset', srcSet);
     $(elm).attr('sizes', sizes);
     $(elm).attr('loading', 'lazy');
     $(elm).attr('decoding', 'async');
