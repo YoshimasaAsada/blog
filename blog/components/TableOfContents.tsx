@@ -109,22 +109,30 @@ export const TableOfContents = ({ toc }: TableOfContentsProps) => {
         overflowY: 'auto',
       }}
     >
-      <Typography
-        variant="h4"
-        component="h1"
+      <Box
         sx={{
-          mr: 2,
-          ml: 2,
-          borderBottom: '2px solid',
-          borderImage: 'linear-gradient(to right, #fff 0%, #1a1a1a 90%)',
-          borderImageSlice: '1',
-          display: 'flex',
-          alignItems: 'center',
+          position: 'sticky',
+          top: '0',
+          zIndex: 1,
+          backgroundColor: '#1a1a1a',
         }}
       >
-        <FormatListNumberedIcon fontSize="large" />
-        Index
-      </Typography>
+        <Typography
+          variant="h4"
+          component="h1"
+          sx={{
+            mr: 2,
+            ml: 2,
+            borderBottom: '2px solid',
+            borderImageSlice: '1',
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <FormatListNumberedIcon fontSize="large" />
+          Index
+        </Typography>
+      </Box>
       <List>
         {toc.map((data) => (
           <ListItem
