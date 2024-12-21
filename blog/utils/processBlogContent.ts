@@ -35,7 +35,16 @@ async function fetchOGPData(url: string) {
 export async function processBlogContent(content: string) {
   const highlighter = await getHighlighter({
     themes: ['slack-dark'],
-    langs: ['tsx', 'shell', 'typescript', 'dockerfile', 'yml', 'json', 'ruby'],
+    langs: [
+      'tsx',
+      'shell',
+      'typescript',
+      'dockerfile',
+      'yml',
+      'json',
+      'ruby',
+      'mermaid',
+    ],
   });
   const $ = cheerio.load(content);
 
@@ -97,7 +106,6 @@ export async function processBlogContent(content: string) {
     const src = $(elm).attr('src');
     if (!src) return;
 
-    // WebPとAVIFのURLを生成
     const webpSrc = `${src}?w=800&fit=crop&format=webp`;
     const avifSrc = `${src}?w=800&fit=crop&format=avif`;
     const defaultSrc = `${src}?w=800&fit=crop`;
