@@ -130,6 +130,8 @@ div[data-filename] {
   margin-bottom: 20px;
   background-color: #333333;
   border-radius: 8px;
+  box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1),
+    3px 3px 3px 3px rgba(0, 0, 0, 0.05);
 }
 
 div[data-filename] > pre {
