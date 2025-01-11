@@ -43,11 +43,10 @@ export async function generateStaticParams() {
  * @param param0
  * @returns
  */
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
+export async function generateMetadata(props: {
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
+  const params = await props.params;
   const blog = await getBlogById(params);
   const $ = cheerio.load(blog.content);
   const text = $('body').text();
@@ -89,7 +88,8 @@ export async function generateMetadata({
  * @param params ブログのID
  * @returns
  */
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page(props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const blog: Blog = await getBlogById(params);
   const toc = renderToc(blog.content);
   const highlightedContent = await processBlogContent(blog.content);
