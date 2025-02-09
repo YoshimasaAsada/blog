@@ -5,20 +5,30 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
 import Link from 'next/link';
 import { memo, useState } from 'react';
 
-// const pages = ['Blog', 'Profile', 'Contact'];
-const pages = ['Blog', 'Contact'];
+const pages = ['Blog', 'Profile', 'Contact'];
 
-const Header = () => {
-  const [isFullScreen, setIsFullScreen] = useState(false);
+/**
+ * ヘッダーのテンプレート
+ * @returns
+ */
+const Header = memo(() => {
+  console.log('ヘッダー読み込み');
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
-  const toggleFullScreen = () => {
-    setIsFullScreen((prev) => !prev);
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
   };
 
   const NavButton = ({
@@ -63,93 +73,104 @@ const Header = () => {
   );
 
   return (
-    <>
-      {!isFullScreen ? (
-        <>
-          <AppBar
-            position="fixed"
-            sx={{ backgroundColor: 'rgba(66, 66, 66, 0.8)' }}
-          >
-            <Container maxWidth="xl">
-              <Toolbar disableGutters>
-                <Typography
-                  variant="h6"
-                  noWrap
-                  component="a"
-                  href="/"
-                  sx={{
-                    mr: 2,
-                    display: { xs: 'none', md: 'flex' },
-                    fontFamily: 'monospace',
-                    fontWeight: 700,
-                    letterSpacing: '.3rem',
-                    color: 'inherit',
-                    textDecoration: 'none',
-                  }}
-                >
-                  YASD-TECH
-                </Typography>
-
-                <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                  <IconButton
-                    size="large"
-                    aria-label="menu"
-                    onClick={toggleFullScreen}
-                    color="inherit"
-                  >
-                    <MenuIcon />
-                  </IconButton>
-                </Box>
-                <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                  <NavButton page="Home" onClick={() => {}} />
-                  {pages.map((page) => (
-                    <NavButton key={page} page={page} onClick={() => {}} />
-                  ))}
-                </Box>
-              </Toolbar>
-            </Container>
-          </AppBar>
-        </>
-      ) : (
-        <Box
-          sx={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'black',
-            color: 'white',
-            zIndex: 20,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Box
+    <AppBar position="fixed" sx={{ backgroundColor: 'rgba(66, 66, 66, 0.8)' }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
             }}
           >
-            <NavButton page="Home" onClick={toggleFullScreen} />
+            YASD-TECH
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', md: 'none' },
+              }}
+            >
+              <Link href="/" passHref prefetch={false}>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Home</Typography>
+                </MenuItem>
+              </Link>
+              {pages.map((page) => (
+                <Link
+                  key={page}
+                  prefetch={false}
+                  href={`/${page.toLowerCase()}`}
+                  passHref
+                >
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                </Link>
+              ))}
+            </Menu>
+          </Box>
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="/blog"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            YASD TECH
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <NavButton page="Home" onClick={handleCloseNavMenu} />
             {pages.map((page) => (
-              <NavButton key={page} page={page} onClick={toggleFullScreen} />
+              <NavButton key={page} page={page} onClick={handleCloseNavMenu} />
             ))}
           </Box>
-          <Button
-            variant="outlined"
-            onClick={toggleFullScreen}
-            sx={{ mt: 4, color: 'white', borderColor: 'white' }}
-          >
-            Close
-          </Button>
-        </Box>
-      )}
-    </>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
-};
+});
 
+Header.displayName = 'Header';
 export default Header;
