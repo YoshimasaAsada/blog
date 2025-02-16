@@ -2,7 +2,7 @@
 import { Container, Grid, TextField, Button, Typography } from '@mui/material';
 
 // 型定義とかhooksとかその辺
-import { sendInquiry } from '@/utils/sendInquiry';
+import { sendEmail } from '@/utils/sendInquiry';
 
 /**
  * 問い合わせページ
@@ -23,7 +23,7 @@ export default function Page() {
       >
         お問い合わせ
       </Typography>
-      <form action={sendInquiry}>
+      <form action={sendEmail}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <TextField
