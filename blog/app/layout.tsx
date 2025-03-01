@@ -51,6 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const GA_ID = process.env.NEXT_PUBLIC_GA_ID || '';
+  const adsenseId = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE || '';
 
   return (
     <html lang="ja">
@@ -69,6 +70,12 @@ export default function RootLayout({
             gtag('config', '${GA_ID}', { page_path: window.location.pathname });
           `}
         </Script>
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
+          crossOrigin="anonymous"
+          strategy="lazyOnload"
+        ></Script>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
