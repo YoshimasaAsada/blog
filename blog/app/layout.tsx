@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.scss';
 import Script from 'next/script';
+import { html } from 'cheerio';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -56,6 +57,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <head>
+        <meta name="google-adsense-account" content={adsenseId}></meta>
         {/* <GoogleAnalytics gaId={GA_ID} /> */}
         {/* Google Analyticsのスクリプトをasyncで非同期に読み込む */}
         <Script
