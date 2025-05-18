@@ -26,10 +26,10 @@ export const client = createClient({
  * @returns
  */
 export const getAllBlogs = async () => {
-  const data = await client.get<BlogsInContents>({
+  const data = await client.getAllContents<BlogsInContents>({
     endpoint: 'blogs',
   });
-  return data.contents;
+  return data;
 };
 
 /**
@@ -50,10 +50,10 @@ export const getBlogById = async (params: { id: string }) => {
  * @returns
  */
 export const getAllCategories = async () => {
-  const data = await client.get<CategoryInContents>({
+  const data = await client.getAllContents<CategoryInContents>({
     endpoint: 'categories',
   });
-  return data.contents;
+  return data;
 };
 
 /**
