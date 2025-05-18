@@ -1,17 +1,14 @@
+import { MicroCMSContentId, MicroCMSDate } from "microcms-js-sdk";
+
 /**
  * カテゴリーのデータ型
  */
-export type Category = {
-  /** カテゴリーのID */
-  id: string;
-  /** カテゴリーの名前 */
-  name: string;
-};
+export type Category = CategoryInContents & MicroCMSContentId & MicroCMSDate
 
 /**
  * カテゴリーがcontentsオブジェクトで返ってくる時のデータ型
  */
 export type CategoryInContents = {
-  /** カテゴリーがcontentsオブジェクトで返ってくる時用 */
-  contents: Category[];
+  /** カテゴリー名 */
+  name: string;
 };

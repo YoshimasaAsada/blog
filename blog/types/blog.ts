@@ -1,10 +1,20 @@
+import { MicroCMSContentId, MicroCMSDate } from 'microcms-js-sdk';
 import { Category } from './category';
 
 /**
  * ブログのデータ型
  */
-export type Blog = {
-  /** ブログのID */
+export type Blog = BlogsInContents & MicroCMSContentId & MicroCMSDate;
+
+/**
+ * ブログがcontentsオブジェクトで帰ってくる時のデータ型
+ */
+export type BlogsInContents = {
+  /** ブログのコンテンツ */
+  contents: string;
+  /** ブログのカテゴリ */
+  category: Category[];
+    /** ブログのID */
   id: string;
   /** ブログのタイトル */
   title: string;
@@ -14,18 +24,8 @@ export type Blog = {
   eyecatch: {
     url: string;
   };
-  /** ブログの持ってるカテゴリー */
-  category: Category[];
   /** 投稿日 */
   publishedAt: string;
   /** 更新日 */
   updatedAt: string;
-};
-
-/**
- * ブログがcontentsオブジェクトで帰ってくる時のデータ型
- */
-export type BlogsInContents = {
-  /** ブログがcontenysオブジェクトで返ってくる時用 */
-  contents: Blog[];
 };
