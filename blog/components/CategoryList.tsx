@@ -15,7 +15,7 @@ type PropsType = {
  */
 export const CategoryList = ({ contents, onSelectCategory }: PropsType) => {
   return (
-    <Box>
+    <div>
       <Typography
         variant="h3"
         component="h3"
@@ -39,9 +39,9 @@ export const CategoryList = ({ contents, onSelectCategory }: PropsType) => {
             margin: '2px',
             '&:hover': { backgroundColor: 'white', color: 'gray' },
           }}
-          onClick={() => onSelectCategory(category.id)}
+          onClick={() => onSelectCategory(category.id, category.name)}
         />
       ))}
-    </Box>
+    </div>
   );
 };
