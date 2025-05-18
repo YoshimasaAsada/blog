@@ -89,9 +89,9 @@ export default function Page() {
         <Grid item xs={10} md={7}>
           <div data-filename="" >
             <div className="code-bar">
-              <div className="dot red"></div>
-              <div className="dot yellow"></div>
-              <div className="dot green"></div>
+              <div className="circle" data-color="red"></div>
+              <div className="circle" data-color="yellow"></div>
+              <div className="circle" data-color="green"></div>
               <div className="search-name">
                 <SearchIcon />
                 <p className='category-name'>{displayCategory}</p>

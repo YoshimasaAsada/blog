@@ -144,34 +144,30 @@ div[data-filename] > pre {
   align-items: center;
   border-radius: 8px;
   gap: 5px;
+  padding-left: 5px;
 }
 
-.red,
-.yellow,
-.green {
+
+.circle {
+  aspect-ratio: 1 / 1;
   width: 13px;
   height: 13px;
   border-radius: 50%;
+  margin-left: 5px;
+  display: inline-block;
+  background-color: var(--circle-color, #000);
 }
 
-.red {
-  background-color: #ff5f56;
-  border-radius: 50%;
-  margin-left: 10px;
-  display: inline-block;
+.circle[data-color="red"] {
+  --circle-color: #ff5f56;
 }
 
-.yellow {
-  background-color: #ffbd2e;
-  border-radius: 50%;
-  margin: 5px;
-  display: inline-block;
+.circle[data-color="yellow"] {
+  --circle-color: #ffbd2e;
 }
 
-.green {
-  background-color: #27c93f;
-  border-radius: 50%;
-  display: inline-block;
+.circle[data-color="green"] {
+  --circle-color: #27c93f;
 }
 
 .file-name {
@@ -179,11 +175,11 @@ div[data-filename] > pre {
 }
 
 .search-name {
-  justify-content: center;
+  width: 100%;
   display: flex;
+  justify-content: center;
   align-items: center;
   padding: 10px;
-  margin-left: 5px;
 }
 
 .category-name {

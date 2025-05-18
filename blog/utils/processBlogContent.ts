@@ -51,7 +51,7 @@ export async function processBlogContent(content: string) {
   // コードブロックのファイル名が入力されている場合の処理
   $('div[data-filename]').each((_, elm) => {
     $(elm).prepend(
-      `<div class="code-bar"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div><div class="file-name">${$(
+      `<div class="code-bar"><div class="circle" data-color="red"></div><div class="circle" data-color="yellow"></div><div class="circle" data-color="green"></div><div class="file-name">${$(
         elm
       ).attr('data-filename')}</div><div>`
     );
