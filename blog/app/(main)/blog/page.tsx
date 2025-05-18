@@ -1,6 +1,6 @@
 'use client';
 // ライブラリ関連
-import { Container, Grid, Pagination, Typography } from '@mui/material';
+import { Box, Container, Grid, Pagination, Typography } from '@mui/material';
 
 // 型定義とかその辺
 import { getAllBlogs, getAllCategories } from '@/libs/client';
@@ -12,6 +12,7 @@ import { SetStateAction, useEffect, useState } from 'react';
 import { Blog } from '@/types/blog';
 import { Category } from '@/types/category';
 import Loading from '@/app/loading';
+import SearchIcon from '@mui/icons-material/Search';
 
 /**
  * ブログの一覧ページ
@@ -25,6 +26,7 @@ export default function Page() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [postsPerPage] = useState(4);
   const [isLoading, setIsLoading] = useState(true);
+  const [displayCategory, setDisplayCategory] = useState<string>("All Blogs");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,12 +57,14 @@ export default function Page() {
     }
   }, [allBlogs, selectedCategory]);
 
-  const handleSelectCategory = (categoryId: string) => {
+  const handleSelectCategory = (categoryId: string, categoryName: string) => {
     setSelectedCategory(categoryId);
+    setDisplayCategory(categoryName);
   };
 
   const resetFilter = () => {
     setSelectedCategory(null);
+    setDisplayCategory("All Blogs");
   };
 
   const paginate = (_: any, value: SetStateAction<number>) => {
@@ -83,17 +87,17 @@ export default function Page() {
         style={{ paddingTop: '20px', paddingBottom: '20px' }}
       >
         <Grid item xs={10} md={7}>
-          <Typography
-            variant="h3"
-            component="h3"
-            style={{
-              textDecoration: 'underline',
-              textUnderlineOffset: '8px',
-              textDecorationThickness: '2px',
-            }}
-          >
-            Blogs
-          </Typography>
+          <div data-filename="" >
+            <div className="code-bar">
+              <div className="dot red"></div>
+              <div className="dot yellow"></div>
+              <div className="dot green"></div>
+              <div className="search-name">
+                <SearchIcon />
+                <p className='category-name'>{displayCategory}</p>
+              </div>
+            </div>
+          </div>
         </Grid>
         <Grid item xs={2} style={{ textAlign: 'right' }}>
           <div

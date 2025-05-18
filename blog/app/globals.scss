@@ -177,6 +177,20 @@ div[data-filename] > pre {
 .file-name {
   margin: 10px;
 }
+
+.search-name {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-left: 5px;
+}
+
+.category-name {
+  margin-left: 5px;
+  display: flex;
+  text-align: center;
+}
 // -------------------------------------------------------------------
 
 /** スライダーのレイアウト **/
