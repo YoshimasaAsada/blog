@@ -6,14 +6,15 @@ import { Category } from '@/types/category';
 
 type PropsType = {
   contents: Category[];
-  onSelectCategory: any;
+  onSelectCategory: (categoryId: string, categoryName: string) => void;
+  resetFilter: () => void;
 };
 
 /**
  * カテゴリー一覧のテンプレート
  * @returns
  */
-export const CategoryList = ({ contents, onSelectCategory }: PropsType) => {
+export const CategoryList = ({ contents, onSelectCategory, resetFilter }: PropsType) => {
   return (
     <div>
       <Typography
@@ -27,6 +28,18 @@ export const CategoryList = ({ contents, onSelectCategory }: PropsType) => {
       >
         Categories
       </Typography>
+      <Chip
+        label="All Blogs"
+        clickable
+        variant="outlined"
+        sx={{
+          color: 'white',
+          borderColor: 'white',
+          margin: '2px',
+          '&:hover': { backgroundColor: 'white', color: 'gray' },
+        }}
+        onClick={() => resetFilter()}
+      />
       {contents.map((category) => (
         <Chip
           key={category.id}

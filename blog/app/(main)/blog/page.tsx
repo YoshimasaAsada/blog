@@ -86,7 +86,7 @@ export default function Page() {
         alignItems="center"
         style={{ paddingTop: '20px', paddingBottom: '20px' }}
       >
-        <Grid item xs={10} md={7}>
+        <Grid item xs={12} md={9}>
           <div data-filename="" >
             <div className="code-bar">
               <div className="circle" data-color="red"></div>
@@ -97,17 +97,6 @@ export default function Page() {
                 <p className='category-name'>{displayCategory}</p>
               </div>
             </div>
-          </div>
-        </Grid>
-        <Grid item xs={2} style={{ textAlign: 'right' }}>
-          <div
-            className="to-blog-animation"
-            style={{
-              cursor: 'pointer',
-            }}
-            onClick={resetFilter}
-          >
-            All Blogs
           </div>
         </Grid>
       </Grid>
@@ -152,6 +141,7 @@ export default function Page() {
           <CategoryList
             contents={categories}
             onSelectCategory={handleSelectCategory}
+            resetFilter={resetFilter}
           />
         </Grid>
       </Grid>
