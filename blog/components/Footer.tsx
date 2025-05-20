@@ -72,7 +72,7 @@ export default function Footer() {
           </Box>
           <Box
             sx={{
-              display: { xs: 'none', sm: 'flex' },
+              display: 'flex',
               flexDirection: 'column',
               gap: 1,
             }}
@@ -86,7 +86,7 @@ export default function Footer() {
           </Box>
           <Box
             sx={{
-              display: { xs: 'none', sm: 'flex' },
+              display: 'flex',
               flexDirection: 'column',
               gap: 1,
             }}
