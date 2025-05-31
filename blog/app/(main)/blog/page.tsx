@@ -13,6 +13,9 @@ import { Blog } from '@/types/blog';
 import { Category } from '@/types/category';
 import Loading from '@/app/loading';
 import SearchIcon from '@mui/icons-material/Search';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 /**
  * ブログの一覧ページ
@@ -87,7 +90,7 @@ export default function Page() {
         style={{ paddingTop: '20px', paddingBottom: '20px' }}
       >
         <Grid item xs={12} md={9}>
-          <div data-filename="" >
+          <div data-filename="" className="code-container">
             <div className="code-bar">
               <div className="circle" data-color="red"></div>
               <div className="circle" data-color="yellow"></div>
