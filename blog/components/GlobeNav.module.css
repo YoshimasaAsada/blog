@@ -1,0 +1,83 @@
+/* =========================================================
+   地球儀型のナビゲーション
+   ========================================================= */
+
+.wrap {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+}
+
+.canvasHost {
+  position: absolute;
+  inset: 0;
+  /* ドラッグ中にページがスクロールしないように */
+  touch-action: none;
+  cursor: grab;
+}
+
+.canvasHost:active {
+  cursor: grabbing;
+}
+
+.canvasHost canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* 3D座標に投影して重ねるラベル */
+.label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 15px;
+  border: 1px solid rgba(150, 180, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(10, 15, 38, 0.62);
+  backdrop-filter: blur(10px);
+  white-space: nowrap;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #eef4ff;
+  text-decoration: none;
+  will-change: transform, opacity;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+.label:hover,
+.label:focus-visible {
+  border-color: rgba(180, 215, 255, 0.85);
+  background: rgba(28, 44, 92, 0.82);
+  box-shadow:
+    0 0 0 1px rgba(140, 190, 255, 0.25),
+    0 12px 34px -12px rgba(90, 150, 255, 0.85);
+  outline: none;
+}
+
+.labelIndex {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(150, 190, 255, 0.8);
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    max-width: 340px;
+  }
+
+  .label {
+    padding: 6px 13px;
+    font-size: 0.86rem;
+  }
+}

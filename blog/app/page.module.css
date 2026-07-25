@@ -1,76 +1,382 @@
-/* 共通のフレックスボックススタイル */
-.links,
-.welcome {
+/* =========================================================
+   ホーム画面 : 宇宙をイメージしたランディング
+   ========================================================= */
+
+.page {
+  position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 72px 24px 56px;
+  overflow: hidden;
+  color: #eaf0ff;
+}
+
+/* ---------- 背景（星空・星雲・ビネット） ---------- */
+
+.background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(
+      110% 85% at 78% 6%,
+      rgba(78, 56, 150, 0.16) 0%,
+      rgba(78, 56, 150, 0) 55%
+    ),
+    radial-gradient(
+      90% 75% at 12% 92%,
+      rgba(22, 78, 140, 0.14) 0%,
+      rgba(22, 78, 140, 0) 60%
+    ),
+    linear-gradient(180deg, #000000 0%, #04050d 42%, #000000 100%);
+  pointer-events: none;
+}
+
+/* three.js が生成する canvas */
+.canvasHost {
+  position: absolute;
+  inset: 0;
+}
+
+.canvasHost canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ゆっくり漂う星雲 */
+.nebula {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(
+      34% 27% at 20% 28%,
+      rgba(110, 78, 220, 0.12) 0%,
+      rgba(110, 78, 220, 0) 100%
+    ),
+    radial-gradient(
+      30% 24% at 78% 68%,
+      rgba(50, 150, 220, 0.09) 0%,
+      rgba(50, 150, 220, 0) 100%
+    );
+  filter: blur(28px);
+  animation: drift 44s ease-in-out infinite alternate;
+}
+
+/* 画面端を落として奥行きを出す */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    100% 78% at 50% 42%,
+    rgba(0, 0, 0, 0) 35%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
+}
+
+/* ---------- 流れ星 ---------- */
+
+.shootingStar {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 12px 3px rgba(200, 224, 255, 0.55);
+  opacity: 0;
+  animation: shoot 11s linear infinite;
+}
+
+.shootingStar::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  right: 2px;
+  width: 190px;
+  height: 1px;
+  transform-origin: right center;
+  transform: rotate(30deg);
+  background: linear-gradient(
+    to left,
+    rgba(220, 235, 255, 0.9),
+    rgba(220, 235, 255, 0)
+  );
+}
+
+.shootingStar1 {
+  top: 12%;
+  left: 8%;
+  animation-delay: 2s;
+}
+
+.shootingStar2 {
+  top: 28%;
+  left: 46%;
+  animation-delay: 7s;
+  animation-duration: 14s;
+}
+
+.shootingStar3 {
+  top: 4%;
+  left: 68%;
+  animation-delay: 12s;
+  animation-duration: 17s;
+}
+
+/* ---------- コンテンツ ---------- */
+
+.content {
+  position: relative;
+  z-index: 1;
   width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: 40px;
+}
+
+.heroText {
+  min-width: 0;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px;
+  border: 1px solid rgba(150, 180, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(120, 160, 255, 0.07);
+  backdrop-filter: blur(8px);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #b9ccff;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #66e6ff;
+  box-shadow: 0 0 10px 2px rgba(102, 230, 255, 0.85);
+  animation: pulse 2.6s ease-in-out infinite;
+}
+
+.title {
+  margin: 26px 0 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(2.6rem, 9.5vw, 6rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: 0.06em;
+  background: linear-gradient(
+    103deg,
+    #ffffff 0%,
+    #cfe0ff 38%,
+    #9db6ff 62%,
+    #ffffff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 26px rgba(120, 160, 255, 0.45));
+}
+
+.titleLine {
+  display: block;
+}
+
+.titleAccent {
+  color: #8fb4ff;
+}
+
+.lead {
+  max-width: 540px;
+  margin: 26px 0 0;
+  font-size: clamp(0.94rem, 2.4vw, 1.06rem);
+  line-height: 2;
+  color: rgba(214, 226, 255, 0.78);
+}
+
+/* ---------- 地球儀ナビ ---------- */
+
+.globe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  justify-self: center;
+  width: 100%;
+}
+
+.hint {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: rgba(170, 195, 245, 0.55);
   text-align: center;
 }
 
-/* WIPテキストのスタイリング */
-.wip {
-  color: #ccc;
-  font-size: 20px;
-}
+/* ---------- フッター ---------- */
 
-.links {
-  position: absolute;
-  bottom: 10%;
-  overflow-x: auto;
-  height: 100vh;
-}
-
-/* リンクのスタイリング */
-.link {
-  flex: none;
-  display: inline-flex;
-  justify-content: center;
+.footer {
+  display: flex;
   align-items: center;
-  margin: 0 20px;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  font-size: 30px;
-  color: white;
+  gap: 14px;
+  margin-top: 36px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: rgba(170, 190, 230, 0.5);
+}
+
+.footerRule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(150, 180, 255, 0.35),
+    rgba(150, 180, 255, 0)
+  );
+}
+
+.footerLink {
+  color: rgba(170, 190, 230, 0.5);
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.link:hover {
-  transform: scale(1.1);
-  box-shadow:
-    0 0 40px rgba(255, 255, 255, 0.9),
-    inset 0 0 20px rgba(0, 0, 0, 0.3),
-    inset 0 0 40px rgba(255, 255, 255, 0.2);
+.footerLink:hover {
+  color: rgba(210, 226, 255, 0.9);
 }
 
-/* Welcomeメッセージのスタイリング */
-.welcome {
-  position: absolute;
-  top: 20%;
-  font-size: 48px;
-  color: white;
-  opacity: 0;
-  animation: fadeInGlow 4s ease-out forwards;
+/* ---------- 登場アニメーション ---------- */
+
+.rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* テキストのフェードインと光るアニメーション */
-@keyframes fadeInGlow {
-  0% {
+.delay1 {
+  animation-delay: 0.12s;
+}
+
+.delay2 {
+  animation-delay: 0.24s;
+}
+
+.delay3 {
+  animation-delay: 0.36s;
+}
+
+.delay4 {
+  animation-delay: 0.48s;
+}
+
+/* ---------- アニメーション ---------- */
+
+@keyframes rise {
+  from {
     opacity: 0;
-    text-shadow: none;
+    transform: translate3d(0, 26px, 0);
   }
-  50%,
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(-2%, -1%, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(3%, 2%, 0) scale(1.1);
+  }
+}
+
+@keyframes pulse {
+  0%,
   100% {
     opacity: 1;
-    text-shadow:
-      0 0 20px #fff,
-      0 0 30px #fff,
-      0 0 40px #fff,
-      0 0 50px #ffaa00,
-      0 0 70px #ffaa00,
-      0 0 80px #ffaa00,
-      0 0 100px #ffaa00,
-      0 0 150px #ffaa00;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.75);
+  }
+}
+
+@keyframes shoot {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  2% {
+    opacity: 1;
+  }
+  14% {
+    opacity: 0;
+    transform: translate3d(640px, 370px, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(640px, 370px, 0);
+  }
+}
+
+/* ---------- レスポンシブ ---------- */
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 64px 20px 40px;
+  }
+
+  .footer {
+    margin-top: 28px;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* ---------- モーション低減 ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .nebula,
+  .badgeDot {
+    animation: none;
+  }
+
+  .rise {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .shootingStar {
+    display: none;
   }
 }
