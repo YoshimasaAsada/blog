@@ -16,7 +16,7 @@ import * as cheerio from 'cheerio';
 import XIcon from '@mui/icons-material/X';
 
 // 型定義とかその辺
-import { getAllBlogs, getBlogById } from '@/libs/client';
+import { getAllBlogs, getBlogById } from '@/libs/github';
 import { Blog } from '@/types/blog';
 import { renderToc } from '../../../../libs/render-toc';
 import { processBlogContent } from '@/utils/processBlogContent';
@@ -52,13 +52,14 @@ export async function generateMetadata({
   const $ = cheerio.load(blog.content);
   const text = $('body').text();
   const description = text.slice(0, 100).replace(/\s+/g, ' ').trim();
-  const eyecatchUrl = blog.eyecatch.url;
+  // OGP用に絶対URLへ変換する
+  const eyecatchUrl = new URL(blog.eyecatch.url, 'https://yasdtech.com').href;
 
   return {
     title: blog.title,
     description: description,
     alternates: {
-      canonical: `https://yasdtech.com/blog/${blog.id}`,
+      canonical: `https://yasdtech.com/blog/${encodeURIComponent(blog.id)}`,
     },
     twitter: {
       card: 'summary_large_image',
@@ -71,7 +72,7 @@ export async function generateMetadata({
       description: description,
       locale: 'ja_JP',
       type: 'article',
-      url: `https://yasdtech.com/blog/${blog.id}`,
+      url: `https://yasdtech.com/blog/${encodeURIComponent(blog.id)}`,
       images: [
         {
           url: eyecatchUrl,
