@@ -1,4 +1,4 @@
-import { client, getAllBlogs } from '@/libs/client';
+import { getAllBlogs } from '@/libs/github';
 import { Blog } from '@/types/blog';
 import type { MetadataRoute } from 'next';
 
@@ -33,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // 記事一覧ページ
   const blogs = allBlogs.map((blog: Blog) => ({
-    url: `https://yasdtech.com/blog/${blog.id}`,
+    url: `https://yasdtech.com/blog/${encodeURIComponent(blog.id)}`,
     lastModified: blog.updatedAt,
   }));
 

@@ -2,12 +2,32 @@ import { getHighlighter } from 'shiki';
 import * as cheerio from 'cheerio';
 
 /**
+ * シンタックスハイライトで読み込む言語一覧
+ * Obsidianの記事で使われている言語をカバーする
+ */
+const HIGHLIGHT_LANGS = [
+  'tsx',
+  'shell',
+  'typescript',
+  'javascript',
+  'dockerfile',
+  'yaml',
+  'json',
+  'ruby',
+  'mermaid',
+  'sql',
+  'prisma',
+  'http',
+  'html',
+] as const;
+
+/**
  * ブログで使っているリンクのOGPデータ取得用関数
  * @param url
  * @returns
  */
 async function fetchOGPData(url: string) {
-  const response = await fetch(url);
+  const response = await fetch(url, { signal: AbortSignal.timeout(10000) });
   const html = await response.text();
   const $ = cheerio.load(html);
 
@@ -35,16 +55,7 @@ async function fetchOGPData(url: string) {
 export async function processBlogContent(content: string) {
   const highlighter = await getHighlighter({
     themes: ['slack-dark'],
-    langs: [
-      'tsx',
-      'shell',
-      'typescript',
-      'dockerfile',
-      'yml',
-      'json',
-      'ruby',
-      'mermaid',
-    ],
+    langs: [...HIGHLIGHT_LANGS],
   });
   const $ = cheerio.load(content);
 
@@ -58,21 +69,57 @@ export async function processBlogContent(content: string) {
   });
 
   // コードブロックのシンタックスハイライトを行う
+  const langAliases: Record<string, string> = {
+    bash: 'shell',
+    sh: 'shell',
+    zsh: 'shell',
+    ts: 'typescript',
+    js: 'javascript',
+    yml: 'yaml',
+  };
   $('pre code').each((_, elm) => {
-    let language = $(elm).attr('class')?.split('language-')[1] || '';
+    const rawLanguage = $(elm).attr('class')?.split('language-')[1] || '';
+    const language = langAliases[rawLanguage] || rawLanguage;
     const codeText = $(elm).text();
-    const html = highlighter.codeToHtml(codeText, {
-      lang: language,
-      theme: 'slack-dark',
-    });
+    let html: string;
+    try {
+      html = highlighter.codeToHtml(codeText, {
+        lang: language,
+        theme: 'slack-dark',
+      });
+    } catch {
+      // 未対応の言語はプレーンテキストとして表示する
+      html = highlighter.codeToHtml(codeText, {
+        lang: 'text',
+        theme: 'slack-dark',
+      });
+    }
     $(elm).parent().replaceWith(html);
   });
 
   // リンクカードを適用する
-  const linkPromises = $('a').map(async (_, elm) => {
+  // 対象は「段落内に単独で置かれた外部リンク」のみ。
+  // 文中のインラインリンクや内部リンクはそのまま残す。
+  const standaloneLinks = $('a').filter((_, elm) => {
+    const url = $(elm).attr('href') || '';
+    if (!/^https?:\/\//.test(url)) return false;
+    const parent = $(elm).parent();
+    return parent.is('p') && parent.text().trim() === $(elm).text().trim();
+  });
+
+  const linkPromises = standaloneLinks.map(async (_, elm) => {
     const url = $(elm).attr('href');
     if (!url) return;
-    const ogpData = await fetchOGPData(url);
+
+    // OGPが取れないリンクは通常のリンクのまま残す
+    let ogpData;
+    try {
+      ogpData = await fetchOGPData(url);
+    } catch {
+      return;
+    }
+    if (!ogpData.title) return;
+
     const optimizedImageUrl = `${ogpData.image}?w=270&h=150&fit=crop`;
     const optimizedImageUrlWebP = `${ogpData.image}?w=270&h=150&fit=crop&format=webp`;
     const optimizedImageUrlAVIF = `${ogpData.image}?w=270&h=150&fit=crop&format=avif`;
@@ -85,13 +132,13 @@ export async function processBlogContent(content: string) {
             <div class="link-card-title">${ogpData.title}</div>
             <div class="link-card-url">${url}</div>
           </div>
-          <img 
-            alt="link card image" 
-            data-src="${optimizedImageUrl}" 
-            class="link-card-thumbnail" 
-            loading="lazy" 
-            decoding="async" 
-            srcset="${optimizedImageUrlAVIF} 270w, ${optimizedImageUrlWebP} 270w, ${optimizedImageUrl} 270w" 
+          <img
+            alt="link card image"
+            data-src="${optimizedImageUrl}"
+            class="link-card-thumbnail"
+            loading="lazy"
+            decoding="async"
+            srcset="${optimizedImageUrlAVIF} 270w, ${optimizedImageUrlWebP} 270w, ${optimizedImageUrl} 270w"
             sizes="(max-width: 768px) 100vw, 270px"
           />
         </div>
@@ -111,8 +158,8 @@ export async function processBlogContent(content: string) {
     const defaultSrc = `${src}?w=800&fit=crop`;
 
     const srcSet = `
-    ${avifSrc} 800w, 
-    ${webpSrc} 800w, 
+    ${avifSrc} 800w,
+    ${webpSrc} 800w,
     ${defaultSrc} 800w
   `;
     const sizes = '(max-width: 768px) 100vw, 800px';
