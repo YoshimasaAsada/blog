@@ -105,6 +105,42 @@ a:hover {
   border-radius: 5px;
   margin: 20px 0;
 }
+/* テーブル（スマホでは横スクロール） */
+.blog .table-wrapper {
+  overflow-x: auto;
+  margin: 20px 0;
+}
+.blog table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.blog th,
+.blog td {
+  border: 1px solid rgba(236, 240, 241, 0.4);
+  padding: 8px 14px;
+  color: var(--foreground-color);
+}
+.blog th {
+  background-color: rgba(255, 255, 255, 0.12);
+  font-weight: bold;
+  text-align: left;
+  white-space: nowrap;
+}
+.blog tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+/* Mermaid図 */
+.blog pre.mermaid {
+  display: flex;
+  justify-content: center;
+  background-color: transparent;
+  padding: 0;
+  overflow-x: auto;
+}
+.blog pre.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
 .index_img {
   width: 700px;
   height: 260px;

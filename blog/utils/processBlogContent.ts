@@ -14,7 +14,6 @@ const HIGHLIGHT_LANGS = [
   'yaml',
   'json',
   'ruby',
-  'mermaid',
   'sql',
   'prisma',
   'http',
@@ -67,6 +66,19 @@ export async function processBlogContent(content: string) {
       ).attr('data-filename')}</div><div>`
     );
   });
+
+  // mermaidのコードブロックはシンタックスハイライトせず、
+  // クライアント側で図としてレンダリングするためのクラスを付けて残す
+  $('pre code').each((_, elm) => {
+    const rawLanguage = $(elm).attr('class')?.split('language-')[1] || '';
+    if (rawLanguage !== 'mermaid') return;
+    const pre = $('<pre class="mermaid"></pre>');
+    pre.text($(elm).text());
+    $(elm).parent().replaceWith(pre);
+  });
+
+  // テーブルはスマホではみ出さないよう横スクロール可能なラッパーで包む
+  $('table').wrap('<div class="table-wrapper"></div>');
 
   // コードブロックのシンタックスハイライトを行う
   const langAliases: Record<string, string> = {

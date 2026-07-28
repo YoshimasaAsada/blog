@@ -23,6 +23,7 @@ import { processBlogContent } from '@/utils/processBlogContent';
 
 // コンポーネント
 import TableOfContents from '@/components/TableOfContents';
+import MermaidRenderer from '@/components/MermaidRenderer';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
@@ -169,6 +170,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               className="blog"
               dangerouslySetInnerHTML={{ __html: highlightedContent }}
             />
+            <MermaidRenderer />
           </Grid>
           <Grid item xs={12} md={3} order={{ xs: 1, md: 2 }}>
             <TableOfContents toc={toc} />
