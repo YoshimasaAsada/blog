@@ -46,6 +46,16 @@ async function fetchOGPData(url: string) {
 }
 
 /**
+ * 言語タブに表示する文字列を安全な文字だけに絞る
+ * （HTMLとしてそのまま埋め込むため）
+ * @param rawLanguage コードブロックのclassから取り出した言語名
+ * @returns
+ */
+function sanitizeLangLabel(rawLanguage: string) {
+  return rawLanguage.replace(/[^a-zA-Z0-9+#._-]/g, '').slice(0, 20);
+}
+
+/**
  * ブログコンテンツを加工する
  * シンタックスハイライトとリンクカードの適用
  * @param content コンテンツのHTML丸ごと
@@ -106,7 +116,19 @@ export async function processBlogContent(content: string) {
         theme: 'slack-dark',
       });
     }
-    $(elm).parent().replaceWith(html);
+
+    const pre = $(elm).parent();
+    // ファイル名バー付きのコードブロックはそちらに情報が出るのでタブは付けない
+    const hasFilenameBar = pre.parent().is('div[data-filename]');
+    const langLabel = sanitizeLangLabel(rawLanguage);
+    if (!langLabel || hasFilenameBar) {
+      pre.replaceWith(html);
+      return;
+    }
+    // コードブロックの上に言語名のタブを表示する
+    pre.replaceWith(
+      `<div class="code-block"><div class="code-lang">${langLabel}</div>${html}</div>`
+    );
   });
 
   // リンクカードを適用する
