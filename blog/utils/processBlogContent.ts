@@ -125,9 +125,9 @@ export async function processBlogContent(content: string) {
       pre.replaceWith(html);
       return;
     }
-    // コードブロックの上に言語名のタブを表示する
+    // コードブロックの上に3色の丸と言語名のバーを表示する
     pre.replaceWith(
-      `<div class="code-block"><div class="code-lang">${langLabel}</div>${html}</div>`
+      `<div class="code-block"><div class="code-lang-bar"><span class="code-dot" data-color="red"></span><span class="code-dot" data-color="yellow"></span><span class="code-dot" data-color="green"></span><span class="code-lang-name">${langLabel}</span></div>${html}</div>`
     );
   });
 
